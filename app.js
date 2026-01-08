@@ -1,8 +1,24 @@
-// Language state
-let currentLang = 'id';
-
 // Music state
 let isMusicPlaying = false;
+let musicStarted = false;
+
+// Start music on first user interaction
+function startMusicOnInteraction() {
+    if (!musicStarted) {
+        const audio = document.getElementById('bgMusic');
+        const btn = document.getElementById('musicBtn');
+
+        audio.volume = 0.25; // 25% volume
+        audio.play().then(() => {
+            musicStarted = true;
+            isMusicPlaying = true;
+            btn.textContent = '♫';
+            btn.classList.add('playing');
+        }).catch(e => {
+            console.log('Autoplay blocked, user must click button:', e);
+        });
+    }
+}
 
 // Toggle background music
 function toggleMusic() {
@@ -14,26 +30,24 @@ function toggleMusic() {
         btn.textContent = '♪';
         btn.classList.remove('playing');
     } else {
-        audio.volume = 0.3; // 30% volume
+        audio.volume = 0.25; // 25% volume
         audio.play().catch(e => console.log('Audio play failed:', e));
         btn.textContent = '♫';
         btn.classList.add('playing');
+        musicStarted = true;
     }
     isMusicPlaying = !isMusicPlaying;
 }
 
-// Likert labels
-const likertLabels = {
-    id: ['STS', 'TS', 'N', 'S', 'SS'],
-    en: ['SD', 'D', 'N', 'A', 'SA']
-};
+// Likert labels (Indonesian only)
+const likertLabels = ['STS', 'TS', 'N', 'S', 'SS'];
 
 // Initialize Likert scales with auto-scroll functionality
 function initLikertScales() {
     document.querySelectorAll('.likert').forEach(container => {
         const questionEl = container.closest('.question');
         const questionName = questionEl.dataset.q;
-        container.innerHTML = likertLabels[currentLang].map((label, i) =>
+        container.innerHTML = likertLabels.map((label, i) =>
             `<label><input type="radio" name="${questionName}" value="${i + 1}"><span>${label}</span></label>`
         ).join('');
 
@@ -46,6 +60,9 @@ function initLikertScales() {
 
 // Handle question answered - mark as answered and auto-scroll to next
 function handleQuestionAnswered(questionEl) {
+    // Start music on first interaction
+    startMusicOnInteraction();
+
     // Mark as answered
     questionEl.classList.add('answered');
     questionEl.classList.remove('error');
@@ -73,10 +90,9 @@ function handleQuestionAnswered(questionEl) {
             nextQuestion.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }, 200);
     } else {
-        // All questions in section answered, check if we should auto-navigate
+        // All questions in section answered, scroll to nav buttons
         const allAnswered = Array.from(questions).every(q => q.classList.contains('answered'));
         if (allAnswered) {
-            // Scroll to navigation buttons
             const navButtons = section.querySelector('.nav-buttons');
             if (navButtons) {
                 setTimeout(() => {
@@ -87,30 +103,13 @@ function handleQuestionAnswered(questionEl) {
     }
 }
 
-// Language switching
-function setLang(lang) {
-    currentLang = lang;
-    document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-    document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
-
-    // Update all translatable elements
-    document.querySelectorAll('[data-id][data-en]').forEach(el => {
-        const text = el.getAttribute(`data-${lang}`);
-        if (el.tagName === 'INPUT') {
-            el.placeholder = text;
-        } else {
-            el.textContent = text;
-        }
-    });
-
-    // Update Likert scales
-    initLikertScales();
-}
-
 // Section navigation
 const sections = ['welcomeSection', 'respondentSection', 'tlSection', 'oiSection', 'miSection', 'upbSection', 'resultSection'];
 
 function showSection(id) {
+    // Start music on first interaction
+    startMusicOnInteraction();
+
     document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
     document.getElementById(id).classList.add('active');
     updateProgress(id);
@@ -132,7 +131,7 @@ function validateAndNext(from, to) {
         const pendidikan = document.getElementById('pendidikan').value;
         const masakerja = document.getElementById('masakerja').value;
         if (!usia || !gender || !pendidikan || !masakerja) {
-            showAlert(currentLang === 'id' ? 'Mohon lengkapi semua data yang wajib diisi (*)' : 'Please fill in all required fields (*)');
+            showAlert('Mohon lengkapi semua data yang wajib diisi (*)');
             return;
         }
     } else {
@@ -145,7 +144,7 @@ function validateAndNext(from, to) {
             else { q.classList.remove('error'); }
         });
         if (!valid) {
-            showAlert(currentLang === 'id' ? 'Mohon jawab semua pertanyaan' : 'Please answer all questions');
+            showAlert('Mohon jawab semua pertanyaan');
             return;
         }
     }
@@ -168,7 +167,7 @@ async function submitForm() {
         else { q.classList.remove('error'); }
     });
     if (!valid) {
-        showAlert(currentLang === 'id' ? 'Mohon jawab semua pertanyaan' : 'Please answer all questions');
+        showAlert('Mohon jawab semua pertanyaan');
         return;
     }
 
@@ -177,7 +176,7 @@ async function submitForm() {
     // Show loading state
     const submitBtn = document.querySelector('.btn-submit');
     const originalText = submitBtn.textContent;
-    submitBtn.textContent = currentLang === 'id' ? '⏳ Mengirim...' : '⏳ Submitting...';
+    submitBtn.textContent = '⏳ Mengirim...';
     submitBtn.disabled = true;
 
     try {
@@ -201,12 +200,9 @@ async function submitForm() {
 
     } catch (error) {
         console.error('Error:', error);
-        // Still show result even if Google Sheets fails
         displayResult(data);
         showSection('resultSection');
-        showAlert(currentLang === 'id'
-            ? 'Data tersimpan offline. Koneksi ke server gagal.'
-            : 'Data saved offline. Server connection failed.');
+        showAlert('Data tersimpan offline. Koneksi ke server gagal.');
     } finally {
         submitBtn.textContent = originalText;
         submitBtn.disabled = false;
@@ -217,7 +213,7 @@ async function submitForm() {
 function collectData() {
     const data = {
         timestamp: new Date().toISOString(),
-        language: currentLang,
+        language: 'id',
         respondent: {
             nama: document.getElementById('nama').value || 'Anonim',
             usia: document.getElementById('usia').value,
@@ -242,7 +238,6 @@ function collectData() {
         data.responses[varName] = {};
         for (let i = 1; i <= config.count; i++) {
             let val = parseInt(document.querySelector(`input[name="${varName}${i}"]:checked`)?.value || 0);
-            // Reverse score if needed
             if (config.reverse.includes(i)) {
                 val = 6 - val;
             }
@@ -308,4 +303,8 @@ function showAlert(msg) {
 document.addEventListener('DOMContentLoaded', () => {
     initLikertScales();
     updateProgress('welcomeSection');
+
+    // Try to autoplay on first interaction anywhere
+    document.body.addEventListener('click', startMusicOnInteraction, { once: true });
+    document.body.addEventListener('touchstart', startMusicOnInteraction, { once: true });
 });
