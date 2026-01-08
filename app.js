@@ -7,14 +7,63 @@ const likertLabels = {
     en: ['SD', 'D', 'N', 'A', 'SA']
 };
 
-// Initialize Likert scales
+// Initialize Likert scales with auto-scroll functionality
 function initLikertScales() {
     document.querySelectorAll('.likert').forEach(container => {
-        const questionName = container.closest('.question').dataset.q;
+        const questionEl = container.closest('.question');
+        const questionName = questionEl.dataset.q;
         container.innerHTML = likertLabels[currentLang].map((label, i) =>
             `<label><input type="radio" name="${questionName}" value="${i + 1}"><span>${label}</span></label>`
         ).join('');
+
+        // Add click listener for auto-scroll
+        container.querySelectorAll('input').forEach(input => {
+            input.addEventListener('change', () => handleQuestionAnswered(questionEl));
+        });
     });
+}
+
+// Handle question answered - mark as answered and auto-scroll to next
+function handleQuestionAnswered(questionEl) {
+    // Mark as answered
+    questionEl.classList.add('answered');
+    questionEl.classList.remove('error');
+
+    // Find next unanswered question in current section
+    const section = questionEl.closest('.section');
+    const questions = section.querySelectorAll('.question');
+    let nextQuestion = null;
+    let foundCurrent = false;
+
+    for (const q of questions) {
+        if (q === questionEl) {
+            foundCurrent = true;
+            continue;
+        }
+        if (foundCurrent && !q.classList.contains('answered')) {
+            nextQuestion = q;
+            break;
+        }
+    }
+
+    if (nextQuestion) {
+        // Scroll to next question with smooth animation
+        setTimeout(() => {
+            nextQuestion.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 200);
+    } else {
+        // All questions in section answered, check if we should auto-navigate
+        const allAnswered = Array.from(questions).every(q => q.classList.contains('answered'));
+        if (allAnswered) {
+            // Scroll to navigation buttons
+            const navButtons = section.querySelector('.nav-buttons');
+            if (navButtons) {
+                setTimeout(() => {
+                    navButtons.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 300);
+            }
+        }
+    }
 }
 
 // Language switching
@@ -83,7 +132,7 @@ function validateAndNext(from, to) {
 }
 
 // ============================================
-// GANTI URL INI DENGAN URL GOOGLE APPS SCRIPT WEB APP LO!
+// GOOGLE APPS SCRIPT WEB APP URL
 // ============================================
 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzl2-djcbuKjYKiLEfGC-UgvLDitByt1PlYrE4Rvo4EGm1Y8h5L3it-8ee3ecMfSAd5/exec';
 
@@ -219,7 +268,10 @@ function exportData() {
 function resetForm() {
     document.querySelectorAll('input[type="text"], select').forEach(el => el.value = '');
     document.querySelectorAll('input[type="radio"]').forEach(el => el.checked = false);
-    document.querySelectorAll('.error').forEach(el => el.classList.remove('error'));
+    document.querySelectorAll('.error, .answered').forEach(el => {
+        el.classList.remove('error');
+        el.classList.remove('answered');
+    });
     showSection('welcomeSection');
 }
 
