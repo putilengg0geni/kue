@@ -82,8 +82,13 @@ function validateAndNext(from, to) {
     showSection(to);
 }
 
+// ============================================
+// GANTI URL INI DENGAN URL GOOGLE APPS SCRIPT WEB APP LO!
+// ============================================
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzl2-djcbuKjYKiLEfGC-UgvLDitByt1PlYrE4Rvo4EGm1Y8h5L3it-8ee3ecMfSAd5/exec';
+
 // Submit
-function submitForm() {
+async function submitForm() {
     const questions = document.querySelectorAll('#upbSection .question');
     let valid = true;
     questions.forEach(q => {
@@ -98,14 +103,44 @@ function submitForm() {
     }
 
     const data = collectData();
-    displayResult(data);
 
-    // Save to localStorage
-    const responses = JSON.parse(localStorage.getItem('responses') || '[]');
-    responses.push(data);
-    localStorage.setItem('responses', JSON.stringify(responses));
+    // Show loading state
+    const submitBtn = document.querySelector('.btn-submit');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = currentLang === 'id' ? '⏳ Mengirim...' : '⏳ Submitting...';
+    submitBtn.disabled = true;
 
-    showSection('resultSection');
+    try {
+        // Kirim ke Google Sheets
+        if (GOOGLE_SCRIPT_URL !== 'PASTE_WEB_APP_URL_DISINI') {
+            await fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+        }
+
+        // Save to localStorage as backup
+        const responses = JSON.parse(localStorage.getItem('responses') || '[]');
+        responses.push(data);
+        localStorage.setItem('responses', JSON.stringify(responses));
+
+        displayResult(data);
+        showSection('resultSection');
+
+    } catch (error) {
+        console.error('Error:', error);
+        // Still show result even if Google Sheets fails
+        displayResult(data);
+        showSection('resultSection');
+        showAlert(currentLang === 'id'
+            ? 'Data tersimpan offline. Koneksi ke server gagal.'
+            : 'Data saved offline. Server connection failed.');
+    } finally {
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+    }
 }
 
 // Collect data
