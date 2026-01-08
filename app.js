@@ -11,12 +11,12 @@ function toggleMusic() {
 
     if (isMusicPlaying) {
         audio.pause();
-        btn.textContent = '🔇';
+        btn.textContent = '♪';
         btn.classList.remove('playing');
     } else {
         audio.volume = 0.3; // 30% volume
         audio.play().catch(e => console.log('Audio play failed:', e));
-        btn.textContent = '🔊';
+        btn.textContent = '♫';
         btn.classList.add('playing');
     }
     isMusicPlaying = !isMusicPlaying;
