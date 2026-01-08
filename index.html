@@ -12,10 +12,20 @@
 
 <body>
     <div class="app-container">
-        <!-- Language Toggle -->
-        <div class="lang-toggle">
-            <button class="lang-btn active" onclick="setLang('id')">🇮🇩 ID</button>
-            <button class="lang-btn" onclick="setLang('en')">🇬🇧 EN</button>
+        <!-- Audio Background Music -->
+        <audio id="bgMusic" loop>
+            <source src="bgm.mp3" type="audio/mpeg">
+        </audio>
+
+        <!-- Header Controls -->
+        <div class="header-controls">
+            <button class="music-btn" id="musicBtn" onclick="toggleMusic()" title="Toggle Music">
+                🔇
+            </button>
+            <div class="lang-toggle">
+                <button class="lang-btn active" onclick="setLang('id')">🇮🇩 ID</button>
+                <button class="lang-btn" onclick="setLang('en')">🇬🇧 EN</button>
+            </div>
         </div>
 
         <div class="progress-container">

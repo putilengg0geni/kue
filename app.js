@@ -1,6 +1,27 @@
 // Language state
 let currentLang = 'id';
 
+// Music state
+let isMusicPlaying = false;
+
+// Toggle background music
+function toggleMusic() {
+    const audio = document.getElementById('bgMusic');
+    const btn = document.getElementById('musicBtn');
+
+    if (isMusicPlaying) {
+        audio.pause();
+        btn.textContent = '🔇';
+        btn.classList.remove('playing');
+    } else {
+        audio.volume = 0.3; // 30% volume
+        audio.play().catch(e => console.log('Audio play failed:', e));
+        btn.textContent = '🔊';
+        btn.classList.add('playing');
+    }
+    isMusicPlaying = !isMusicPlaying;
+}
+
 // Likert labels
 const likertLabels = {
     id: ['STS', 'TS', 'N', 'S', 'SS'],
