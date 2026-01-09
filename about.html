@@ -529,7 +529,7 @@
                 const blob = new Blob([xml], { type: 'application/vnd.ms-excel' });
                 const link = document.createElement('a');
                 link.href = URL.createObjectURL(blob);
-                link.download = `kuesioner_data_${new Date().toISOString().split('T')[0]}.xlsx`;
+                link.download = `kuesioner_data_${new Date().toISOString().split('T')[0]}.xls`;
                 link.click();
             };
 
@@ -730,7 +730,7 @@
                                             onClick={() => exportToXLSX(data)}
                                             className="px-6 py-3 bg-white text-teal-700 font-bold rounded-lg shadow-lg hover:bg-teal-50 transition flex items-center gap-2"
                                         >
-                                            📊 Export XLSX
+                                            📊 Export XLS
                                         </button>
                                     </div>
                                 </div>
