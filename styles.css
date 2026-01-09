@@ -169,14 +169,14 @@ body::before {
 }
 
 .logo-center img {
-  height: 100px;
+  height: 140px;
   width: auto;
   object-fit: contain;
 }
 
 @media (max-width: 600px) {
   .logo-center img {
-    height: 70px;
+    height: 100px;
   }
 }
 
