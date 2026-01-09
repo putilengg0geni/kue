@@ -37,21 +37,18 @@
                 </div>
                 <h1>Kuesioner Penelitian</h1>
                 <div class="welcome-letter">
-                    <p class="greeting"><strong>Assalamualaikum wr wb</strong></p>
-                    <p>Selamat pagi Bapak/Ibu Pegawai DJP yang saya hormati</p>
-                    <p>Mohon izin sebelumnya, saya Puti Lenggogeni, Pegawai DJP yang saat ini sedang menempuh pendidikan
-                        S2 Magister Manajemen di Universitas Negeri Padang. Sehubungan dengan penelitian tesis saya
-                        dengan judul <strong>"Pengaruh Transformational Leadership terhadap Unethical Pro-organizational
-                            Behavior melalui Organizational Identification sebagai Variabel Mediasi dan Moral Identity
-                            sebagai Variabel Moderasi di Lingkungan Kantor Wilayah DJP Sumatera Barat dan
-                            Jambi"</strong>, bersama ini saya mohon kesediaan Bapak/Ibu untuk dapat mengisi
-                        angket/kuesioner ini dengan jawaban yang sesuai dengan kondisi dan kenyataan yang dirasakan.
-                        Segala kerahasiaan dalam penelitian ini sepenuhnya menjadi tanggungjawab saya, dan semua data
-                        yang diperoleh dari kuesioner ini semata-mata hanyalah untuk kepentingan akademis dan ilmu
-                        pengetahuan.</p>
-                    <p>Atas perhatian dan bantuan dari Bapak/Ibu, saya mengucapkan terima kasih.</p>
-                    <p class="greeting"><strong>Wassalamualaikum wr wb.</strong></p>
-                    <p class="signature-name">Puti Lenggogeni</p>
+                    <p style="text-align: justify;">Sehubungan dengan pelaksanaan penelitian dalam rangka penulisan
+                        tesis dengan judul <strong>"Pengaruh Transformational Leadership terhadap Unethical
+                            Pro-organizational Behavior melalui Organizational Identification sebagai Variabel Mediasi
+                            dan Moral Identity sebagai Variabel Moderasi di Lingkungan Kantor Wilayah DJP Sumatera Barat
+                            dan Jambi"</strong>, saya mohon kesediaan Bapak/Ibu untuk berpartisipasi sebagai responden
+                        dengan mengisi kuesioner ini secara jujur sesuai dengan kondisi dan pengalaman yang Bapak/Ibu
+                        rasakan. Seluruh data dan informasi yang Bapak/Ibu berikan akan dijaga kerahasiaannya dan hanya
+                        digunakan untuk kepentingan akademik serta pengembangan ilmu pengetahuan.</p>
+                    <p style="text-align: justify;">Atas perhatian dan bantuan dari Bapak/Ibu, saya mengucapkan terima
+                        kasih.</p>
+                    <p class="greeting" style="text-align: left; margin-top: 20px;">Hormat saya,</p>
+                    <p class="signature-name" style="text-align: left;"><strong>Puti Lenggogeni</strong></p>
                 </div>
                 <div class="likert-info">
                     <p><strong>📋 Informasi Kuesioner:</strong></p>
@@ -161,7 +158,48 @@
 
                 <div class="nav-buttons">
                     <button class="btn-secondary" onclick="showSection('respondentSection')">← Kembali</button>
-                    <button class="btn-primary" onclick="validateAndNext('miSection','randomSection')">Lanjutkan
+                    <button class="btn-primary" onclick="validateAndNext('miSection','oiSection')">Lanjutkan
+                        →</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- OI Section (Skala 5, separate card) -->
+        <section class="section" id="oiSection">
+            <div class="card">
+                <div class="section-header">
+                    <h2>Organizational Identification</h2>
+                    <p>Seberapa setuju Anda dengan pernyataan-pernyataan berikut?</p>
+                </div>
+                <div class="legend">Skala Likert 5: 1=Sangat Tidak Setuju | 2=Tidak Setuju | 3=Netral | 4=Setuju |
+                    5=Sangat Setuju</div>
+
+                <div class="question" data-q="OI1">
+                    <p>1. Ketika seseorang mengkritik organisasi tempat saya bekerja, saya merasa seperti dihina secara
+                        pribadi.</p>
+                    <div class="likert" data-scale="5"></div>
+                </div>
+                <div class="question" data-q="OI2">
+                    <p>2. Saya sangat tertarik dengan apa yang orang lain pikirkan tentang organisasi saya.</p>
+                    <div class="likert" data-scale="5"></div>
+                </div>
+                <div class="question" data-q="OI3">
+                    <p>3. Ketika saya berbicara tentang organisasi ini, saya biasanya mengatakan "kami" daripada
+                        "mereka".</p>
+                    <div class="likert" data-scale="5"></div>
+                </div>
+                <div class="question" data-q="OI4">
+                    <p>4. Keberhasilan organisasi ini terasa seperti keberhasilan pribadi saya.</p>
+                    <div class="likert" data-scale="5"></div>
+                </div>
+                <div class="question" data-q="OI5">
+                    <p>5. Ketika seseorang memuji organisasi ini, saya merasa itu sebagai pujian pribadi.</p>
+                    <div class="likert" data-scale="5"></div>
+                </div>
+
+                <div class="nav-buttons">
+                    <button class="btn-secondary" onclick="showSection('miSection')">← Kembali</button>
+                    <button class="btn-primary" onclick="validateAndNext('oiSection','randomSection')">Lanjutkan
                         →</button>
                 </div>
             </div>
@@ -174,8 +212,6 @@
                     <p>Seberapa setuju Anda dengan pernyataan-pernyataan berikut?</p>
                 </div>
                 <div class="legend" id="randomLegend">
-                    Skala Likert 5: 1=Sangat Tidak Setuju | 2=Tidak Setuju | 3=Netral | 4=Setuju | 5=Sangat Setuju
-                    <hr style="border:none; border-top:1px solid rgba(0,0,0,0.1); margin:8px 0;">
                     Skala Likert 7: 1=Sangat Tidak Setuju | 2=Tidak Setuju | 3=Agak Tidak Setuju | 4=Netral | 5=Agak
                     Setuju | 6=Setuju | 7=Sangat Setuju
                 </div>
@@ -184,7 +220,7 @@
                 <div id="randomQuestionsContainer"></div>
 
                 <div class="nav-buttons">
-                    <button class="btn-secondary" onclick="showSection('miSection')">← Kembali</button>
+                    <button class="btn-secondary" onclick="showSection('oiSection')">← Kembali</button>
                     <button class="btn-primary btn-submit" onclick="submitForm()">✓ Kirim Jawaban</button>
                 </div>
             </div>

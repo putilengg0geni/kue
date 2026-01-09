@@ -43,7 +43,7 @@ function toggleMusic() {
 const likertLabels5 = ['STS', 'TS', 'N', 'S', 'SS'];
 const likertLabels7 = ['STS', 'TS', 'ATS', 'N', 'AS', 'S', 'SS'];
 
-// Question definitions for randomized section (TL + OI + UPB = 22 questions)
+// Question definitions for randomized section (TL + UPB = 17 questions, all scale 7)
 const randomQuestions = [
     // TL (11 questions) - Likert 7
     { id: 'TL1', text: 'Atasan langsung saya memiliki pemahaman jelas mengenai arah tujuan organisasi.', scale: 7 },
@@ -57,12 +57,6 @@ const randomQuestions = [
     { id: 'TL9', text: 'Atasan langsung saya memotivasi tiap pegawai untuk menjadi anggota tim yang handal.', scale: 7 },
     { id: 'TL10', text: 'Atasan langsung saya mampu menyatukan seluruh anggota kelompok untuk bergerak menuju satu tujuan yang sama.', scale: 7 },
     { id: 'TL11', text: 'Atasan langsung saya membangun mentalitas dan semangat kebersamaan di antara pegawai.', scale: 7 },
-    // OI (5 questions) - Likert 5
-    { id: 'OI1', text: 'Menurut saya, keberhasilan organisasi ini juga keberhasilan saya secara pribadi.', scale: 5 },
-    { id: 'OI2', text: 'Saat ada orang yang mengkritik organisasi ini, saya merasa seolah kritikan itu langsung ditujukan pada saya.', scale: 5 },
-    { id: 'OI3', text: 'Ketika organisasi dipuji, saya merasakannya sebagai pujian terhadap diri saya.', scale: 5 },
-    { id: 'OI4', text: 'Saya tak peduli dengan pandangan pihak luar terhadap organisasi kami.', scale: 5 },
-    { id: 'OI5', text: 'Saat membicarakan organisasi kami (kepada pihak luar), saya lebih sering menyebut mereka ("kantor mereka") ketimbang kami ("kantor kami").', scale: 5 },
     // UPB (6 questions) - Likert 7
     { id: 'UPB1', text: 'Demi membantu organisasi, saya bersedia menyelaraskan informasi agar citra organisasi tetap terlihat baik di mata publik.', scale: 7 },
     { id: 'UPB2', text: 'Jika itu menguntungkan organisasi, saya bersedia menonjolkan sisi positif layanan organisasi secara berlebihan saat berhadapan dengan Wajib Pajak.', scale: 7 },
@@ -82,21 +76,16 @@ function shuffleArray(array) {
     return shuffled;
 }
 
-// Generate randomized questions HTML and insert into container
-// Group by scale: Skala 5 first, then Skala 7 (each group shuffled)
+// Generate randomized questions HTML (TL + UPB only, all scale 7)
 function generateRandomQuestions() {
     const container = document.getElementById('randomQuestionsContainer');
 
-    // Separate by scale and shuffle each group
-    const scale5Questions = shuffleArray(randomQuestions.filter(q => q.scale === 5));
-    const scale7Questions = shuffleArray(randomQuestions.filter(q => q.scale === 7));
-
-    // Combine: Skala 5 first, then Skala 7
-    const orderedQuestions = [...scale5Questions, ...scale7Questions];
+    // Shuffle all questions (all are scale 7 now)
+    const shuffledQuestions = shuffleArray(randomQuestions);
 
     let html = '';
-    orderedQuestions.forEach((q, index) => {
-        const labels = q.scale === 7 ? likertLabels7 : likertLabels5;
+    shuffledQuestions.forEach((q, index) => {
+        const labels = likertLabels7; // All scale 7 now
         const likertHtml = labels.map((label, i) =>
             `<label><input type="radio" name="${q.id}" value="${i + 1}"><span>${label}</span></label>`
         ).join('');
@@ -111,10 +100,13 @@ function generateRandomQuestions() {
 
     container.innerHTML = html;
 
-    // Add click listeners for auto-scroll
+    // Add click listeners for auto-scroll and auto-save
     container.querySelectorAll('.question').forEach(questionEl => {
         questionEl.querySelectorAll('input').forEach(input => {
-            input.addEventListener('change', () => handleQuestionAnswered(questionEl));
+            input.addEventListener('change', () => {
+                handleQuestionAnswered(questionEl);
+                saveProgress(); // Auto-save on every answer
+            });
         });
     });
 }
@@ -130,9 +122,33 @@ function initLikertScales() {
             `<label><input type="radio" name="${questionName}" value="${i + 1}"><span>${label}</span></label>`
         ).join('');
 
-        // Add click listener for auto-scroll
+        // Add click listener for auto-scroll and auto-save
         container.querySelectorAll('input').forEach(input => {
-            input.addEventListener('change', () => handleQuestionAnswered(questionEl));
+            input.addEventListener('change', () => {
+                handleQuestionAnswered(questionEl);
+                saveProgress(); // Auto-save on every answer
+            });
+        });
+    });
+}
+
+// Initialize Likert scales for OI section (static, not randomized)
+function initOILikertScales() {
+    document.querySelectorAll('#oiSection .likert').forEach(container => {
+        const questionEl = container.closest('.question');
+        const questionName = questionEl.dataset.q;
+
+        // OI uses 5-point scale
+        container.innerHTML = likertLabels5.map((label, i) =>
+            `<label><input type="radio" name="${questionName}" value="${i + 1}"><span>${label}</span></label>`
+        ).join('');
+
+        // Add click listener for auto-scroll and auto-save
+        container.querySelectorAll('input').forEach(input => {
+            input.addEventListener('change', () => {
+                handleQuestionAnswered(questionEl);
+                saveProgress(); // Auto-save on every answer
+            });
         });
     });
 }
@@ -182,8 +198,8 @@ function handleQuestionAnswered(questionEl) {
     }
 }
 
-// Section navigation - updated for new flow
-const sections = ['welcomeSection', 'respondentSection', 'miSection', 'randomSection', 'resultSection'];
+// Section navigation - updated for new flow with OI section
+const sections = ['welcomeSection', 'respondentSection', 'miSection', 'oiSection', 'randomSection', 'resultSection'];
 
 function showSection(id) {
     // Start music on first interaction
@@ -274,6 +290,10 @@ async function submitForm() {
         const responses = JSON.parse(localStorage.getItem('responses') || '[]');
         responses.push(data);
         localStorage.setItem('responses', JSON.stringify(responses));
+
+        // Clear form progress (not backup responses)
+        clearProgress();
+
         showSection('resultSection');
 
     } catch (error) {
@@ -336,6 +356,86 @@ function exportData() {
     URL.revokeObjectURL(url);
 }
 
+// ============================================
+// SESSION PERSISTENCE - Auto-save progress
+// ============================================
+const STORAGE_KEY = 'kuesioner_progress';
+
+// Save current progress to localStorage
+function saveProgress() {
+    const progress = {
+        currentSection: document.querySelector('.section.active')?.id || 'welcomeSection',
+        respondent: {
+            nama: document.getElementById('nama')?.value || '',
+            usia: document.getElementById('usia')?.value || '',
+            gender: document.querySelector('input[name="gender"]:checked')?.value || '',
+            unitorg: document.getElementById('unitorg')?.value || '',
+            pendidikan: document.getElementById('pendidikan')?.value || '',
+            lamakerja: document.getElementById('lamakerja')?.value || ''
+        },
+        answers: {}
+    };
+
+    // Save all radio button answers
+    document.querySelectorAll('input[type="radio"]:checked').forEach(input => {
+        progress.answers[input.name] = input.value;
+    });
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+}
+
+// Load saved progress from localStorage
+function loadProgress() {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (!saved) return false;
+
+    try {
+        const progress = JSON.parse(saved);
+
+        // Restore respondent data
+        if (progress.respondent) {
+            if (progress.respondent.nama) document.getElementById('nama').value = progress.respondent.nama;
+            if (progress.respondent.usia) document.getElementById('usia').value = progress.respondent.usia;
+            if (progress.respondent.gender) {
+                const genderRadio = document.querySelector(`input[name="gender"][value="${progress.respondent.gender}"]`);
+                if (genderRadio) genderRadio.checked = true;
+            }
+            if (progress.respondent.unitorg) document.getElementById('unitorg').value = progress.respondent.unitorg;
+            if (progress.respondent.pendidikan) document.getElementById('pendidikan').value = progress.respondent.pendidikan;
+            if (progress.respondent.lamakerja) document.getElementById('lamakerja').value = progress.respondent.lamakerja;
+        }
+
+        // Restore all answers
+        if (progress.answers) {
+            for (const [name, value] of Object.entries(progress.answers)) {
+                const radio = document.querySelector(`input[name="${name}"][value="${value}"]`);
+                if (radio) {
+                    radio.checked = true;
+                    // Mark question as answered
+                    const questionEl = radio.closest('.question');
+                    if (questionEl) questionEl.classList.add('answered');
+                }
+            }
+        }
+
+        // Navigate to last section (but not result section)
+        if (progress.currentSection && progress.currentSection !== 'resultSection') {
+            showSection(progress.currentSection);
+            return true;
+        }
+
+        return false;
+    } catch (e) {
+        console.log('Error loading progress:', e);
+        return false;
+    }
+}
+
+// Clear saved progress
+function clearProgress() {
+    localStorage.removeItem(STORAGE_KEY);
+}
+
 // Reset
 function resetForm() {
     document.querySelectorAll('input[type="text"], select').forEach(el => el.value = '');
@@ -344,6 +444,8 @@ function resetForm() {
         el.classList.remove('error');
         el.classList.remove('answered');
     });
+    // Clear saved progress
+    clearProgress();
     // Re-shuffle questions on reset
     generateRandomQuestions();
     showSection('welcomeSection');
@@ -360,10 +462,22 @@ function showAlert(msg) {
 // Init
 document.addEventListener('DOMContentLoaded', () => {
     initLikertScales();        // Initialize MI section (static)
-    generateRandomQuestions(); // Generate and shuffle TL+OI+UPB questions
+    initOILikertScales();      // Initialize OI section (static)
+    generateRandomQuestions(); // Generate and shuffle TL+UPB questions
     updateProgress('welcomeSection');
+
+    // Try to load saved progress
+    const hasProgress = loadProgress();
+    if (hasProgress) {
+        showAlert('Progress sebelumnya telah dipulihkan!');
+    }
 
     // Try to autoplay on first interaction anywhere
     document.body.addEventListener('click', startMusicOnInteraction, { once: true });
     document.body.addEventListener('touchstart', startMusicOnInteraction, { once: true });
+
+    // Save respondent data on change
+    document.querySelectorAll('#respondentSection input, #respondentSection select').forEach(el => {
+        el.addEventListener('change', saveProgress);
+    });
 });
