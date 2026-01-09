@@ -371,14 +371,27 @@ h2 {
 }
 
 .trait-box {
-  background: rgba(30, 58, 95, 0.08);
-  border: 1px solid var(--primary-light);
-  padding: 16px;
-  border-radius: 8px;
-  margin-bottom: 16px;
-  font-size: 14px;
+  position: sticky;
+  top: 80px;
+  /* Below navbar */
+  z-index: 10;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 16px 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  font-size: 15px;
+  font-weight: 500;
   line-height: 1.6;
-  text-align: left;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+  transition: all 0.3s ease;
+}
+
+.trait-box:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(102, 126, 234, 0.5);
 }
 
 /* Questions */
