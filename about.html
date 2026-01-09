@@ -487,21 +487,21 @@
                 };
 
                 rows.forEach(row => {
-                    // Calculate averages from score columns if available
-                    if (row['TL_Score']) {
-                        variables.TL.sum += parseFloat(row['TL_Score']) || 0;
+                    // Calculate averages from score columns (matching Sheet column names)
+                    if (row['Score_TL']) {
+                        variables.TL.sum += parseFloat(row['Score_TL']) || 0;
                         variables.TL.count++;
                     }
-                    if (row['OI_Score']) {
-                        variables.OI.sum += parseFloat(row['OI_Score']) || 0;
+                    if (row['Score_OI']) {
+                        variables.OI.sum += parseFloat(row['Score_OI']) || 0;
                         variables.OI.count++;
                     }
-                    if (row['MI_Score']) {
-                        variables.MI.sum += parseFloat(row['MI_Score']) || 0;
+                    if (row['Score_MI']) {
+                        variables.MI.sum += parseFloat(row['Score_MI']) || 0;
                         variables.MI.count++;
                     }
-                    if (row['UPB_Score']) {
-                        variables.UPB.sum += parseFloat(row['UPB_Score']) || 0;
+                    if (row['Score_UPB']) {
+                        variables.UPB.sum += parseFloat(row['Score_UPB']) || 0;
                         variables.UPB.count++;
                     }
                 });
@@ -638,11 +638,11 @@
                                                         <td className="px-4 py-2 text-xs">{row.Timestamp || '-'}</td>
                                                         <td className="px-4 py-2">{row.Usia || '-'}</td>
                                                         <td className="px-4 py-2">{row.Gender || '-'}</td>
-                                                        <td className="px-4 py-2">{row.Seksi || row.UnitOrg || '-'}</td>
-                                                        <td className="px-4 py-2 text-center font-mono">{row.TL_Score || '-'}</td>
-                                                        <td className="px-4 py-2 text-center font-mono">{row.OI_Score || '-'}</td>
-                                                        <td className="px-4 py-2 text-center font-mono">{row.MI_Score || '-'}</td>
-                                                        <td className="px-4 py-2 text-center font-mono">{row.UPB_Score || '-'}</td>
+                                                        <td className="px-4 py-2">{row['Unit Organisasi'] || '-'}</td>
+                                                        <td className="px-4 py-2 text-center font-mono">{row.Score_TL || '-'}</td>
+                                                        <td className="px-4 py-2 text-center font-mono">{row.Score_OI || '-'}</td>
+                                                        <td className="px-4 py-2 text-center font-mono">{row.Score_MI || '-'}</td>
+                                                        <td className="px-4 py-2 text-center font-mono">{row.Score_UPB || '-'}</td>
                                                     </tr>
                                                 ))}
                                             </tbody>
