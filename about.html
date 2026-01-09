@@ -473,6 +473,66 @@
                 }
             };
 
+            // Export to CSV
+            const exportToCSV = (rows) => {
+                if (!rows || rows.length === 0) return;
+                const headers = Object.keys(rows[0]);
+                const csvContent = [
+                    headers.join(','),
+                    ...rows.map(row => headers.map(h => {
+                        let val = row[h] || '';
+                        // Escape quotes and wrap in quotes if contains comma
+                        if (typeof val === 'string' && (val.includes(',') || val.includes('"'))) {
+                            val = '"' + val.replace(/"/g, '""') + '"';
+                        }
+                        return val;
+                    }).join(','))
+                ].join('\n');
+
+                const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = `kuesioner_data_${new Date().toISOString().split('T')[0]}.csv`;
+                link.click();
+            };
+
+            // Export to XLSX (using simple XML format)
+            const exportToXLSX = (rows) => {
+                if (!rows || rows.length === 0) return;
+                const headers = Object.keys(rows[0]);
+
+                // Create simple Excel XML
+                let xml = '<?xml version="1.0"?><?mso-application progid="Excel.Sheet"?>';
+                xml += '<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">';
+                xml += '<Worksheet ss:Name="Data"><Table>';
+
+                // Header row
+                xml += '<Row>';
+                headers.forEach(h => {
+                    xml += `<Cell><Data ss:Type="String">${h}</Data></Cell>`;
+                });
+                xml += '</Row>';
+
+                // Data rows
+                rows.forEach(row => {
+                    xml += '<Row>';
+                    headers.forEach(h => {
+                        const val = row[h] || '';
+                        const type = typeof val === 'number' ? 'Number' : 'String';
+                        xml += `<Cell><Data ss:Type="${type}">${val}</Data></Cell>`;
+                    });
+                    xml += '</Row>';
+                });
+
+                xml += '</Table></Worksheet></Workbook>';
+
+                const blob = new Blob([xml], { type: 'application/vnd.ms-excel' });
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = `kuesioner_data_${new Date().toISOString().split('T')[0]}.xlsx`;
+                link.click();
+            };
+
             const calculateStats = (rows) => {
                 if (!rows || rows.length === 0) {
                     setStats(null);
@@ -651,14 +711,30 @@
                                 </div>
                             )}
 
-                            {/* SEM-PLS Placeholder */}
-                            <div className="bg-slate-100 border-2 border-dashed border-slate-300 rounded-xl p-8 text-center">
-                                <BarChart2 size={48} className="mx-auto mb-4 text-slate-400" />
-                                <h3 className="text-lg font-bold text-slate-600 mb-2">SEM-PLS Analysis</h3>
-                                <p className="text-sm text-slate-500 max-w-md mx-auto">
-                                    Fitur analisis SEM-PLS (Structural Equation Modeling) akan tersedia setelah data responden mencukupi (minimal 50-100 responden).
-                                </p>
-                            </div>
+                            {/* Export for SmartPLS */}
+                            {data.length > 0 && (
+                                <div className="bg-gradient-to-r from-emerald-500 to-teal-600 rounded-xl p-8 text-center text-white">
+                                    <BarChart2 size={48} className="mx-auto mb-4 opacity-90" />
+                                    <h3 className="text-xl font-bold mb-2">Export untuk SmartPLS</h3>
+                                    <p className="text-sm opacity-90 max-w-md mx-auto mb-6">
+                                        Download data untuk dianalisis di SmartPLS, AMOS, atau software statistik lainnya.
+                                    </p>
+                                    <div className="flex justify-center gap-4 flex-wrap">
+                                        <button
+                                            onClick={() => exportToCSV(data)}
+                                            className="px-6 py-3 bg-white text-emerald-700 font-bold rounded-lg shadow-lg hover:bg-emerald-50 transition flex items-center gap-2"
+                                        >
+                                            📄 Export CSV
+                                        </button>
+                                        <button
+                                            onClick={() => exportToXLSX(data)}
+                                            className="px-6 py-3 bg-white text-teal-700 font-bold rounded-lg shadow-lg hover:bg-teal-50 transition flex items-center gap-2"
+                                        >
+                                            📊 Export XLSX
+                                        </button>
+                                    </div>
+                                </div>
+                            )}
                         </>
                     )}
                 </div>
