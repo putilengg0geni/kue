@@ -39,9 +39,9 @@ function toggleMusic() {
     isMusicPlaying = !isMusicPlaying;
 }
 
-// Likert labels - 5 point for OI/MI, 7 point for TL/UPB
-const likertLabels5 = ['1', '2', '3', '4', '5'];
-const likertLabels7 = ['1', '2', '3', '4', '5', '6', '7'];
+// Likert labels with initials - 5 point for OI/MI, 7 point for TL/UPB
+const likertLabels5 = ['STS', 'TS', 'N', 'S', 'SS'];
+const likertLabels7 = ['STS', 'TS', 'ATS', 'N', 'AS', 'S', 'SS'];
 
 // Question definitions for randomized section (TL + OI + UPB = 22 questions)
 const randomQuestions = [
@@ -61,8 +61,8 @@ const randomQuestions = [
     { id: 'OI1', text: 'Menurut saya, keberhasilan organisasi ini juga keberhasilan saya secara pribadi.', scale: 5 },
     { id: 'OI2', text: 'Saat ada orang yang mengkritik organisasi ini, saya merasa seolah kritikan itu langsung ditujukan pada saya.', scale: 5 },
     { id: 'OI3', text: 'Ketika organisasi dipuji, saya merasakannya sebagai pujian terhadap diri saya.', scale: 5 },
-    { id: 'OI4', text: 'Saya tak peduli dengan pandangan pihak luar terhadap organisasi kami.', scale: 5, reverse: true },
-    { id: 'OI5', text: 'Saat membicarakan organisasi kami (kepada pihak luar), saya lebih sering menyebut mereka ("kantor mereka") ketimbang kami ("kantor kami").', scale: 5, reverse: true },
+    { id: 'OI4', text: 'Saya tak peduli dengan pandangan pihak luar terhadap organisasi kami.', scale: 5 },
+    { id: 'OI5', text: 'Saat membicarakan organisasi kami (kepada pihak luar), saya lebih sering menyebut mereka ("kantor mereka") ketimbang kami ("kantor kami").', scale: 5 },
     // UPB (6 questions) - Likert 7
     { id: 'UPB1', text: 'Demi membantu organisasi, saya bersedia menyelaraskan informasi agar citra organisasi tetap terlihat baik di mata publik.', scale: 7 },
     { id: 'UPB2', text: 'Jika itu menguntungkan organisasi, saya bersedia menonjolkan sisi positif layanan organisasi secara berlebihan saat berhadapan dengan Wajib Pajak.', scale: 7 },
@@ -86,14 +86,14 @@ function shuffleArray(array) {
 function generateRandomQuestions() {
     const container = document.getElementById('randomQuestionsContainer');
     const shuffled = shuffleArray(randomQuestions);
-    
+
     let html = '';
     shuffled.forEach((q, index) => {
         const labels = q.scale === 7 ? likertLabels7 : likertLabels5;
-        const likertHtml = labels.map((label, i) => 
+        const likertHtml = labels.map((label, i) =>
             `<label><input type="radio" name="${q.id}" value="${i + 1}"><span>${label}</span></label>`
         ).join('');
-        
+
         html += `
             <div class="question" data-q="${q.id}" data-scale="${q.scale}">
                 <p>${index + 1}. ${q.text}</p>
@@ -101,9 +101,9 @@ function generateRandomQuestions() {
             </div>
         `;
     });
-    
+
     container.innerHTML = html;
-    
+
     // Add click listeners for auto-scroll
     container.querySelectorAll('.question').forEach(questionEl => {
         questionEl.querySelectorAll('input').forEach(input => {
@@ -117,7 +117,7 @@ function initLikertScales() {
     document.querySelectorAll('#miSection .likert').forEach(container => {
         const questionEl = container.closest('.question');
         const questionName = questionEl.dataset.q;
-        
+
         // MI uses 5-point scale
         container.innerHTML = likertLabels5.map((label, i) =>
             `<label><input type="radio" name="${questionName}" value="${i + 1}"><span>${label}</span></label>`
@@ -300,12 +300,12 @@ function collectData() {
         scores: {}
     };
 
-    // Collect responses for each variable - data is organized properly regardless of display order
+    // Collect responses for each variable - NO reverse scoring
     const variables = {
-        TL: { count: 11, reverse: [], maxScale: 7 },
-        OI: { count: 5, reverse: [4, 5], maxScale: 5 },
-        MI: { count: 5, reverse: [], maxScale: 5 },
-        UPB: { count: 6, reverse: [], maxScale: 7 }
+        TL: { count: 11, maxScale: 7 },
+        OI: { count: 5, maxScale: 5 },
+        MI: { count: 5, maxScale: 5 },
+        UPB: { count: 6, maxScale: 7 }
     };
 
     for (const [varName, config] of Object.entries(variables)) {
@@ -313,9 +313,6 @@ function collectData() {
         data.responses[varName] = {};
         for (let i = 1; i <= config.count; i++) {
             let val = parseInt(document.querySelector(`input[name="${varName}${i}"]:checked`)?.value || 0);
-            if (config.reverse.includes(i)) {
-                val = (config.maxScale + 1) - val; // Proper reverse scoring based on scale
-            }
             data.responses[varName][`${varName}${i}`] = val;
             sum += val;
         }
