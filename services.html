@@ -1,560 +1,430 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proposal Tesis Digital - Puti Lenggogeni</title>
-    
-    <!-- React & ReactDOM -->
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    
-    <!-- Babel untuk JSX -->
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Custom Styles untuk animasi -->
+    <title>Daftar Pertanyaan Kuesioner</title>
     <style>
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        .animate-fade-in {
-            animation: fadeIn 0.5s ease-out forwards;
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1e3a5f;
+            margin-bottom: 30px;
+        }
+
+        .variable {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .variable-header {
+            padding: 16px 20px;
+            color: white;
+        }
+
+        .variable-header h2 {
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+
+        .variable-header p {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        .tl .variable-header {
+            background: #1e3a5f;
+        }
+
+        .oi .variable-header {
+            background: #d97706;
+        }
+
+        .mi .variable-header {
+            background: #059669;
+        }
+
+        .upb .variable-header {
+            background: #dc2626;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        th {
+            background: #f9fafb;
+            font-size: 12px;
+            color: #6b7280;
+            text-transform: uppercase;
+        }
+
+        td {
+            font-size: 14px;
+        }
+
+        .code {
+            font-weight: 600;
+            color: #1e3a5f;
+        }
+
+        .reverse {
+            background: #fef3c7;
+        }
+
+        .reverse .badge {
+            background: #f59e0b;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .no-reverse {
+            color: #9ca3af;
+        }
+
+        .legend {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .legend h3 {
+            margin-bottom: 12px;
+            color: #1e3a5f;
+        }
+
+        .legend-row {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            background: #f9fafb;
+            border-radius: 8px;
+        }
+
+        .legend-item h4 {
+            font-size: 13px;
+            color: #6b7280;
+            margin-bottom: 8px;
+        }
+
+        .legend-item ul {
+            list-style: none;
+            font-size: 13px;
+        }
+
+        .legend-item li {
+            margin-bottom: 4px;
+        }
+
+        .reverse-box {
+            background: #fef3c7;
+            padding: 16px;
+            border-radius: 8px;
+            border-left: 4px solid #f59e0b;
+            margin-top: 16px;
+        }
+
+        .reverse-box h4 {
+            color: #92400e;
+            margin-bottom: 8px;
+        }
+
+        .reverse-box p {
+            font-size: 13px;
+            color: #78350f;
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800">
-    <div id="root"></div>
 
-    <script type="text/babel">
-        const { useState } = React;
+<body>
+    <div class="container">
+        <h1>📋 Daftar Pertanyaan Kuesioner</h1>
 
-        // --- Ikon-ikon (Inline SVG pengganti Lucide-React untuk file HTML tunggal) ---
-        const BookOpen = ({ size = 24, className = "" }) => (
-            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
-        );
-        const Users = ({ size = 24, className = "" }) => (
-            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-        );
-        const Activity = ({ size = 24, className = "" }) => (
-            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-        );
-        const Brain = ({ size = 24, className = "" }) => (
-            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/></svg>
-        );
-        const ArrowRight = ({ size = 24, className = "" }) => (
-            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-        );
-        const BarChart2 = ({ size = 24, className = "" }) => (
-            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
-        );
-        const ShieldCheck = ({ size = 24, className = "" }) => (
-            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
-        );
-        const AlertTriangle = ({ size = 24, className = "" }) => (
-            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-        );
-        const Menu = ({ size = 24, className = "" }) => (
-            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-        );
-        const X = ({ size = 24, className = "" }) => (
-            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-        );
-        const FileText = ({ size = 24, className = "" }) => (
-            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-        );
-        const Search = ({ size = 24, className = "" }) => (
-            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-        );
-
-        // --- Komponen Utama ---
-
-        const ProposalApp = () => {
-            const [activeTab, setActiveTab] = useState('home');
-            const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-            // State untuk Simulasi
-            const [tlScore, setTlScore] = useState(50); // Transformational Leadership
-            const [oiScore, setOiScore] = useState(50); // Organizational Identification
-            const [miScore, setMiScore] = useState(50); // Moral Identity
-
-            // Logika Sederhana Simulasi Berdasarkan Hipotesis
-            const calculateUPB = () => {
-                const tlEffect = tlScore * 0.3; // Pengaruh langsung TL (H1)
-                
-                // Pengaruh OI dimoderasi oleh MI (H5)
-                const moderationFactor = 1 - (miScore / 150); 
-                const oiEffect = (oiScore * 0.6) * moderationFactor;
-
-                const total = tlEffect + oiEffect;
-                return Math.min(100, Math.max(0, total)).toFixed(1);
-            };
-
-            const upbResult = calculateUPB();
-
-            const renderContent = () => {
-                switch (activeTab) {
-                    case 'home':
-                        return <HomeSection setActiveTab={setActiveTab} />;
-                    case 'framework':
-                        return <FrameworkSection />;
-                    case 'methodology':
-                        return <MethodologySection />;
-                    case 'simulation':
-                        return (
-                        <SimulationSection 
-                            tlScore={tlScore} setTlScore={setTlScore}
-                            oiScore={oiScore} setOiScore={setOiScore}
-                            miScore={miScore} setMiScore={setMiScore}
-                            upbResult={upbResult}
-                        />
-                        );
-                    default:
-                        return <HomeSection setActiveTab={setActiveTab} />;
-                }
-            };
-
-            return (
-                <div className="min-h-screen bg-slate-50 font-sans text-slate-800">
-                    {/* Navigation */}
-                    <nav className="bg-blue-900 text-white shadow-lg sticky top-0 z-50">
-                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <div className="flex items-center justify-between h-16">
-                            <div className="flex items-center space-x-2">
-                            <BookOpen className="h-6 w-6 text-yellow-400" />
-                            <span className="font-bold text-lg tracking-tight">Proposal Tesis Digital</span>
-                            </div>
-                            
-                            {/* Desktop Menu */}
-                            <div className="hidden md:block">
-                            <div className="ml-10 flex items-baseline space-x-4">
-                                <NavButton active={activeTab === 'home'} onClick={() => setActiveTab('home')} label="Beranda" />
-                                <NavButton active={activeTab === 'framework'} onClick={() => setActiveTab('framework')} label="Kerangka Konseptual" />
-                                <NavButton active={activeTab === 'methodology'} onClick={() => setActiveTab('methodology')} label="Metodologi" />
-                                <NavButton active={activeTab === 'simulation'} onClick={() => setActiveTab('simulation')} label="Simulasi Model" icon={<Activity size={16} />} />
-                            </div>
-                            </div>
-
-                            {/* Mobile Menu Button */}
-                            <div className="md:hidden">
-                            <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="p-2 rounded-md text-white hover:bg-blue-800 focus:outline-none">
-                                {isMenuOpen ? <X /> : <Menu />}
-                            </button>
-                            </div>
-                        </div>
-                        </div>
-
-                        {/* Mobile Menu */}
-                        {isMenuOpen && (
-                        <div className="md:hidden bg-blue-800 px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                            <MobileNavButton onClick={() => {setActiveTab('home'); setIsMenuOpen(false)}} label="Beranda" />
-                            <MobileNavButton onClick={() => {setActiveTab('framework'); setIsMenuOpen(false)}} label="Kerangka Konseptual" />
-                            <MobileNavButton onClick={() => {setActiveTab('methodology'); setIsMenuOpen(false)}} label="Metodologi" />
-                            <MobileNavButton onClick={() => {setActiveTab('simulation'); setIsMenuOpen(false)}} label="Simulasi Model" />
-                        </div>
-                        )}
-                    </nav>
-
-                    {/* Main Content */}
-                    <main className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {renderContent()}
-                    </main>
-
-                    {/* Footer */}
-                    <footer className="bg-slate-200 mt-12 py-6 border-t border-slate-300">
-                        <div className="max-w-7xl mx-auto px-4 text-center text-slate-600 text-sm">
-                        <p className="font-semibold">Oleh: Puti Lenggogeni (NIM: 24081070)</p>
-                        <p>Program Magister Manajemen - Universitas Negeri Padang (2025)</p>
-                        <p className="mt-2 text-xs italic">Berdasarkan dokumen: "Proposal Tesis - Puti Lenggogeni (24081070) (1).docx"</p>
-                        </div>
-                    </footer>
-                </div>
-            );
-        };
-
-        // --- Sub-Components ---
-
-        const NavButton = ({ active, onClick, label, icon }) => (
-            <button
-                onClick={onClick}
-                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-2 ${
-                active 
-                    ? 'bg-blue-700 text-white shadow-md' 
-                    : 'text-blue-100 hover:bg-blue-800 hover:text-white'
-                }`}
-            >
-                {icon}
-                {label}
-            </button>
-        );
-
-        const MobileNavButton = ({ onClick, label }) => (
-            <button
-                onClick={onClick}
-                className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700"
-            >
-                {label}
-            </button>
-        );
-
-        // --- Section Components ---
-
-        const HomeSection = ({ setActiveTab }) => (
-            <div className="space-y-8 animate-fade-in">
-                <div className="bg-white rounded-2xl shadow-xl overflow-hidden border-l-8 border-yellow-400">
-                <div className="p-8 md:p-12">
-                    <div className="uppercase tracking-wide text-sm text-blue-600 font-bold mb-2">Konsentrasi: Manajemen Sumber Daya Manusia</div>
-                    <h1 className="text-2xl md:text-4xl font-extrabold text-slate-900 mb-6 leading-tight">
-                    Pengaruh Transformational Leadership Terhadap Unethical Pro-Organizational Behavior (UPB)
-                    </h1>
-                    <p className="text-lg text-slate-600 mb-8 max-w-3xl">
-                    Studi empiris di lingkungan Kantor Wilayah DJP Sumatera Barat dan Jambi, dengan <strong>Organizational Identification</strong> sebagai variabel mediasi dan <strong>Moral Identity</strong> sebagai variabel moderasi.
-                    </p>
-                    <div className="flex flex-wrap gap-4">
-                    <button onClick={() => setActiveTab('framework')} className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold shadow hover:bg-blue-700 transition flex items-center">
-                        Lihat Model Penelitian <span className="ml-2"><ArrowRight size={20} /></span>
-                    </button>
-                    <button onClick={() => setActiveTab('simulation')} className="bg-white text-blue-600 border border-blue-200 px-6 py-3 rounded-lg font-semibold shadow-sm hover:bg-blue-50 transition flex items-center">
-                        <span className="mr-2"><Activity size={20} /></span> Coba Simulasi
-                    </button>
-                    </div>
-                </div>
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-6">
-                <div className="bg-white p-6 rounded-xl shadow-md">
-                    <h3 className="text-xl font-bold text-slate-800 mb-4 flex items-center">
-                    <span className="mr-2 text-red-500"><AlertTriangle size={24} /></span> Masalah Penelitian
-                    </h3>
-                    <p className="text-slate-600 leading-relaxed mb-4">
-                    Meskipun DJP memiliki target Integritas dan IKU yang tinggi, terdapat fenomena <strong>Unethical Pro-Organizational Behavior (UPB)</strong>, yaitu perilaku tidak etis yang dilakukan pegawai bukan untuk kepentingan pribadi, melainkan demi keuntungan organisasi (seperti mencapai target penerimaan pajak yang ambisius).
-                    </p>
-                    <p className="text-slate-600 leading-relaxed">
-                    Studi ini meneliti "pedang bermata dua" dari kepemimpinan transformasional yang dapat memicu UPB melalui identifikasi organisasi yang berlebihan.
-                    </p>
-                </div>
-
-                <div className="bg-white p-6 rounded-xl shadow-md">
-                    <h3 className="text-xl font-bold text-slate-800 mb-4 flex items-center">
-                    <span className="mr-2 text-blue-500"><Search size={24} /></span> Tujuan Penelitian
-                    </h3>
-                    <ul className="space-y-3 text-slate-600">
-                    <li className="flex items-start">
-                        <div className="h-2 w-2 mt-2 rounded-full bg-blue-500 mr-3 flex-shrink-0"></div>
-                        <span>Menguji pengaruh langsung <strong>Transformational Leadership</strong> terhadap UPB.</span>
-                    </li>
-                    <li className="flex items-start">
-                        <div className="h-2 w-2 mt-2 rounded-full bg-blue-500 mr-3 flex-shrink-0"></div>
-                        <span>Menganalisis peran <strong>Organizational Identification</strong> sebagai mediator.</span>
-                    </li>
-                    <li className="flex items-start">
-                        <div className="h-2 w-2 mt-2 rounded-full bg-blue-500 mr-3 flex-shrink-0"></div>
-                        <span>Menguji peran <strong>Moral Identity</strong> sebagai "rem" (moderator) yang melemahkan perilaku tidak etis tersebut.</span>
-                    </li>
+        <div class="legend">
+            <h3>Skala Likert</h3>
+            <div class="legend-row">
+                <div class="legend-item">
+                    <h4>Skala 1-5 (OI, MI)</h4>
+                    <ul>
+                        <li><strong>1</strong> = STS (Sangat Tidak Setuju)</li>
+                        <li><strong>2</strong> = TS (Tidak Setuju)</li>
+                        <li><strong>3</strong> = N (Netral)</li>
+                        <li><strong>4</strong> = S (Setuju)</li>
+                        <li><strong>5</strong> = SS (Sangat Setuju)</li>
                     </ul>
                 </div>
-                </div>
-            </div>
-        );
-
-        const FrameworkSection = () => (
-            <div className="space-y-8 animate-fade-in">
-                <div className="text-center mb-8">
-                <h2 className="text-3xl font-bold text-slate-900">Kerangka Konseptual & Hipotesis</h2>
-                <p className="text-slate-500 mt-2">Visualisasi hubungan antar variabel dalam penelitian</p>
-                </div>
-
-                <div className="bg-white p-8 rounded-2xl shadow-lg relative overflow-hidden">
-                <div className="absolute top-0 right-0 bg-blue-50 px-4 py-2 rounded-bl-xl text-xs font-mono text-blue-800">
-                    MODEL JALUR (PATH MODEL)
-                </div>
-                
-                <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-12 py-10 relative">
-                    
-                    {/* IV */}
-                    <div className="w-full md:w-1/4 bg-blue-100 p-6 rounded-xl border-2 border-blue-200 text-center relative z-10 hover:shadow-lg transition">
-                    <div className="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center absolute -top-4 -left-2 font-bold shadow">X</div>
-                    <h4 className="font-bold text-blue-900 mb-2">Transformational Leadership</h4>
-                    <p className="text-xs text-slate-600">Gaya kepemimpinan inspiratif, motivasional</p>
-                    </div>
-
-                    {/* Arrow 1 */}
-                    <div className="hidden md:flex flex-col items-center w-16">
-                    <span className="text-xs font-bold text-slate-400 mb-1">H2 (+)</span>
-                    <div className="h-0.5 w-full bg-slate-400 relative">
-                        <div className="absolute right-0 -top-1.5 border-t-4 border-b-4 border-l-8 border-transparent border-l-slate-400"></div>
-                    </div>
-                    </div>
-
-                    {/* Mediator */}
-                    <div className="w-full md:w-1/4 bg-yellow-50 p-6 rounded-xl border-2 border-yellow-200 text-center relative z-10 hover:shadow-lg transition">
-                    <div className="bg-yellow-500 text-white rounded-full w-8 h-8 flex items-center justify-center absolute -top-4 -left-2 font-bold shadow">Z</div>
-                    <div className="flex flex-col items-center">
-                        <h4 className="font-bold text-yellow-900 mb-2">Organizational Identification</h4>
-                        <p className="text-xs text-slate-600">Perasaan menyatu dengan organisasi</p>
-                    </div>
-
-                    {/* Moderator Arrow (Vertical) */}
-                    <div className="absolute -bottom-24 left-1/2 transform -translate-x-1/2 flex flex-col items-center z-0">
-                        <div className="h-24 w-0.5 bg-slate-400 border-l border-dashed border-slate-400"></div>
-                        <div className="bg-green-100 p-3 rounded-lg border border-green-300 mt-2 shadow-sm w-48 text-center">
-                            <div className="bg-green-600 text-white rounded-full w-6 h-6 flex items-center justify-center absolute -top-3 right-0 font-bold text-xs shadow">M</div>
-                            <span className="text-xs font-bold text-green-800">Moral Identity (Moderator)</span>
-                            <p className="text-[10px] text-green-700">Memoderasi H3 (H5)</p>
-                        </div>
-                    </div>
-                    </div>
-
-                    {/* Arrow 2 */}
-                    <div className="hidden md:flex flex-col items-center w-16">
-                    <span className="text-xs font-bold text-slate-400 mb-1">H3 (+)</span>
-                    <div className="h-0.5 w-full bg-slate-400 relative">
-                        <div className="absolute right-0 -top-1.5 border-t-4 border-b-4 border-l-8 border-transparent border-l-slate-400"></div>
-                    </div>
-                    </div>
-
-                    {/* DV */}
-                    <div className="w-full md:w-1/4 bg-red-50 p-6 rounded-xl border-2 border-red-200 text-center relative z-10 hover:shadow-lg transition">
-                    <div className="bg-red-600 text-white rounded-full w-8 h-8 flex items-center justify-center absolute -top-4 -left-2 font-bold shadow">Y</div>
-                    <h4 className="font-bold text-red-900 mb-2">Unethical Pro-Org Behavior (UPB)</h4>
-                    <p className="text-xs text-slate-600">Perilaku tidak etis demi keuntungan organisasi</p>
-                    </div>
-                </div>
-                
-                {/* Direct Arrow Overlay (H1) */}
-                <div className="hidden md:block absolute top-1/3 left-1/4 right-1/4 h-24 border-t-2 border-dashed border-slate-300 rounded-t-[100%] pointer-events-none">
-                    <div className="absolute top-[-15px] left-1/2 bg-white px-2 text-xs text-slate-400 font-bold">H1 (Direct +)</div>
-                </div>
-
-                <div className="mt-24 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                    <HypothesisCard 
-                    code="H1" 
-                    text="Transformational leadership berpengaruh positif signifikan terhadap UPB." 
-                    />
-                    <HypothesisCard 
-                    code="H2" 
-                    text="Transformational leadership berpengaruh positif signifikan terhadap Organizational Identification." 
-                    />
-                    <HypothesisCard 
-                    code="H3" 
-                    text="Organizational Identification berpengaruh positif signifikan terhadap UPB." 
-                    />
-                    <HypothesisCard 
-                    code="H4" 
-                    text="Organizational Identification memediasi pengaruh Transformational Leadership terhadap UPB." 
-                    />
-                    <HypothesisCard 
-                    code="H5" 
-                    text="Moral Identity memoderasi (memperlemah) hubungan Organizational Identification terhadap UPB." 
-                    highlight 
-                    />
-                </div>
-                </div>
-            </div>
-        );
-
-        const HypothesisCard = ({ code, text, highlight }) => (
-            <div className={`p-4 rounded-lg border ${highlight ? 'bg-green-50 border-green-200' : 'bg-slate-50 border-slate-200'}`}>
-                <span className={`font-bold text-sm ${highlight ? 'text-green-700' : 'text-blue-900'}`}>{code}</span>
-                <p className="text-sm text-slate-700 mt-1">{text}</p>
-            </div>
-        );
-
-        const MethodologySection = () => (
-            <div className="space-y-6 animate-fade-in">
-                <h2 className="text-3xl font-bold text-slate-900 mb-6">Metodologi Penelitian</h2>
-
-                <div className="grid md:grid-cols-3 gap-6">
-                <div className="bg-white p-6 rounded-xl shadow-md border-t-4 border-blue-500">
-                    <div className="flex items-center mb-4">
-                    <div className="p-3 bg-blue-100 rounded-lg text-blue-600 mr-3">
-                        <Users size={24} />
-                    </div>
-                    <h3 className="font-bold text-lg">Populasi & Sampel</h3>
-                    </div>
-                    <div className="space-y-4">
-                    <div>
-                        <p className="text-sm text-slate-500 font-semibold">Populasi</p>
-                        <p className="text-2xl font-bold text-slate-800">594 <span className="text-base font-normal text-slate-500">Pegawai</span></p>
-                        <p className="text-xs text-slate-500 mt-1">Pegawai KPP Pratama di Kanwil DJP Sumbar & Jambi (Seksi Pelayanan, Pengawasan, Pemeriksaan).</p>
-                    </div>
-                    <div className="h-px bg-slate-100"></div>
-                    <div>
-                        <p className="text-sm text-slate-500 font-semibold">Sampel (Krejcie & Morgan)</p>
-                        <p className="text-2xl font-bold text-slate-800">234 <span className="text-base font-normal text-slate-500">Responden</span></p>
-                        <p className="text-xs text-slate-500 mt-1">Teknik: Proportionate Stratified Random Sampling (39.39% per unit).</p>
-                    </div>
-                    </div>
-                </div>
-
-                <div className="bg-white p-6 rounded-xl shadow-md border-t-4 border-purple-500">
-                    <div className="flex items-center mb-4">
-                    <div className="p-3 bg-purple-100 rounded-lg text-purple-600 mr-3">
-                        <FileText size={24} />
-                    </div>
-                    <h3 className="font-bold text-lg">Instrumen Data</h3>
-                    </div>
-                    <ul className="space-y-3 text-sm text-slate-600">
-                    <li className="bg-slate-50 p-2 rounded border border-slate-100">
-                        <strong>Kuesioner Online</strong> (Google Form) dengan Skala Likert.
-                    </li>
-                    <li className="bg-slate-50 p-2 rounded border border-slate-100">
-                        <strong>Transformational Leadership:</strong> 11 Item (Podsakoff, 1990).
-                    </li>
-                    <li className="bg-slate-50 p-2 rounded border border-slate-100">
-                        <strong>UPB:</strong> 6 Item (Umphress et al., 2010).
-                    </li>
-                    <li className="bg-slate-50 p-2 rounded border border-slate-100">
-                        <strong>Org. Identification:</strong> 5 Item (Mael & Ashforth, 1992).
-                    </li>
-                    <li className="bg-slate-50 p-2 rounded border border-slate-100">
-                        <strong>Moral Identity:</strong> 5 Item (Aquino & Reed, 2002).
-                    </li>
+                <div class="legend-item">
+                    <h4>Skala 1-7 (TL, UPB)</h4>
+                    <ul>
+                        <li><strong>1</strong> = STS (Sangat Tidak Setuju)</li>
+                        <li><strong>2</strong> = TS (Tidak Setuju)</li>
+                        <li><strong>3</strong> = ATS (Agak Tidak Setuju)</li>
+                        <li><strong>4</strong> = N (Netral)</li>
+                        <li><strong>5</strong> = AS (Agak Setuju)</li>
+                        <li><strong>6</strong> = S (Setuju)</li>
+                        <li><strong>7</strong> = SS (Sangat Setuju)</li>
                     </ul>
                 </div>
-
-                <div className="bg-white p-6 rounded-xl shadow-md border-t-4 border-emerald-500">
-                    <div className="flex items-center mb-4">
-                    <div className="p-3 bg-emerald-100 rounded-lg text-emerald-600 mr-3">
-                        <BarChart2 size={24} />
-                    </div>
-                    <h3 className="font-bold text-lg">Analisis Data</h3>
-                    </div>
-                    <p className="text-slate-600 mb-4 text-sm">
-                    Analisis Kuantitatif menggunakan <strong>SEM-PLS (Structural Equation Modeling - Partial Least Squares)</strong> dengan software SmartPLS v4.
-                    </p>
-                    <div className="space-y-2">
-                    <div className="flex items-center text-sm text-slate-700">
-                        <span className="w-6 h-6 rounded-full bg-slate-200 flex items-center justify-center text-xs mr-2 font-bold">1</span>
-                        Analisis Deskriptif
-                    </div>
-                    <div className="flex items-center text-sm text-slate-700">
-                        <span className="w-6 h-6 rounded-full bg-slate-200 flex items-center justify-center text-xs mr-2 font-bold">2</span>
-                        Outer Model (Validitas & Reliabilitas)
-                    </div>
-                    <div className="flex items-center text-sm text-slate-700">
-                        <span className="w-6 h-6 rounded-full bg-slate-200 flex items-center justify-center text-xs mr-2 font-bold">3</span>
-                        Inner Model (R-square, Path coeff)
-                    </div>
-                    <div className="flex items-center text-sm text-slate-700">
-                        <span className="w-6 h-6 rounded-full bg-slate-200 flex items-center justify-center text-xs mr-2 font-bold">4</span>
-                        Uji Hipotesis & Mediasi
-                    </div>
-                    </div>
-                </div>
-                </div>
             </div>
-        );
-
-        const SimulationSection = ({ tlScore, setTlScore, oiScore, setOiScore, miScore, setMiScore, upbResult }) => (
-            <div className="space-y-8 animate-fade-in">
-                <div className="text-center">
-                <h2 className="text-3xl font-bold text-slate-900">Simulasi Interaktif</h2>
-                <p className="text-slate-500 mt-2 max-w-2xl mx-auto">
-                    Sesuaikan variabel di bawah ini untuk melihat bagaimana teori dalam proposal memprediksi tingkat kecenderungan perilaku tidak etis pro-organisasi (UPB).
-                </p>
-                </div>
-
-                <div className="grid lg:grid-cols-3 gap-8">
-                {/* Input Controls */}
-                <div className="lg:col-span-2 space-y-6 bg-white p-8 rounded-2xl shadow-lg">
-                    
-                    {/* Slider 1 */}
-                    <div className="space-y-2">
-                    <div className="flex justify-between">
-                        <label className="font-bold text-blue-900 flex items-center">
-                        Transformational Leadership
-                        <span className="ml-2 px-2 py-0.5 bg-blue-100 text-blue-700 text-xs rounded-full">Variabel Independen</span>
-                        </label>
-                        <span className="font-mono font-bold text-blue-600">{tlScore}%</span>
-                    </div>
-                    <input 
-                        type="range" min="0" max="100" value={tlScore} 
-                        onChange={(e) => setTlScore(Number(e.target.value))}
-                        className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
-                    />
-                    <p className="text-xs text-slate-500">Tingkat kepemimpinan yang menginspirasi dan menuntut standar tinggi.</p>
-                    </div>
-
-                    {/* Slider 2 */}
-                    <div className="space-y-2">
-                    <div className="flex justify-between">
-                        <label className="font-bold text-yellow-900 flex items-center">
-                        Organizational Identification
-                        <span className="ml-2 px-2 py-0.5 bg-yellow-100 text-yellow-700 text-xs rounded-full">Mediator</span>
-                        </label>
-                        <span className="font-mono font-bold text-yellow-600">{oiScore}%</span>
-                    </div>
-                    <input 
-                        type="range" min="0" max="100" value={oiScore} 
-                        onChange={(e) => setOiScore(Number(e.target.value))}
-                        className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-yellow-600"
-                    />
-                    <p className="text-xs text-slate-500">Seberapa kuat pegawai merasa "menyatu" dengan organisasi (loyalitas ekstrem).</p>
-                    </div>
-
-                    {/* Slider 3 */}
-                    <div className="space-y-2 p-4 bg-green-50 rounded-xl border border-green-200">
-                    <div className="flex justify-between">
-                        <label className="font-bold text-green-900 flex items-center">
-                        Moral Identity
-                        <span className="ml-2 px-2 py-0.5 bg-green-200 text-green-800 text-xs rounded-full">Moderator (Peredam)</span>
-                        </label>
-                        <span className="font-mono font-bold text-green-600">{miScore}%</span>
-                    </div>
-                    <input 
-                        type="range" min="0" max="100" value={miScore} 
-                        onChange={(e) => setMiScore(Number(e.target.value))}
-                        className="w-full h-2 bg-green-200 rounded-lg appearance-none cursor-pointer accent-green-600"
-                    />
-                    <p className="text-xs text-green-700">Pentingnya nilai moral bagi diri sendiri. Semakin tinggi, semakin kuat menahan dorongan perilaku tidak etis.</p>
-                    </div>
-                </div>
-
-                {/* Result Display */}
-                <div className="bg-slate-900 text-white p-8 rounded-2xl shadow-xl flex flex-col justify-center items-center relative overflow-hidden">
-                    <div className="absolute top-0 right-0 p-32 bg-blue-500 rounded-full filter blur-3xl opacity-20 transform translate-x-1/2 -translate-y-1/2"></div>
-                    
-                    <h3 className="text-lg font-medium text-slate-300 mb-2">Prediksi Potensi UPB</h3>
-                    <div className="text-6xl font-bold mb-2 tracking-tighter">
-                    {upbResult}<span className="text-2xl text-slate-400">%</span>
-                    </div>
-                    
-                    <div className="w-full bg-slate-700 h-3 rounded-full mt-4 mb-6 overflow-hidden">
-                    <div 
-                        className={`h-full transition-all duration-500 ${Number(upbResult) > 70 ? 'bg-red-500' : Number(upbResult) > 40 ? 'bg-yellow-400' : 'bg-green-400'}`} 
-                        style={{ width: `${upbResult}%` }}
-                    ></div>
-                    </div>
-
-                    <div className="text-sm text-center bg-white/10 p-4 rounded-lg backdrop-blur-sm">
-                    {Number(upbResult) > 70 ? (
-                        <span className="text-red-300 font-bold flex items-center justify-center">
-                        <span className="mr-2"><AlertTriangle size={16} /></span> Risiko Tinggi
-                        </span>
-                    ) : Number(upbResult) > 40 ? (
-                        <span className="text-yellow-300 font-bold">Risiko Sedang</span>
-                    ) : (
-                        <span className="text-green-300 font-bold flex items-center justify-center">
-                        <span className="mr-2"><ShieldCheck size={16} /></span> Risiko Rendah
-                        </span>
-                    )}
-                    <p className="mt-2 text-slate-300 text-xs leading-relaxed">
-                        {Number(upbResult) > 70 
-                        ? "Kombinasi Loyalitas tinggi dan Kepemimpinan kuat tanpa Identitas Moral yang cukup dapat memicu perilaku tidak etis demi organisasi."
-                        : "Identitas Moral yang kuat berhasil meredam efek negatif dari identifikasi organisasi yang berlebihan."}
-                    </p>
-                    </div>
-                </div>
-                </div>
+            <div class="reverse-box">
+                <h4>⚠️ Reverse Scoring (OI4 & OI5)</h4>
+                <p>Untuk pertanyaan dengan reverse scoring, nilai dibalik saat kalkulasi:<br>
+                    5→1, 4→2, 3→3, 2→4, 1→5</p>
             </div>
-        );
+        </div>
 
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<ProposalApp />);
-    </script>
+        <!-- TL -->
+        <div class="variable tl">
+            <div class="variable-header">
+                <h2>TL - Transformational Leadership</h2>
+                <p>11 Pertanyaan | Skala 1-7</p>
+            </div>
+            <table>
+                <tr>
+                    <th>Kode</th>
+                    <th>Pertanyaan</th>
+                    <th>Reverse</th>
+                </tr>
+                <tr>
+                    <td class="code">TL1</td>
+                    <td>Atasan langsung saya memiliki pemahaman jelas mengenai arah tujuan organisasi.</td>
+                    <td class="no-reverse">-</td>
+                </tr>
+                <tr>
+                    <td class="code">TL2</td>
+                    <td>Atasan langsung saya mampu mendefinisikan masa depan organisasi dengan sudut pandang menarik.
+                    </td>
+                    <td class="no-reverse">-</td>
+                </tr>
+                <tr>
+                    <td class="code">TL3</td>
+                    <td>Atasan langsung saya selalu proaktif mencari peluang baru demi kemajuan organisasi.</td>
+                    <td class="no-reverse">-</td>
+                </tr>
+                <tr>
+                    <td class="code">TL4</td>
+                    <td>Rencana masa depan yang disusun atasan langsung saya mampu menginspirasi orang lain.</td>
+                    <td class="no-reverse">-</td>
+                </tr>
+                <tr>
+                    <td class="code">TL5</td>
+                    <td>Atasan langsung saya mampu membuat anggotanya merasa memiliki dan berkomitmen pada visi yang ia
+                        bangun.</td>
+                    <td class="no-reverse">-</td>
+                </tr>
+                <tr>
+                    <td class="code">TL6</td>
+                    <td>Atasan langsung saya menjadi panutan yang baik untuk dicontoh dalam bekerja.</td>
+                    <td class="no-reverse">-</td>
+                </tr>
+                <tr>
+                    <td class="code">TL7</td>
+                    <td>Atasan langsung saya memimpin dengan memberikan contoh berupa tindakan nyata.</td>
+                    <td class="no-reverse">-</td>
+                </tr>
+                <tr>
+                    <td class="code">TL8</td>
+                    <td>Atasan langsung saya mendorong terciptanya kolaborasi antar unit kerja.</td>
+                    <td class="no-reverse">-</td>
+                </tr>
+                <tr>
+                    <td class="code">TL9</td>
+                    <td>Atasan langsung saya memotivasi tiap pegawai untuk menjadi anggota tim yang handal.</td>
+                    <td class="no-reverse">-</td>
+                </tr>
+                <tr>
+                    <td class="code">TL10</td>
+                    <td>Atasan langsung saya mampu menyatukan seluruh anggota kelompok untuk bergerak menuju satu tujuan
+                        yang sama.</td>
+                    <td class="no-reverse">-</td>
+                </tr>
+                <tr>
+                    <td class="code">TL11</td>
+                    <td>Atasan langsung saya membangun mentalitas dan semangat kebersamaan di antara pegawai.</td>
+                    <td class="no-reverse">-</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- OI -->
+        <div class="variable oi">
+            <div class="variable-header">
+                <h2>OI - Organizational Identification</h2>
+                <p>5 Pertanyaan | Skala 1-5</p>
+            </div>
+            <table>
+                <tr>
+                    <th>Kode</th>
+                    <th>Pertanyaan</th>
+                    <th>Reverse</th>
+                </tr>
+                <tr>
+                    <td class="code">OI1</td>
+                    <td>Menurut saya, keberhasilan organisasi ini juga keberhasilan saya secara pribadi.</td>
+                    <td class="no-reverse">-</td>
+                </tr>
+                <tr>
+                    <td class="code">OI2</td>
+                    <td>Saat ada orang yang mengkritik organisasi ini, saya merasa seolah kritikan itu langsung
+                        ditujukan pada saya.</td>
+                    <td class="no-reverse">-</td>
+                </tr>
+                <tr>
+                    <td class="code">OI3</td>
+                    <td>Ketika organisasi dipuji, saya merasakannya sebagai pujian terhadap diri saya.</td>
+                    <td class="no-reverse">-</td>
+                </tr>
+                <tr class="reverse">
+                    <td class="code">OI4</td>
+                    <td>Saya tak peduli dengan pandangan pihak luar terhadap organisasi kami.</td>
+                    <td><span class="badge">REVERSE</span></td>
+                </tr>
+                <tr class="reverse">
+                    <td class="code">OI5</td>
+                    <td>Saat membicarakan organisasi kami (kepada pihak luar), saya lebih sering menyebut mereka
+                        ("kantor mereka") ketimbang kami ("kantor kami").</td>
+                    <td><span class="badge">REVERSE</span></td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- MI -->
+        <div class="variable mi">
+            <div class="variable-header">
+                <h2>MI - Moral Identity</h2>
+                <p>5 Pertanyaan | Skala 1-5</p>
+            </div>
+            <table>
+                <tr>
+                    <th>Kode</th>
+                    <th>Pertanyaan</th>
+                    <th>Reverse</th>
+                </tr>
+                <tr>
+                    <td class="code">MI1</td>
+                    <td>Saya merasa bangga dan puas apabila mampu memiliki sifat-sifat positif tersebut.</td>
+                    <td class="no-reverse">-</td>
+                </tr>
+                <tr>
+                    <td class="code">MI2</td>
+                    <td>Menjadi pribadi yang memiliki sifat-sifat di atas adalah penting bagi diri saya.</td>
+                    <td class="no-reverse">-</td>
+                </tr>
+                <tr>
+                    <td class="code">MI3</td>
+                    <td>Ketenangan batin dan kebahagiaan saya sangat bergantung pada apakah saya sudah memiliki
+                        sifat-sifat baik tersebut.</td>
+                    <td class="no-reverse">-</td>
+                </tr>
+                <tr>
+                    <td class="code">MI4</td>
+                    <td>Memiliki sifat-sifat di atas merupakan bagian dari jati diri saya.</td>
+                    <td class="no-reverse">-</td>
+                </tr>
+                <tr>
+                    <td class="code">MI5</td>
+                    <td>Saya berkeinginan kuat untuk selalu menanamkan dan menjaga sifat-sifat tersebut dalam diri saya.
+                    </td>
+                    <td class="no-reverse">-</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- UPB -->
+        <div class="variable upb">
+            <div class="variable-header">
+                <h2>UPB - Unethical Pro-organizational Behavior</h2>
+                <p>6 Pertanyaan | Skala 1-7</p>
+            </div>
+            <table>
+                <tr>
+                    <th>Kode</th>
+                    <th>Pertanyaan</th>
+                    <th>Reverse</th>
+                </tr>
+                <tr>
+                    <td class="code">UPB1</td>
+                    <td>Demi membantu organisasi, saya bersedia menyelaraskan informasi agar citra organisasi tetap
+                        terlihat baik di mata publik.</td>
+                    <td class="no-reverse">-</td>
+                </tr>
+                <tr>
+                    <td class="code">UPB2</td>
+                    <td>Jika itu menguntungkan organisasi, saya bersedia menonjolkan sisi positif layanan organisasi
+                        secara berlebihan saat berhadapan dengan Wajib Pajak.</td>
+                    <td class="no-reverse">-</td>
+                </tr>
+                <tr>
+                    <td class="code">UPB3</td>
+                    <td>Jika menguntungkan organisasi, saya akan menyimpan informasi negatif dari Wajib Pajak.</td>
+                    <td class="no-reverse">-</td>
+                </tr>
+                <tr>
+                    <td class="code">UPB4</td>
+                    <td>Demi kepentingan organisasi, saya bersedia memberikan rekomendasi positif bagi pegawai yang
+                        tidak kompeten agar ia diterima di instansi atau perusahaan lain dan tidak lagi menjadi beban di
+                        organisasi saya.</td>
+                    <td class="no-reverse">-</td>
+                </tr>
+                <tr>
+                    <td class="code">UPB5</td>
+                    <td>Jika organisasi membutuhkan, saya bersedia untuk tidak mengembalikan kelebihan bayar Wajib Pajak
+                        meski terjadi kesalahan penagihan.</td>
+                    <td class="no-reverse">-</td>
+                </tr>
+                <tr>
+                    <td class="code">UPB6</td>
+                    <td>Jika diperlukan, saya akan menahan informasi yang berpotensi merusak reputasi organisasi agar
+                        tidak diketahui publik.</td>
+                    <td class="no-reverse">-</td>
+                </tr>
+            </table>
+        </div>
+
+        <p style="text-align: center; color: #9ca3af; font-size: 12px; margin-top: 20px;">
+            Total: 27 Pertanyaan (TL:11 + OI:5 + MI:5 + UPB:6)
+        </p>
+    </div>
 </body>
+
 </html>
