@@ -79,6 +79,12 @@
         const UploadCloud = ({ size = 24, className = "" }) => (
             <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
         );
+        const ClipboardList = ({ size = 24, className = "" }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect><path d="M9 12h6"></path><path d="M9 16h6"></path><path d="M9 20h2"></path></svg>
+        );
+        const ChevronDown = ({ size = 24, className = "" }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><polyline points="6 9 12 15 18 9"></polyline></svg>
+        );
 
         // --- Komponen Utama ---
 
@@ -113,6 +119,8 @@
                         return <FrameworkSection />;
                     case 'methodology':
                         return <MethodologySection />;
+                    case 'questionnaire':
+                        return <QuestionnaireSection />;
                     case 'simulation':
                         return (
                         <SimulationSection 
@@ -147,6 +155,7 @@
                                 <NavButton active={activeTab === 'home'} onClick={() => setActiveTab('home')} label="Beranda" />
                                 <NavButton active={activeTab === 'framework'} onClick={() => setActiveTab('framework')} label="Konseptual" />
                                 <NavButton active={activeTab === 'methodology'} onClick={() => setActiveTab('methodology')} label="Metodologi" />
+                                <NavButton active={activeTab === 'questionnaire'} onClick={() => setActiveTab('questionnaire')} label="Kuesioner" icon={<ClipboardList size={16} />} />
                                 <NavButton active={activeTab === 'simulation'} onClick={() => setActiveTab('simulation')} label="Simulasi" icon={<Activity size={16} />} />
                                 <NavButton active={activeTab === 'fulldoc'} onClick={() => setActiveTab('fulldoc')} label="Dokumen" icon={<FileText size={16} />} />
                             </div>
@@ -167,6 +176,7 @@
                             <MobileNavButton onClick={() => {setActiveTab('home'); setIsMenuOpen(false)}} label="Beranda" />
                             <MobileNavButton onClick={() => {setActiveTab('framework'); setIsMenuOpen(false)}} label="Kerangka Konseptual" />
                             <MobileNavButton onClick={() => {setActiveTab('methodology'); setIsMenuOpen(false)}} label="Metodologi" />
+                            <MobileNavButton onClick={() => {setActiveTab('questionnaire'); setIsMenuOpen(false)}} label="Kuesioner" />
                             <MobileNavButton onClick={() => {setActiveTab('simulation'); setIsMenuOpen(false)}} label="Simulasi Model" />
                             <MobileNavButton onClick={() => {setActiveTab('fulldoc'); setIsMenuOpen(false)}} label="Dokumen Lengkap" />
                         </div>
@@ -216,6 +226,177 @@
         );
 
         // --- Feature Components ---
+
+        const QuestionnaireSection = () => {
+            const [openSection, setOpenSection] = useState(1);
+
+            const toggleSection = (id) => {
+                setOpenSection(openSection === id ? null : id);
+            };
+
+            return (
+                <div className="space-y-6 animate-fade-in">
+                    <div className="text-center mb-8">
+                        <h2 className="text-3xl font-bold text-slate-900">Instrumen Kuesioner</h2>
+                        <p className="text-slate-500 mt-2 max-w-2xl mx-auto">
+                            Rincian item pengukuran untuk setiap variabel penelitian berdasarkan Bab III (Metodologi).
+                        </p>
+                    </div>
+
+                    <div className="space-y-4">
+                        {/* Variabel 1 */}
+                        <AccordionItem 
+                            id={1} 
+                            isOpen={openSection === 1} 
+                            toggle={toggleSection}
+                            title="Transformational Leadership (Variabel X)"
+                            subtitle="11 Item - Sumber: Podsakoff (1990)"
+                            color="blue"
+                            scale="Skala Likert 1-7 (Sangat Tidak Setuju - Sangat Setuju)"
+                        >
+                            <div className="space-y-3">
+                                <div className="p-3 bg-blue-50 rounded-lg border border-blue-100">
+                                    <h5 className="font-bold text-blue-800 text-sm mb-1">Dimensi: Articulating a Vision</h5>
+                                    <ul className="list-disc ml-5 text-sm text-slate-700">
+                                        <li>Item 1: Pemimpin mengartikulasikan visi masa depan yang jelas.</li>
+                                        <li>Item 2: Pemimpin mampu menjelaskan visi yang menarik.</li>
+                                        <li>Item 3: Pemimpin menginspirasi dengan rencana masa depan.</li>
+                                    </ul>
+                                </div>
+                                <div className="p-3 bg-blue-50 rounded-lg border border-blue-100">
+                                    <h5 className="font-bold text-blue-800 text-sm mb-1">Dimensi: Acting as a Role Model</h5>
+                                    <ul className="list-disc ml-5 text-sm text-slate-700">
+                                        <li>Item 4: Pemimpin memberikan contoh yang baik untuk diikuti.</li>
+                                        <li>Item 5: Pemimpin konsisten dalam ucapan dan tindakan.</li>
+                                        <li>Item 6: Pemimpin menunjukkan dedikasi yang tinggi.</li>
+                                    </ul>
+                                </div>
+                                <div className="p-3 bg-blue-50 rounded-lg border border-blue-100">
+                                    <h5 className="font-bold text-blue-800 text-sm mb-1">Dimensi: Fostering Group Goals</h5>
+                                    <ul className="list-disc ml-5 text-sm text-slate-700">
+                                        <li>Item 7: Pemimpin mendorong kerjasama tim.</li>
+                                        <li>Item 8: Pemimpin mengembangkan semangat kebersamaan.</li>
+                                        <li>Item 9: [Item lanjutan sesuai instrumen asli...]</li>
+                                        <li>Item 10: [Item lanjutan sesuai instrumen asli...]</li>
+                                        <li>Item 11: [Item lanjutan sesuai instrumen asli...]</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </AccordionItem>
+
+                        {/* Variabel 2 */}
+                        <AccordionItem 
+                            id={2} 
+                            isOpen={openSection === 2} 
+                            toggle={toggleSection}
+                            title="Organizational Identification (Variabel Z)"
+                            subtitle="5 Item - Sumber: Mael & Ashforth (1992)"
+                            color="yellow"
+                            scale="Skala Likert 1-5 (Sangat Tidak Setuju - Selalu Sangat Setuju)"
+                        >
+                            <div className="p-4 bg-yellow-50 rounded-lg border border-yellow-100">
+                                <h5 className="font-bold text-yellow-800 text-sm mb-2">Dimensi: Kognitif (Self Categorization)</h5>
+                                <ul className="list-decimal ml-5 text-sm text-slate-700 space-y-2">
+                                    <li>Ketika seseorang mengkritik organisasi, rasanya seperti penghinaan pribadi bagi saya.</li>
+                                    <li>Saya sangat tertarik dengan apa yang orang lain pikirkan tentang organisasi saya.</li>
+                                    <li>Ketika saya berbicara tentang organisasi ini, saya biasanya mengatakan 'kami' daripada 'mereka'.</li>
+                                    <li>Kesuksesan organisasi ini adalah kesuksesan saya.</li>
+                                    <li>Ketika organisasi dipuji, saya merasa dipuji juga.</li>
+                                </ul>
+                            </div>
+                        </AccordionItem>
+
+                        {/* Variabel 3 */}
+                        <AccordionItem 
+                            id={3} 
+                            isOpen={openSection === 3} 
+                            toggle={toggleSection}
+                            title="Moral Identity (Variabel M)"
+                            subtitle="5 Item - Sumber: Aquino & Reed (2002)"
+                            color="green"
+                            scale="Skala Likert 1-5 (Sangat Tidak Setuju - Selalu Sangat Setuju)"
+                        >
+                            <div className="p-4 bg-green-50 rounded-lg border border-green-100">
+                                <h5 className="font-bold text-green-800 text-sm mb-2">Dimensi: Internalized Moral Identity</h5>
+                                <p className="text-xs text-slate-500 mb-2 italic">Responden diminta membayangkan karakteristik: Peduli, Penyayang, Adil, Ramah, Dermawan, Suka Membantu, Pekerja Keras, Jujur, Baik Hati.</p>
+                                <ul className="list-decimal ml-5 text-sm text-slate-700 space-y-2">
+                                    <li>Menjadi seseorang yang memiliki karakteristik ini adalah bagian penting dari siapa saya.</li>
+                                    <li>Saya akan merasa malu jika saya bertindak tidak sesuai dengan karakteristik ini.</li>
+                                    <li>Karakteristik ini mencerminkan diri saya yang sebenarnya.</li>
+                                    <li>Karakteristik ini sangat penting bagi rasa identitas diri saya.</li>
+                                    <li>Saya sangat menginginkan untuk memiliki karakteristik ini.</li>
+                                </ul>
+                            </div>
+                        </AccordionItem>
+
+                        {/* Variabel 4 */}
+                        <AccordionItem 
+                            id={4} 
+                            isOpen={openSection === 4} 
+                            toggle={toggleSection}
+                            title="Unethical Pro-Organizational Behavior (Variabel Y)"
+                            subtitle="6 Item - Sumber: Umphress et al. (2010)"
+                            color="red"
+                            scale="Skala Likert 1-7 (Sangat Tidak Setuju - Sangat Setuju)"
+                        >
+                            <div className="p-4 bg-red-50 rounded-lg border border-red-100">
+                                <h5 className="font-bold text-red-800 text-sm mb-2">Tindakan Tidak Etis Demi Organisasi</h5>
+                                <ul className="list-decimal ml-5 text-sm text-slate-700 space-y-2">
+                                    <li>Jika hal itu dapat membantu organisasi saya, saya akan melebih-lebihkan kebenaran tentang produk atau layanan kami.</li>
+                                    <li>Saya akan menahan informasi negatif tentang organisasi saya dari pelanggan/klien jika itu menguntungkan organisasi.</li>
+                                    <li>Saya akan melakukan apa pun yang diperlukan untuk membantu organisasi saya, meskipun itu berarti melanggar aturan perusahaan.</li>
+                                    <li>Saya akan menyembunyikan kesalahan organisasi untuk melindungi reputasinya.</li>
+                                    <li>[Item 5: Representasi tindakan UPB lainnya...]</li>
+                                    <li>[Item 6: Representasi tindakan UPB lainnya...]</li>
+                                </ul>
+                            </div>
+                        </AccordionItem>
+                    </div>
+                </div>
+            );
+        };
+
+        const AccordionItem = ({ id, isOpen, toggle, title, subtitle, children, color, scale }) => {
+            const colorClasses = {
+                blue: "border-blue-200 hover:bg-blue-50",
+                yellow: "border-yellow-200 hover:bg-yellow-50",
+                green: "border-green-200 hover:bg-green-50",
+                red: "border-red-200 hover:bg-red-50"
+            };
+            
+            const headerColors = {
+                blue: "text-blue-900",
+                yellow: "text-yellow-900",
+                green: "text-green-900",
+                red: "text-red-900"
+            };
+
+            return (
+                <div className={`bg-white rounded-xl shadow border overflow-hidden transition-all duration-300 ${isOpen ? 'ring-2 ring-opacity-50 ring-blue-300' : ''}`}>
+                    <button 
+                        onClick={() => toggle(id)}
+                        className={`w-full flex items-center justify-between p-5 text-left transition-colors ${colorClasses[color]} border-b border-transparent ${isOpen ? 'bg-slate-50' : ''}`}
+                    >
+                        <div>
+                            <h3 className={`text-lg font-bold ${headerColors[color]}`}>{title}</h3>
+                            <p className="text-sm text-slate-500">{subtitle}</p>
+                        </div>
+                        <div className={`transform transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
+                            <ChevronDown className="text-slate-400" />
+                        </div>
+                    </button>
+                    
+                    {isOpen && (
+                        <div className="p-5 bg-white border-t border-slate-100 animate-fade-in">
+                            <div className="mb-4 inline-block px-3 py-1 rounded-full bg-slate-100 text-xs font-semibold text-slate-600">
+                                {scale}
+                            </div>
+                            {children}
+                        </div>
+                    )}
+                </div>
+            );
+        };
 
         const FullDocumentSection = () => {
             const [content, setContent] = useState("");
