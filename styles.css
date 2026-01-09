@@ -205,6 +205,20 @@ body::before {
   text-align: left;
 }
 
+.likert-info {
+  background: rgba(30, 58, 95, 0.08);
+  border: 1px solid var(--primary-light);
+  border-radius: 8px;
+  padding: 16px;
+  margin: 24px 0;
+  text-align: center;
+}
+
+.likert-info p {
+  margin: 4px 0;
+  font-size: 14px;
+}
+
 .thesis-title {
   font-style: normal;
   font-size: 15px;

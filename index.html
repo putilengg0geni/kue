@@ -53,6 +53,10 @@
                     <p class="greeting"><strong>Wassalamualaikum warahmatullahi wabarakatuh</strong></p>
                     <p class="signature-name">Puti Lenggogeni</p>
                 </div>
+                <div class="likert-info">
+                    <p><strong>📋 Informasi Kuesioner:</strong></p>
+                    <p>Kuesioner ini menggunakan <strong>Skala Likert 5</strong> dan <strong>Skala Likert 7</strong></p>
+                </div>
                 <button class="btn-primary" onclick="showSection('respondentSection')">Mulai Kuesioner →</button>
             </div>
         </section>
@@ -117,126 +121,16 @@
                 </div>
                 <div class="nav-buttons">
                     <button class="btn-secondary" onclick="showSection('welcomeSection')">← Kembali</button>
-                    <button class="btn-primary" onclick="validateAndNext('respondentSection','tlSection')">Lanjutkan
+                    <button class="btn-primary" onclick="validateAndNext('respondentSection','miSection')">Lanjutkan
                         →</button>
                 </div>
             </div>
         </section>
 
-        <!-- Transformational Leadership Section -->
-        <section class="section" id="tlSection">
-            <div class="card">
-                <div class="section-header">
-                    <span class="badge">Bagian 1</span>
-                    <h2>Transformational Leadership</h2>
-                    <p>Seberapa setuju Anda dengan pernyataan berikut mengenai atasan langsung Anda?</p>
-                </div>
-                <div class="legend">Skala 1-7: 1=Sangat Tidak Setuju | 2=Tidak Setuju | 3=Agak Tidak Setuju | 4=Netral |
-                    5=Agak Setuju | 6=Setuju | 7=Sangat Setuju
-                </div>
-
-                <div class="question" data-q="TL1">
-                    <p>1. Atasan langsung saya memiliki pemahaman jelas mengenai arah tujuan organisasi.</p>
-                    <div class="likert"></div>
-                </div>
-                <div class="question" data-q="TL2">
-                    <p>2. Atasan langsung saya mampu mendefinisikan masa depan organisasi dengan sudut pandang menarik.
-                    </p>
-                    <div class="likert"></div>
-                </div>
-                <div class="question" data-q="TL3">
-                    <p>3. Atasan langsung saya selalu proaktif mencari peluang baru demi kemajuan organisasi.</p>
-                    <div class="likert"></div>
-                </div>
-                <div class="question" data-q="TL4">
-                    <p>4. Rencana masa depan yang disusun atasan langsung saya mampu menginspirasi orang lain.</p>
-                    <div class="likert"></div>
-                </div>
-                <div class="question" data-q="TL5">
-                    <p>5. Atasan langsung saya mampu membuat anggotanya merasa memiliki dan berkomitmen pada visi yang
-                        ia bangun.</p>
-                    <div class="likert"></div>
-                </div>
-                <div class="question" data-q="TL6">
-                    <p>6. Atasan langsung saya menjadi panutan yang baik untuk dicontoh dalam bekerja.</p>
-                    <div class="likert"></div>
-                </div>
-                <div class="question" data-q="TL7">
-                    <p>7. Atasan langsung saya memimpin dengan memberikan contoh berupa tindakan nyata.</p>
-                    <div class="likert"></div>
-                </div>
-                <div class="question" data-q="TL8">
-                    <p>8. Atasan langsung saya mendorong terciptanya kolaborasi antar unit kerja.</p>
-                    <div class="likert"></div>
-                </div>
-                <div class="question" data-q="TL9">
-                    <p>9. Atasan langsung saya memotivasi tiap pegawai untuk menjadi anggota tim yang handal.</p>
-                    <div class="likert"></div>
-                </div>
-                <div class="question" data-q="TL10">
-                    <p>10. Atasan langsung saya mampu menyatukan seluruh anggota kelompok untuk bergerak menuju satu
-                        tujuan yang sama.</p>
-                    <div class="likert"></div>
-                </div>
-                <div class="question" data-q="TL11">
-                    <p>11. Atasan langsung saya membangun mentalitas dan semangat kebersamaan di antara pegawai.</p>
-                    <div class="likert"></div>
-                </div>
-
-                <div class="nav-buttons">
-                    <button class="btn-secondary" onclick="showSection('respondentSection')">← Kembali</button>
-                    <button class="btn-primary" onclick="validateAndNext('tlSection','oiSection')">Lanjutkan →</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Organizational Identification Section -->
-        <section class="section" id="oiSection">
-            <div class="card">
-                <div class="section-header">
-                    <span class="badge">Bagian 2</span>
-                    <h2>Organizational Identification</h2>
-                    <p>Seberapa setuju Anda dengan pernyataan berikut mengenai hubungan Anda dengan organisasi?</p>
-                </div>
-                <div class="legend">Skala 1-5: 1=Sangat Tidak Setuju | 2=Tidak Setuju | 3=Netral | 4=Setuju | 5=Sangat
-                    Setuju
-                </div>
-
-                <div class="question" data-q="OI1">
-                    <p>1. Menurut saya, keberhasilan organisasi ini juga keberhasilan saya secara pribadi.</p>
-                    <div class="likert"></div>
-                </div>
-                <div class="question" data-q="OI2">
-                    <p>2. Saat ada orang yang mengkritik organisasi ini, saya merasa seolah kritikan itu langsung
-                        ditujukan pada saya.</p>
-                    <div class="likert"></div>
-                </div>
-                <div class="question" data-q="OI3">
-                    <p>3. Ketika organisasi dipuji, saya merasakannya sebagai pujian terhadap diri saya.</p>
-                    <div class="likert"></div>
-                </div>
-                <div class="question" data-q="OI4" data-reverse="true">
-                    <p>4. Saya tak peduli dengan pandangan pihak luar terhadap organisasi kami.</p>
-                    <div class="likert"></div>
-                </div>
-                <div class="question" data-q="OI5" data-reverse="true">
-                    <p>5. Saat membicarakan organisasi kami (kepada pihak luar), saya lebih sering menyebut mereka
-                        ("kantor mereka") ketimbang kami ("kantor kami").</p>
-                    <div class="likert"></div>
-                </div>
-
-                <div class="nav-buttons">
-                    <button class="btn-secondary" onclick="showSection('tlSection')">← Kembali</button>
-                    <button class="btn-primary" onclick="validateAndNext('oiSection','miSection')">Lanjutkan →</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Moral Identity Section -->
+        <!-- Moral Identity Section (NOT randomized, separate card) -->
         <section class="section" id="miSection">
             <div class="card">
                 <div class="section-header">
-                    <span class="badge">Bagian 3</span>
                     <h2>Moral Identity</h2>
                     <p>Seberapa setuju Anda dengan pernyataan berikut mengenai identitas moral Anda?</p>
                 </div>
@@ -270,54 +164,27 @@
                 </div>
 
                 <div class="nav-buttons">
-                    <button class="btn-secondary" onclick="showSection('oiSection')">← Kembali</button>
-                    <button class="btn-primary" onclick="validateAndNext('miSection','upbSection')">Lanjutkan →</button>
+                    <button class="btn-secondary" onclick="showSection('respondentSection')">← Kembali</button>
+                    <button class="btn-primary" onclick="validateAndNext('miSection','randomSection')">Lanjutkan
+                        →</button>
                 </div>
             </div>
         </section>
 
-        <!-- Unethical Pro-organizational Behavior Section -->
-        <section class="section" id="upbSection">
+        <!-- Randomized Questions Section (TL + OI + UPB = 22 questions) -->
+        <section class="section" id="randomSection">
             <div class="card">
                 <div class="section-header">
-                    <span class="badge">Bagian 4</span>
-                    <h2>Unethical Pro-organizational Behavior</h2>
-                    <p>Seberapa setuju Anda dengan pernyataan berikut?</p>
+                    <p>Seberapa setuju Anda dengan pernyataan-pernyataan berikut?</p>
                 </div>
-                <div class="legend">Skala 1-7: 1=Sangat Tidak Setuju | 2=Tidak Setuju | 3=Agak Tidak Setuju | 4=Netral |
-                    5=Agak Setuju | 6=Setuju | 7=Sangat Setuju
+                <div class="legend" id="randomLegend">
+                    Skala Likert 5: 1=Sangat Tidak Setuju | 2=Tidak Setuju | 3=Netral | 4=Setuju | 5=Sangat Setuju<br>
+                    Skala Likert 7: 1=Sangat Tidak Setuju | 2=Tidak Setuju | 3=Agak Tidak Setuju | 4=Netral | 5=Agak
+                    Setuju | 6=Setuju | 7=Sangat Setuju
                 </div>
 
-                <div class="question" data-q="UPB1">
-                    <p>1. Demi membantu organisasi, saya bersedia menyelaraskan informasi agar citra organisasi tetap
-                        terlihat baik di mata publik.</p>
-                    <div class="likert"></div>
-                </div>
-                <div class="question" data-q="UPB2">
-                    <p>2. Jika itu menguntungkan organisasi, saya bersedia menonjolkan sisi positif layanan organisasi
-                        secara berlebihan saat berhadapan dengan Wajib Pajak.</p>
-                    <div class="likert"></div>
-                </div>
-                <div class="question" data-q="UPB3">
-                    <p>3. Jika menguntungkan organisasi, saya akan menyimpan informasi negatif dari Wajib Pajak.</p>
-                    <div class="likert"></div>
-                </div>
-                <div class="question" data-q="UPB4">
-                    <p>4. Demi kepentingan organisasi, saya bersedia memberikan rekomendasi positif bagi pegawai yang
-                        tidak kompeten agar ia diterima di instansi atau perusahaan lain dan tidak lagi menjadi beban di
-                        organisasi saya.</p>
-                    <div class="likert"></div>
-                </div>
-                <div class="question" data-q="UPB5">
-                    <p>5. Jika organisasi membutuhkan, saya bersedia untuk tidak mengembalikan kelebihan bayar Wajib
-                        Pajak meski terjadi kesalahan penagihan.</p>
-                    <div class="likert"></div>
-                </div>
-                <div class="question" data-q="UPB6">
-                    <p>6. Jika diperlukan, saya akan menahan informasi yang berpotensi merusak reputasi organisasi agar
-                        tidak diketahui publik.</p>
-                    <div class="likert"></div>
-                </div>
+                <!-- Questions will be dynamically inserted and shuffled here -->
+                <div id="randomQuestionsContainer"></div>
 
                 <div class="nav-buttons">
                     <button class="btn-secondary" onclick="showSection('miSection')">← Kembali</button>

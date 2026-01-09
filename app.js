@@ -43,19 +43,83 @@ function toggleMusic() {
 const likertLabels5 = ['1', '2', '3', '4', '5'];
 const likertLabels7 = ['1', '2', '3', '4', '5', '6', '7'];
 
-// Initialize Likert scales with auto-scroll functionality
+// Question definitions for randomized section (TL + OI + UPB = 22 questions)
+const randomQuestions = [
+    // TL (11 questions) - Likert 7
+    { id: 'TL1', text: 'Atasan langsung saya memiliki pemahaman jelas mengenai arah tujuan organisasi.', scale: 7 },
+    { id: 'TL2', text: 'Atasan langsung saya mampu mendefinisikan masa depan organisasi dengan sudut pandang menarik.', scale: 7 },
+    { id: 'TL3', text: 'Atasan langsung saya selalu proaktif mencari peluang baru demi kemajuan organisasi.', scale: 7 },
+    { id: 'TL4', text: 'Rencana masa depan yang disusun atasan langsung saya mampu menginspirasi orang lain.', scale: 7 },
+    { id: 'TL5', text: 'Atasan langsung saya mampu membuat anggotanya merasa memiliki dan berkomitmen pada visi yang ia bangun.', scale: 7 },
+    { id: 'TL6', text: 'Atasan langsung saya menjadi panutan yang baik untuk dicontoh dalam bekerja.', scale: 7 },
+    { id: 'TL7', text: 'Atasan langsung saya memimpin dengan memberikan contoh berupa tindakan nyata.', scale: 7 },
+    { id: 'TL8', text: 'Atasan langsung saya mendorong terciptanya kolaborasi antar unit kerja.', scale: 7 },
+    { id: 'TL9', text: 'Atasan langsung saya memotivasi tiap pegawai untuk menjadi anggota tim yang handal.', scale: 7 },
+    { id: 'TL10', text: 'Atasan langsung saya mampu menyatukan seluruh anggota kelompok untuk bergerak menuju satu tujuan yang sama.', scale: 7 },
+    { id: 'TL11', text: 'Atasan langsung saya membangun mentalitas dan semangat kebersamaan di antara pegawai.', scale: 7 },
+    // OI (5 questions) - Likert 5
+    { id: 'OI1', text: 'Menurut saya, keberhasilan organisasi ini juga keberhasilan saya secara pribadi.', scale: 5 },
+    { id: 'OI2', text: 'Saat ada orang yang mengkritik organisasi ini, saya merasa seolah kritikan itu langsung ditujukan pada saya.', scale: 5 },
+    { id: 'OI3', text: 'Ketika organisasi dipuji, saya merasakannya sebagai pujian terhadap diri saya.', scale: 5 },
+    { id: 'OI4', text: 'Saya tak peduli dengan pandangan pihak luar terhadap organisasi kami.', scale: 5, reverse: true },
+    { id: 'OI5', text: 'Saat membicarakan organisasi kami (kepada pihak luar), saya lebih sering menyebut mereka ("kantor mereka") ketimbang kami ("kantor kami").', scale: 5, reverse: true },
+    // UPB (6 questions) - Likert 7
+    { id: 'UPB1', text: 'Demi membantu organisasi, saya bersedia menyelaraskan informasi agar citra organisasi tetap terlihat baik di mata publik.', scale: 7 },
+    { id: 'UPB2', text: 'Jika itu menguntungkan organisasi, saya bersedia menonjolkan sisi positif layanan organisasi secara berlebihan saat berhadapan dengan Wajib Pajak.', scale: 7 },
+    { id: 'UPB3', text: 'Jika menguntungkan organisasi, saya akan menyimpan informasi negatif dari Wajib Pajak.', scale: 7 },
+    { id: 'UPB4', text: 'Demi kepentingan organisasi, saya bersedia memberikan rekomendasi positif bagi pegawai yang tidak kompeten agar ia diterima di instansi atau perusahaan lain dan tidak lagi menjadi beban di organisasi saya.', scale: 7 },
+    { id: 'UPB5', text: 'Jika organisasi membutuhkan, saya bersedia untuk tidak mengembalikan kelebihan bayar Wajib Pajak meski terjadi kesalahan penagihan.', scale: 7 },
+    { id: 'UPB6', text: 'Jika diperlukan, saya akan menahan informasi yang berpotensi merusak reputasi organisasi agar tidak diketahui publik.', scale: 7 }
+];
+
+// Shuffle array using Fisher-Yates algorithm
+function shuffleArray(array) {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+}
+
+// Generate randomized questions HTML and insert into container
+function generateRandomQuestions() {
+    const container = document.getElementById('randomQuestionsContainer');
+    const shuffled = shuffleArray(randomQuestions);
+    
+    let html = '';
+    shuffled.forEach((q, index) => {
+        const labels = q.scale === 7 ? likertLabels7 : likertLabels5;
+        const likertHtml = labels.map((label, i) => 
+            `<label><input type="radio" name="${q.id}" value="${i + 1}"><span>${label}</span></label>`
+        ).join('');
+        
+        html += `
+            <div class="question" data-q="${q.id}" data-scale="${q.scale}">
+                <p>${index + 1}. ${q.text}</p>
+                <div class="likert">${likertHtml}</div>
+            </div>
+        `;
+    });
+    
+    container.innerHTML = html;
+    
+    // Add click listeners for auto-scroll
+    container.querySelectorAll('.question').forEach(questionEl => {
+        questionEl.querySelectorAll('input').forEach(input => {
+            input.addEventListener('change', () => handleQuestionAnswered(questionEl));
+        });
+    });
+}
+
+// Initialize Likert scales for MI section (static, not randomized)
 function initLikertScales() {
-    document.querySelectorAll('.likert').forEach(container => {
+    document.querySelectorAll('#miSection .likert').forEach(container => {
         const questionEl = container.closest('.question');
         const questionName = questionEl.dataset.q;
-        const section = questionEl.closest('.section');
-        const sectionId = section?.id || '';
-
-        // Use 7-point for TL and UPB, 5-point for OI and MI
-        const is7Point = sectionId === 'tlSection' || sectionId === 'upbSection';
-        const labels = is7Point ? likertLabels7 : likertLabels5;
-
-        container.innerHTML = labels.map((label, i) =>
+        
+        // MI uses 5-point scale
+        container.innerHTML = likertLabels5.map((label, i) =>
             `<label><input type="radio" name="${questionName}" value="${i + 1}"><span>${label}</span></label>`
         ).join('');
 
@@ -111,8 +175,8 @@ function handleQuestionAnswered(questionEl) {
     }
 }
 
-// Section navigation
-const sections = ['welcomeSection', 'respondentSection', 'tlSection', 'oiSection', 'miSection', 'upbSection', 'resultSection'];
+// Section navigation - updated for new flow
+const sections = ['welcomeSection', 'respondentSection', 'miSection', 'randomSection', 'resultSection'];
 
 function showSection(id) {
     // Start music on first interaction
@@ -166,9 +230,9 @@ function validateAndNext(from, to) {
 // ============================================
 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwSQQ7YcueaY0FKtwAWjkqDWlI31tJlEsotVOhuEh9OPoaXDCZjAWWCPwBSufyrVZnc7A/exec';
 
-// Submit
+// Submit - updated to validate randomSection
 async function submitForm() {
-    const questions = document.querySelectorAll('#upbSection .question');
+    const questions = document.querySelectorAll('#randomSection .question');
     let valid = true;
     questions.forEach(q => {
         const name = q.dataset.q;
@@ -219,7 +283,7 @@ async function submitForm() {
     }
 }
 
-// Collect data
+// Collect data - organized by variable group regardless of display order
 function collectData() {
     const data = {
         timestamp: new Date().toISOString(),
@@ -236,12 +300,12 @@ function collectData() {
         scores: {}
     };
 
-    // Collect responses for each variable
+    // Collect responses for each variable - data is organized properly regardless of display order
     const variables = {
-        TL: { count: 11, reverse: [] },
-        OI: { count: 5, reverse: [4, 5] },
-        MI: { count: 5, reverse: [] },
-        UPB: { count: 6, reverse: [] }
+        TL: { count: 11, reverse: [], maxScale: 7 },
+        OI: { count: 5, reverse: [4, 5], maxScale: 5 },
+        MI: { count: 5, reverse: [], maxScale: 5 },
+        UPB: { count: 6, reverse: [], maxScale: 7 }
     };
 
     for (const [varName, config] of Object.entries(variables)) {
@@ -250,7 +314,7 @@ function collectData() {
         for (let i = 1; i <= config.count; i++) {
             let val = parseInt(document.querySelector(`input[name="${varName}${i}"]:checked`)?.value || 0);
             if (config.reverse.includes(i)) {
-                val = 6 - val;
+                val = (config.maxScale + 1) - val; // Proper reverse scoring based on scale
             }
             data.responses[varName][`${varName}${i}`] = val;
             sum += val;
@@ -273,7 +337,8 @@ function displayResult(data) {
     let html = '';
     for (const [key, label] of Object.entries(labels)) {
         const score = data.scores[key];
-        const pct = (score / 5) * 100;
+        const maxScale = (key === 'TL' || key === 'UPB') ? 7 : 5;
+        const pct = (score / maxScale) * 100;
         html += `<div class="score-item"><span style="font-size:13px">${label}</span><div class="score-bar"><div class="score-fill" style="width:${pct}%"></div></div><strong>${score}</strong></div>`;
     }
     document.getElementById('resultSummary').innerHTML = html;
@@ -299,6 +364,8 @@ function resetForm() {
         el.classList.remove('error');
         el.classList.remove('answered');
     });
+    // Re-shuffle questions on reset
+    generateRandomQuestions();
     showSection('welcomeSection');
 }
 
@@ -312,7 +379,8 @@ function showAlert(msg) {
 
 // Init
 document.addEventListener('DOMContentLoaded', () => {
-    initLikertScales();
+    initLikertScales();        // Initialize MI section (static)
+    generateRandomQuestions(); // Generate and shuffle TL+OI+UPB questions
     updateProgress('welcomeSection');
 
     // Try to autoplay on first interaction anywhere
