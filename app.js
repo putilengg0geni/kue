@@ -274,13 +274,9 @@ async function submitForm() {
         const responses = JSON.parse(localStorage.getItem('responses') || '[]');
         responses.push(data);
         localStorage.setItem('responses', JSON.stringify(responses));
-
-        displayResult(data);
         showSection('resultSection');
 
     } catch (error) {
-        console.error('Error:', error);
-        displayResult(data);
         showSection('resultSection');
         showAlert('Data tersimpan offline. Koneksi ke server gagal.');
     } finally {
@@ -328,26 +324,7 @@ function collectData() {
     return data;
 }
 
-// Display result
-function displayResult(data) {
-    const labels = {
-        TL: 'Transformational Leadership',
-        OI: 'Organizational Identification',
-        MI: 'Moral Identity',
-        UPB: 'Unethical Pro-org Behavior'
-    };
-
-    let html = '';
-    for (const [key, label] of Object.entries(labels)) {
-        const score = data.scores[key];
-        const maxScale = (key === 'TL' || key === 'UPB') ? 7 : 5;
-        const pct = (score / maxScale) * 100;
-        html += `<div class="score-item"><span style="font-size:13px">${label}</span><div class="score-bar"><div class="score-fill" style="width:${pct}%"></div></div><strong>${score}</strong></div>`;
-    }
-    document.getElementById('resultSummary').innerHTML = html;
-}
-
-// Export
+// Export (disabled but kept for reference)
 function exportData() {
     const data = collectData();
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
