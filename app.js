@@ -83,12 +83,19 @@ function shuffleArray(array) {
 }
 
 // Generate randomized questions HTML and insert into container
+// Group by scale: Skala 5 first, then Skala 7 (each group shuffled)
 function generateRandomQuestions() {
     const container = document.getElementById('randomQuestionsContainer');
-    const shuffled = shuffleArray(randomQuestions);
+
+    // Separate by scale and shuffle each group
+    const scale5Questions = shuffleArray(randomQuestions.filter(q => q.scale === 5));
+    const scale7Questions = shuffleArray(randomQuestions.filter(q => q.scale === 7));
+
+    // Combine: Skala 5 first, then Skala 7
+    const orderedQuestions = [...scale5Questions, ...scale7Questions];
 
     let html = '';
-    shuffled.forEach((q, index) => {
+    orderedQuestions.forEach((q, index) => {
         const labels = q.scale === 7 ? likertLabels7 : likertLabels5;
         const likertHtml = labels.map((label, i) =>
             `<label><input type="radio" name="${q.id}" value="${i + 1}"><span>${label}</span></label>`
@@ -198,13 +205,12 @@ function updateProgress(id) {
 // Validation
 function validateAndNext(from, to) {
     if (from === 'respondentSection') {
-        const nama = document.getElementById('nama').value;
         const usia = document.getElementById('usia').value;
         const gender = document.querySelector('input[name="gender"]:checked');
         const unitorg = document.getElementById('unitorg').value;
         const pendidikan = document.getElementById('pendidikan').value;
         const lamakerja = document.getElementById('lamakerja').value;
-        if (!nama || !usia || !gender || !unitorg || !pendidikan || !lamakerja) {
+        if (!usia || !gender || !unitorg || !pendidikan || !lamakerja) {
             showAlert('Mohon lengkapi semua data yang wajib diisi (*)');
             return;
         }
