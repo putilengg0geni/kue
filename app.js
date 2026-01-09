@@ -40,7 +40,7 @@ function toggleMusic() {
 }
 
 // Likert labels - 5 point for OI/MI, 7 point for TL/UPB
-const likertLabels5 = ['STS', 'TS', 'N', 'S', 'SS'];
+const likertLabels5 = ['1', '2', '3', '4', '5'];
 const likertLabels7 = ['1', '2', '3', '4', '5', '6', '7'];
 
 // Initialize Likert scales with auto-scroll functionality
