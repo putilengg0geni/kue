@@ -39,15 +39,23 @@ function toggleMusic() {
     isMusicPlaying = !isMusicPlaying;
 }
 
-// Likert labels (Indonesian only)
-const likertLabels = ['STS', 'TS', 'N', 'S', 'SS'];
+// Likert labels - 5 point for OI/MI, 7 point for TL/UPB
+const likertLabels5 = ['STS', 'TS', 'N', 'S', 'SS'];
+const likertLabels7 = ['1', '2', '3', '4', '5', '6', '7'];
 
 // Initialize Likert scales with auto-scroll functionality
 function initLikertScales() {
     document.querySelectorAll('.likert').forEach(container => {
         const questionEl = container.closest('.question');
         const questionName = questionEl.dataset.q;
-        container.innerHTML = likertLabels.map((label, i) =>
+        const section = questionEl.closest('.section');
+        const sectionId = section?.id || '';
+
+        // Use 7-point for TL and UPB, 5-point for OI and MI
+        const is7Point = sectionId === 'tlSection' || sectionId === 'upbSection';
+        const labels = is7Point ? likertLabels7 : likertLabels5;
+
+        container.innerHTML = labels.map((label, i) =>
             `<label><input type="radio" name="${questionName}" value="${i + 1}"><span>${label}</span></label>`
         ).join('');
 
@@ -126,11 +134,13 @@ function updateProgress(id) {
 // Validation
 function validateAndNext(from, to) {
     if (from === 'respondentSection') {
+        const nama = document.getElementById('nama').value;
         const usia = document.getElementById('usia').value;
         const gender = document.querySelector('input[name="gender"]:checked');
+        const unitorg = document.getElementById('unitorg').value;
         const pendidikan = document.getElementById('pendidikan').value;
-        const masakerja = document.getElementById('masakerja').value;
-        if (!usia || !gender || !pendidikan || !masakerja) {
+        const lamakerja = document.getElementById('lamakerja').value;
+        if (!nama || !usia || !gender || !unitorg || !pendidikan || !lamakerja) {
             showAlert('Mohon lengkapi semua data yang wajib diisi (*)');
             return;
         }
@@ -154,7 +164,7 @@ function validateAndNext(from, to) {
 // ============================================
 // GOOGLE APPS SCRIPT WEB APP URL
 // ============================================
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzl2-djcbuKjYKiLEfGC-UgvLDitByt1PlYrE4Rvo4EGm1Y8h5L3it-8ee3ecMfSAd5/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwSQQ7YcueaY0FKtwAWjkqDWlI31tJlEsotVOhuEh9OPoaXDCZjAWWCPwBSufyrVZnc7A/exec';
 
 // Submit
 async function submitForm() {
@@ -215,11 +225,12 @@ function collectData() {
         timestamp: new Date().toISOString(),
         language: 'id',
         respondent: {
-            nama: document.getElementById('nama').value || 'Anonim',
+            nama: document.getElementById('nama').value,
             usia: document.getElementById('usia').value,
             gender: document.querySelector('input[name="gender"]:checked')?.value,
+            unitorg: document.getElementById('unitorg').value,
             pendidikan: document.getElementById('pendidikan').value,
-            masakerja: document.getElementById('masakerja').value
+            lamakerja: document.getElementById('lamakerja').value
         },
         responses: {},
         scores: {}
