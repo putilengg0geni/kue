@@ -60,7 +60,7 @@ const randomQuestions = [
     // UPB (6 questions) - Likert 7
     { id: 'UPB1', text: 'Demi membantu organisasi, saya bersedia menyelaraskan informasi agar citra organisasi tetap terlihat baik di mata publik.', scale: 7 },
     { id: 'UPB2', text: 'Jika itu menguntungkan organisasi, saya bersedia menonjolkan sisi positif layanan organisasi secara berlebihan saat berhadapan dengan Wajib Pajak.', scale: 7 },
-    { id: 'UPB3', text: 'Jika menguntungkan organisasi, saya akan menyimpan informasi negatif dari Wajib Pajak.', scale: 7 },
+    { id: 'UPB3', text: 'Jika menguntungkan organisasi, saya akan menyimpan informasi negatif terkait organisasi dari Wajib Pajak.', scale: 7 },
     { id: 'UPB4', text: 'Demi kepentingan organisasi, saya bersedia memberikan rekomendasi positif bagi pegawai yang tidak kompeten agar ia diterima di instansi atau perusahaan lain dan tidak lagi menjadi beban di organisasi saya.', scale: 7 },
     { id: 'UPB5', text: 'Jika organisasi membutuhkan, saya bersedia untuk tidak mengembalikan kelebihan bayar Wajib Pajak meski terjadi kesalahan penagihan.', scale: 7 },
     { id: 'UPB6', text: 'Jika diperlukan, saya akan menahan informasi yang berpotensi merusak reputasi organisasi agar tidak diketahui publik.', scale: 7 }
@@ -155,9 +155,6 @@ function initOILikertScales() {
 
 // Handle question answered - mark as answered and auto-scroll to next
 function handleQuestionAnswered(questionEl) {
-    // Start music on first interaction
-    startMusicOnInteraction();
-
     // Mark as answered
     questionEl.classList.add('answered');
     questionEl.classList.remove('error');
@@ -202,9 +199,6 @@ function handleQuestionAnswered(questionEl) {
 const sections = ['welcomeSection', 'respondentSection', 'miSection', 'oiSection', 'randomSection', 'resultSection'];
 
 function showSection(id) {
-    // Start music on first interaction
-    startMusicOnInteraction();
-
     document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
     document.getElementById(id).classList.add('active');
     updateProgress(id);
@@ -473,8 +467,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Try to autoplay on first interaction anywhere
-    document.body.addEventListener('click', startMusicOnInteraction, { once: true });
-    document.body.addEventListener('touchstart', startMusicOnInteraction, { once: true });
+    // Music is now manual only - user must click the music button
+    // No auto-play on interaction
 
     // Save respondent data on change
     document.querySelectorAll('#respondentSection input, #respondentSection select').forEach(el => {
