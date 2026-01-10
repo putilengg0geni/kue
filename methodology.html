@@ -1133,6 +1133,113 @@ boot_model <- <span class="code-function">bootstrap_model</span>(
                             <th>Status</th>
                         </tr>
                     </table>
+
+                    <!-- Penjelasan Status -->
+                    <div
+                        style="margin-top: 1.5rem; padding: 1rem; background: rgba(245, 158, 11, 0.1); border-radius: 8px; border-left: 3px solid var(--warning);">
+                        <h4 style="color: var(--warning); margin-bottom: 0.5rem;">📌 Apa arti "Perlu Review"?</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+                            Status <strong>"Perlu Review"</strong> muncul jika nilai <strong>AVE &lt; 0.5</strong>.
+                            Ini <strong>BUKAN</strong> berarti data rusak!
+                        </p>
+                        <ul style="font-size: 0.85rem; color: var(--text-muted); margin-left: 1.5rem;">
+                            <li><strong>Valid ✓</strong> = Pertanyaan-pertanyaan konstruk konsisten mengukur hal yang
+                                sama</li>
+                            <li><strong>Perlu Review ⚠️</strong> = Ada beberapa pertanyaan yang kurang "nyambung" dengan
+                                konstruknya</li>
+                        </ul>
+                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">
+                            <em>Ini normal untuk pilot test dengan sampel kecil. Akan dievaluasi setelah 234
+                                responden.</em>
+                        </p>
+                    </div>
+
+                    <!-- Penjelasan Drop Item -->
+                    <div
+                        style="margin-top: 1rem; padding: 1rem; background: rgba(99, 102, 241, 0.1); border-radius: 8px; border-left: 3px solid var(--primary);">
+                        <h4 style="color: var(--primary); margin-bottom: 0.5rem;">🔧 Apa itu "Drop Item"?</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+                            Jika AVE rendah, solusinya adalah <strong>"drop item"</strong> yaitu menghapus
+                            <strong>pertanyaan</strong>
+                            yang loading-nya rendah (&lt;0.5), <strong>BUKAN menghapus responden</strong>.
+                        </p>
+                        <table style="font-size: 0.85rem; margin-top: 0.5rem;">
+                            <tr>
+                                <th></th>
+                                <th>Sebelum Drop</th>
+                                <th>Sesudah Drop</th>
+                            </tr>
+                            <tr>
+                                <td>Responden</td>
+                                <td>234</td>
+                                <td><strong>234</strong> (tetap!)</td>
+                            </tr>
+                            <tr>
+                                <td>Item MI</td>
+                                <td>5 item</td>
+                                <td>3 item</td>
+                            </tr>
+                            <tr>
+                                <td>AVE MI</td>
+                                <td>0.40</td>
+                                <td>~0.70 (naik!)</td>
+                            </tr>
+                        </table>
+
+                        <h4 style="color: var(--primary); margin-top: 1rem; margin-bottom: 0.5rem;">❓ FAQ tentang Drop
+                            Item</h4>
+
+                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+                            <strong>Q: Apakah penelitian gagal jika harus drop item?</strong><br>
+                            A: <strong>TIDAK!</strong> Ini prosedur standar yang sangat umum. Banyak jurnal
+                            internasional melaporkan drop item di metodologinya. Ini justru menunjukkan <em>rigor</em>
+                            (ketelitian) penelitian.
+                        </p>
+
+                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+                            <strong>Q: Maksimal berapa item yang boleh di-drop?</strong><br>
+                            A: Setiap konstruk harus punya <strong>minimal 3 item</strong> setelah drop.
+                        </p>
+
+                        <table style="font-size: 0.8rem; margin-top: 0.5rem;">
+                            <tr>
+                                <th>Konstruk</th>
+                                <th>Total Item</th>
+                                <th>Minimal Tersisa</th>
+                                <th>Maksimal Drop</th>
+                            </tr>
+                            <tr>
+                                <td>TL</td>
+                                <td>11</td>
+                                <td>3</td>
+                                <td style="color: var(--success);">8 item</td>
+                            </tr>
+                            <tr>
+                                <td>OI</td>
+                                <td>5</td>
+                                <td>3</td>
+                                <td style="color: var(--warning);">2 item</td>
+                            </tr>
+                            <tr>
+                                <td>MI</td>
+                                <td>5</td>
+                                <td>3</td>
+                                <td style="color: var(--warning);">2 item</td>
+                            </tr>
+                            <tr>
+                                <td>UPB</td>
+                                <td>6</td>
+                                <td>3</td>
+                                <td style="color: var(--success);">3 item</td>
+                            </tr>
+                        </table>
+
+                        <p
+                            style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.75rem; padding: 0.5rem; background: rgba(16, 185, 129, 0.1); border-radius: 4px;">
+                            ✅ <strong>Kesimpulan:</strong> Drop item adalah prosedur standar, bukan kegagalan. Yang
+                            penting minimal 3 item per konstruk tersisa.
+                        </p>
+                    </div>
                 </div>
             </div>
         </section>
