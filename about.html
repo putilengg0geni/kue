@@ -205,6 +205,13 @@
                                         <NavButton active={activeTab === 'results'} onClick={() => setActiveTab('results')} label="Hasil" icon={<BarChart2 size={16} />} />
                                         <NavButton active={activeTab === 'simulation'} onClick={() => setActiveTab('simulation')} label="Simulasi" icon={<Activity size={16} />} />
                                         <NavButton active={activeTab === 'fulldoc'} onClick={() => setActiveTab('fulldoc')} label="Dokumen" icon={<FileText size={16} />} />
+
+                                        <a href="methodology.html"
+                                            target="_blank"
+                                            className="px-3 py-1.5 ml-2 rounded-md text-xs font-bold text-white bg-gradient-to-r from-indigo-500 to-purple-600 shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-300 animate-pulse flex items-center gap-1 decoration-0"
+                                            style={{ animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite', textDecoration: 'none' }}>
+                                            <BarChart2 size={14} /> SEM-PLS Detail →
+                                        </a>
                                     </div>
                                 </div>
 
@@ -1085,6 +1092,8 @@
                         </div>
                     </div>
                 </div>
+
+                {/* Button removed - moved to Navbar */}
             </div>
         );
 
