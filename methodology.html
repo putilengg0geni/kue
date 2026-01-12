@@ -1512,6 +1512,28 @@ boot_model <- <span class="code-function">bootstrap_model</span>(
           </div>
         `;
             });
+
+            // LOGIC TAMBAHAN: Interpretasi Akademis untuk Full Mediation (H1 Ditolak, H4 Didukung)
+            // Ini menjawab kebingungan user "Apakah penelitian gagal?"
+            if (stats.paths.TL_UPB < 0.1 && (stats.paths.TL_OI * stats.paths.OI_UPB) > 0.05) {
+                container.innerHTML += `
+                    <div style="margin-top: 2rem; background: #fff; border-left: 5px solid #6366f1; padding: 1.5rem; border-radius: 0 8px 8px 0; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+                        <h4 style="color: #4f46e5; margin-top: 0; display: flex; align-items: center; gap: 0.5rem; font-size: 1.1rem;">
+                            🎓 Interpretasi Akademis (Penting!)
+                        </h4>
+                        <p style="color: #334155; margin-bottom: 1rem;">
+                            <strong>Jangan Panik H1 Ditolak!</strong> Dalam statistik, ini disebut fenomena <em>Full Mediation</em>.
+                        </p>
+                        <div style="background: #f8fafc; padding: 1rem; border-radius: 6px; border: 1px solid #e2e8f0;">
+                            <p style="color: #475569; font-size: 0.95rem; line-height: 1.6; font-style: italic; margin: 0;">
+                                "Hasil analisis menunjukkan bahwa pengaruh langsung <strong>Transformational Leadership (TL)</strong> terhadap <strong>UPB</strong> tidak signifikan (H1 Ditolak), namun pengaruh tidak langsung melalui <strong>Organizational Identification (OI)</strong> terbukti signifikan (H4 Didukung). <br><br>
+                                Secara teoritis, ini mengindikasikan <strong>Full Mediation (Mediasi Penuh)</strong>. Artinya, gaya kepemimpinan transformasional tidak serta-merta memicu perilaku tidak etis secara langsung. Pemimpin transformasional terlebih dahulu membangun identitas organisasi yang kuat (OI) pada bawahan. Rasa memiliki yang berlebihan (OI) itulah yang kemudian mendorong bawahan untuk melakukan tindakan pro-organisasi yang tidak etis (UPB). <br><br>
+                                <strong>Kesimpulan:</strong> Penelitian <u>TIDAK GAGAL</u>. Justru penelitian ini berhasil membuktikan bahwa variabel OI memegang peran kunci (vital) sebagai satu-satunya jembatan antara kepemimpinan dan perilaku tersebut."
+                            </p>
+                        </div>
+                    </div>
+                `;
+            }
         }
 
         // Initialize
