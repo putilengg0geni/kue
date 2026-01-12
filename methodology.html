@@ -1097,26 +1097,44 @@ boot_model <- <span class="code-function">bootstrap_model</span>(
 
         <!-- RESULTS -->
         <section id="results">
-            <h2>📊 Hasil Analisis (Live)</h2>
+            <h2>📊 Monitoring Data (Live) & Preview Analisis</h2>
+
+            <div
+                style="background: rgba(59, 130, 246, 0.1); border: 1px solid #3b82f6; border-radius: 8px; padding: 1rem; margin-bottom: 2rem;">
+                <h4 style="color: #60a5fa; margin-top: 0;">ℹ️ CATATAN DATA (DISCLAIMER)</h4>
+                <ul style="margin-bottom: 0; color: var(--text-muted); padding-left: 1.5rem;">
+                    <li style="margin-bottom: 0.5rem;"><strong>Data Responden (N)</strong> adalah data <strong>REAL-TIME
+                            / LIVE</strong> 🔴 yang diambil langsung dari Google Sheets.</li>
+                    <li><strong>Path Coefficients & Reliability</strong> adalah <strong>SIMULASI / PREVIEW</strong> ℹ️.
+                        Perhitungan PLS yang valid hanya dilakukan di R Studio (karena browser tidak kuat menjalankan
+                        bootstrapping). Angka di sini hanya ilustrasi visual.</li>
+                </ul>
+            </div>
 
             <div id="results-loading" class="loading">
                 <div class="spinner"></div>
-                <p>Memuat data dari Google Sheets...</p>
+                <p>Memuat data LIVE dari Google Sheets...</p>
             </div>
 
             <div id="results-content" style="display: none;">
                 <div class="stat-grid">
-                    <div class="stat-card">
+                    <div class="stat-card" style="border-top: 3px solid #ef4444;">
                         <div class="stat-value" id="result-n">-</div>
-                        <div class="stat-label">Responden</div>
+                        <div class="stat-label">Responden <span class="badge"
+                                style="font-size: 0.6em; vertical-align: middle; background: #ef4444; color: white;">LIVE
+                                🔴</span></div>
                     </div>
-                    <div class="stat-card">
+                    <div class="stat-card" style="border-top: 3px solid #3b82f6;">
                         <div class="stat-value" id="result-r2-oi">-</div>
-                        <div class="stat-label">R² OI</div>
+                        <div class="stat-label">R² OI <span class="badge"
+                                style="font-size: 0.6em; vertical-align: middle; background: #3b82f6; color: white;">PREVIEW
+                                ℹ️</span></div>
                     </div>
-                    <div class="stat-card">
+                    <div class="stat-card" style="border-top: 3px solid #3b82f6;">
                         <div class="stat-value" id="result-r2-upb">-</div>
-                        <div class="stat-label">R² UPB</div>
+                        <div class="stat-label">R² UPB <span class="badge"
+                                style="font-size: 0.6em; vertical-align: middle; background: #3b82f6; color: white;">PREVIEW
+                                ℹ️</span></div>
                     </div>
                 </div>
 
@@ -1355,29 +1373,29 @@ boot_model <- <span class="code-function">bootstrap_model</span>(
             }, 0) / n;
 
             // Simplified path coefficients (correlations as proxy)
-            // Note: Real PLS results come from R script, these are approximations
+            // Note: Real PLS results come from R script, these are APPROXIMATIONS for visual demo only
             return {
                 n,
                 avgTL: avgTL.toFixed(2),
                 avgOI: avgOI.toFixed(2),
                 avgMI: avgMI.toFixed(2),
                 avgUPB: avgUPB.toFixed(2),
-                // Placeholder values - actual values from R script
+                // Updated Placeholder Values (Mirip Hasil R Sementara)
                 paths: {
                     TL_OI: 0.50,
-                    TL_UPB: 0.36,
-                    OI_UPB: 0.31,
-                    MI_UPB: 0.02
+                    TL_UPB: 0.05, // Updated to match R (low direct effect)
+                    OI_UPB: 0.49, // Updated to match R
+                    MI_UPB: 0.01
                 },
                 r2: {
                     OI: 0.25,
-                    UPB: 0.35
+                    UPB: 0.26
                 },
                 reliability: {
-                    TL: { cr: 0.98, ave: 0.82 },
-                    OI: { cr: 0.92, ave: 0.70 },
-                    MI: { cr: 0.76, ave: 0.40 },
-                    UPB: { cr: 0.82, ave: 0.44 }
+                    TL: { cr: 0.98, ave: 0.84 },
+                    OI: { cr: 0.88, ave: 0.60 }, // Updated to match R (Real data is valid!)
+                    MI: { cr: 0.92, ave: 0.71 }, // Updated to match R (Real data is valid!)
+                    UPB: { cr: 0.86, ave: 0.50 } // Updated to match R (Real data is valid!)
                 }
             };
         }
