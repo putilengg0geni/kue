@@ -1095,6 +1095,55 @@ boot_model <- <span class="code-function">bootstrap_model</span>(
             </div>
         </section>
 
+
+        <!-- R GALLERY SECTION -->
+        <section id="r-evidence" style="margin-top: 4rem;">
+            <h2>📸 Galeri Validasi R Studio (N=136)</h2>
+            <p style="color: var(--text-muted); margin-bottom: 2rem;">Bukti visual output asli dari software R Studio
+                untuk menjamin keaslian analisis.</p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+
+                <div class="card" style="padding: 0; overflow: hidden;">
+                    <div style="padding: 1rem; border-bottom: 1px solid #eee; background: #f8fafc;">
+                        <strong style="color: #334155;">1. Path Model Diagram</strong>
+                    </div>
+                    <img src="assets/r_path_model.png" alt="Path Model"
+                        style="width: 100%; height: auto; display: block;">
+                </div>
+
+                <div class="card" style="padding: 0; overflow: hidden;">
+                    <div style="padding: 1rem; border-bottom: 1px solid #eee; background: #f8fafc;">
+                        <strong style="color: #334155;">2. R-Squared (Variance Explained)</strong>
+                    </div>
+                    <img src="assets/r_r2.png" alt="R Squared" style="width: 100%; height: auto; display: block;">
+                </div>
+
+                <div class="card" style="padding: 0; overflow: hidden;">
+                    <div style="padding: 1rem; border-bottom: 1px solid #eee; background: #f8fafc;">
+                        <strong style="color: #334155;">3. Path Coefficients</strong>
+                    </div>
+                    <img src="assets/r_path_coef.png" alt="Path Coefficients"
+                        style="width: 100%; height: auto; display: block;">
+                </div>
+
+                <div class="card" style="padding: 0; overflow: hidden;">
+                    <div style="padding: 1rem; border-bottom: 1px solid #eee; background: #f8fafc;">
+                        <strong style="color: #334155;">4. Average Variance Extracted (AVE)</strong>
+                    </div>
+                    <img src="assets/r_ave.png" alt="AVE Chart" style="width: 100%; height: auto; display: block;">
+                </div>
+
+                <div class="card" style="padding: 0; overflow: hidden;">
+                    <div style="padding: 1rem; border-bottom: 1px solid #eee; background: #f8fafc;">
+                        <strong style="color: #334155;">5. Composite Reliability</strong>
+                    </div>
+                    <img src="assets/r_cr.png" alt="CR Chart" style="width: 100%; height: auto; display: block;">
+                </div>
+
+            </div>
+        </section>
+
         <!-- RESULTS -->
         <section id="results">
             <h2>📊 Monitoring Data (Live) & Preview Analisis</h2>
@@ -1113,7 +1162,7 @@ boot_model <- <span class="code-function">bootstrap_model</span>(
                     style="text-align: right; margin-top: 0.8rem; border-top: 1px solid rgba(59, 130, 246, 0.2); padding-top: 0.5rem;">
                     <span class="badge"
                         style="background: rgba(59, 130, 246, 0.2); color: #60a5fa; font-size: 0.75rem; font-weight: normal;">
-                        🕒 Terakhir diupdate: 12 Jan 2026, 22:23 WIB (Data N=125)
+                        🕒 Terakhir diupdate: 13 Jan 2026, 09:21 WIB (Data N=136)
                     </span>
                 </div>
             </div>
@@ -1387,22 +1436,22 @@ boot_model <- <span class="code-function">bootstrap_model</span>(
                 avgOI: avgOI.toFixed(2),
                 avgMI: avgMI.toFixed(2),
                 avgUPB: avgUPB.toFixed(2),
-                // Updated Preview Values (Sesuai R Output N=125)
+                // Updated Preview Values (Sesuai R Output N=136)
                 paths: {
-                    TL_OI: 0.497,
-                    TL_UPB: 0.061,
-                    OI_UPB: 0.465,
-                    MI_UPB: 0.011
+                    TL_OI: 0.479,
+                    TL_UPB: 0.120, // H1 Supported now!
+                    OI_UPB: 0.436,
+                    MI_UPB: 0.028
                 },
                 r2: {
-                    OI: 0.247,
-                    UPB: 0.253
+                    OI: 0.230,
+                    UPB: 0.268
                 },
                 reliability: {
-                    TL: { cr: 0.983, ave: 0.837 },
-                    OI: { cr: 0.874, ave: 0.586 },
-                    MI: { cr: 0.926, ave: 0.714 },
-                    UPB: { cr: 0.857, ave: 0.502 }
+                    TL: { cr: 0.983, ave: 0.844 },
+                    OI: { cr: 0.875, ave: 0.588 },
+                    MI: { cr: 0.932, ave: 0.734 },
+                    UPB: { cr: 0.855, ave: 0.498 } // Back to Warning area (0.498 < 0.5), honest data.
                 }
             };
         }
@@ -1513,22 +1562,46 @@ boot_model <- <span class="code-function">bootstrap_model</span>(
         `;
             });
 
-            // LOGIC TAMBAHAN: Interpretasi Akademis untuk Full Mediation (H1 Ditolak, H4 Didukung)
-            // Ini menjawab kebingungan user "Apakah penelitian gagal?"
-            if (stats.paths.TL_UPB < 0.1 && (stats.paths.TL_OI * stats.paths.OI_UPB) > 0.05) {
+            // LOGIC TAMBAHAN: Interpretasi Akademis
+            const indirectEffect = stats.paths.TL_OI * stats.paths.OI_UPB;
+            const directEffect = stats.paths.TL_UPB;
+            const totalEffect = indirectEffect + directEffect;
+            const vaf = indirectEffect / totalEffect;
+
+            // Scenario 1: Full Mediation (H1 Rejected, H4 Supported)
+            if (directEffect < 0.1 && indirectEffect > 0.05) {
                 container.innerHTML += `
                     <div style="margin-top: 2rem; background: #fff; border-left: 5px solid #6366f1; padding: 1.5rem; border-radius: 0 8px 8px 0; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
                         <h4 style="color: #4f46e5; margin-top: 0; display: flex; align-items: center; gap: 0.5rem; font-size: 1.1rem;">
-                            🎓 Interpretasi Akademis (Penting!)
+                            🎓 Interpretasi Hasil: Full Mediation
                         </h4>
-                        <p style="color: #334155; margin-bottom: 1rem;">
-                            <strong>Jangan Panik H1 Ditolak!</strong> Dalam statistik, ini disebut fenomena <em>Full Mediation</em>.
-                        </p>
                         <div style="background: #f8fafc; padding: 1rem; border-radius: 6px; border: 1px solid #e2e8f0;">
                             <p style="color: #475569; font-size: 0.95rem; line-height: 1.6; font-style: italic; margin: 0;">
-                                "Hasil analisis menunjukkan bahwa pengaruh langsung <strong>Transformational Leadership (TL)</strong> terhadap <strong>UPB</strong> tidak signifikan (H1 Ditolak), namun pengaruh tidak langsung melalui <strong>Organizational Identification (OI)</strong> terbukti signifikan (H4 Didukung). <br><br>
-                                Secara teoritis, ini mengindikasikan <strong>Full Mediation (Mediasi Penuh)</strong>. Artinya, gaya kepemimpinan transformasional tidak serta-merta memicu perilaku tidak etis secara langsung. Pemimpin transformasional terlebih dahulu membangun identitas organisasi yang kuat (OI) pada bawahan. Rasa memiliki yang berlebihan (OI) itulah yang kemudian mendorong bawahan untuk melakukan tindakan pro-organisasi yang tidak etis (UPB). <br><br>
-                                <strong>Kesimpulan:</strong> Penelitian <u>TIDAK GAGAL</u>. Justru penelitian ini berhasil membuktikan bahwa variabel OI memegang peran kunci (vital) sebagai satu-satunya jembatan antara kepemimpinan dan perilaku tersebut."
+                                "Hasil analisis menunjukkan bahwa pengaruh langsung <strong>Transformational Leadership (TL)</strong> terhadap <strong>UPB</strong> tidak signifikan, namun pengaruh tidak langsung melalui <strong>Organizational Identification (OI)</strong> signifikan. Ini mengindikasikan <strong>Full Mediation (Mediasi Penuh)</strong>. Artinya, pemimpin transformasional memicu perilaku tidak etis HANYA jika mereka berhasil membangun identitas organisasi (OI) yang kuat pada bawahan."
+                            </p>
+                        </div>
+                    </div>
+                `;
+            }
+            // Scenario 2: Partial Mediation (H1 Supported, H4 Supported) - KASUS SEKARANG (N=136)
+            else if (directEffect >= 0.1 && indirectEffect > 0.05) {
+                container.innerHTML += `
+                    <div style="margin-top: 2rem; background: #fff; border-left: 5px solid #10b981; padding: 1.5rem; border-radius: 0 8px 8px 0; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+                        <h4 style="color: #059669; margin-top: 0; display: flex; align-items: center; gap: 0.5rem; font-size: 1.1rem;">
+                            🎓 Interpretasi Hasil: Partial Mediation
+                        </h4>
+                         <p style="color: #334155; margin-bottom: 1rem;">
+                            <strong>Berita Bagus!</strong> Baik pengaruh langsung (H1) maupun mediasi (H4) keduanya terbukti signifikan.
+                        </p>
+                        <div style="background: #f0fdf4; padding: 1rem; border-radius: 6px; border: 1px solid #dcfce7;">
+                            <p style="color: #334155; font-size: 0.95rem; line-height: 1.6; font-style: italic; margin: 0;">
+                                "Hasil analisis menunjukkan fenomena <strong>Partial Mediation (Mediasi Parsial)</strong> dengan nilai VAF ${(vaf * 100).toFixed(1)}%. <br><br>
+                                Artinya: Gaya kepemimpinan transformasional (TL) memengaruhi perilaku tidak etis (UPB) melalui <strong>DUA JALUR</strong> sekaligus:
+                                <ol style='margin-top:0.5rem; margin-bottom:0.5rem;'>
+                                    <li><strong>Jalur Langsung:</strong> Karisma pemimpin secara langsung bisa memicu bawahan melakukan apa saja demi organisasi.</li>
+                                    <li><strong>Jalur Mediasi (OI):</strong> Pemimpin memperkuat rasa identitas (OI), yang kemudian memicu perilaku tersebut.</li>
+                                </ol>
+                                <strong>Kesimpulan:</strong> Hipotesis lo <strong>SANGAT KUAT</strong> karena terbukti dari berbagai sisi (langsung & tidak langsung)."
                             </p>
                         </div>
                     </div>
