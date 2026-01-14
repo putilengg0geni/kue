@@ -9,17 +9,24 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #6366f1;
-            --primary-dark: #4f46e5;
-            --secondary: #ec4899;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --danger: #ef4444;
-            --bg-dark: #0f172a;
-            --bg-card: rgba(30, 41, 59, 0.8);
-            --text: #e2e8f0;
-            --text-muted: #94a3b8;
-            --border: rgba(148, 163, 184, 0.2);
+            --primary: #4f46e5;
+            --primary-dark: #3730a3;
+            --secondary: #db2777;
+            --success: #059669;
+            --warning: #d97706;
+            --danger: #dc2626;
+
+            /* LIGHT THEME VARIABLES */
+            --bg-dark: #f8fafc;
+            /* Lighter background (slate-50) */
+            --bg-card: #ffffff;
+            /* White cards */
+            --text: #1e293b;
+            /* Slate-800 text */
+            --text-muted: #64748b;
+            /* Slate-500 muted */
+            --border: #e2e8f0;
+            /* Slate-200 border */
         }
 
         * {
@@ -30,7 +37,7 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
             color: var(--text);
             min-height: 100vh;
             line-height: 1.6;
@@ -42,11 +49,12 @@
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(15, 23, 42, 0.95);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border);
             z-index: 1000;
             padding: 1rem 2rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
         }
 
         nav ul {
@@ -223,11 +231,12 @@
         }
 
         .stat-card {
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(236, 72, 153, 0.2));
+            background: #ffffff;
             border-radius: 12px;
             padding: 1.5rem;
             text-align: center;
             border: 1px solid var(--border);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
         }
 
         .stat-value {
@@ -287,8 +296,11 @@
         /* Loading */
         .loading {
             text-align: center;
-            padding: 2rem;
+            padding: 3rem;
             color: var(--text-muted);
+            background: #ffffff;
+            border-radius: 12px;
+            border: 1px dashed var(--border);
         }
 
         .spinner {
@@ -813,25 +825,26 @@
                             </tr>
                             <tr>
                                 <td>OI1</td>
-                                <td>Ketika seseorang mengkritik organisasi saya, saya merasakan seperti penghinaan
-                                    pribadi</td>
+                                <td>Ketika seseorang mengkritik organisasi tempat saya bekerja, saya merasa seperti
+                                    dihina secara pribadi</td>
                             </tr>
                             <tr>
                                 <td>OI2</td>
-                                <td>Saya sangat tertarik dengan pendapat orang lain tentang organisasi saya</td>
+                                <td>Saya sangat tertarik dengan apa yang orang lain pikirkan tentang organisasi saya
+                                </td>
                             </tr>
                             <tr>
                                 <td>OI3</td>
-                                <td>Ketika saya berbicara tentang organisasi saya, saya biasanya mengatakan "kami"
+                                <td>Ketika saya berbicara tentang organisasi ini, saya biasanya mengatakan "kami"
                                     daripada "mereka"</td>
                             </tr>
                             <tr>
                                 <td>OI4</td>
-                                <td>Keberhasilan organisasi ini adalah keberhasilan saya</td>
+                                <td>Keberhasilan organisasi ini terasa seperti keberhasilan pribadi saya</td>
                             </tr>
                             <tr>
                                 <td>OI5</td>
-                                <td>Ketika seseorang memuji organisasi ini, rasanya seperti pujian pribadi</td>
+                                <td>Ketika seseorang memuji organisasi ini, saya merasa itu sebagai pujian pribadi</td>
                             </tr>
                         </table>
                     </div>
@@ -849,17 +862,16 @@
                             </tr>
                             <tr>
                                 <td>MI1</td>
-                                <td>Memiliki sifat-sifat di atas membuat saya merasa nyaman dengan diri saya sendiri
-                                </td>
+                                <td>Saya merasa bangga dan puas apabila mampu memiliki sifat-sifat positif tersebut</td>
                             </tr>
                             <tr>
                                 <td>MI2</td>
-                                <td>Menjadi seseorang yang memiliki sifat-sifat tersebut sangat penting bagi saya</td>
+                                <td>Menjadi pribadi yang memiliki sifat-sifat di atas adalah penting bagi diri saya</td>
                             </tr>
                             <tr>
                                 <td>MI3</td>
-                                <td>Saya akan merasa malu jika saya bertindak tidak sesuai dengan sifat-sifat tersebut
-                                </td>
+                                <td>Ketenangan batin dan kebahagiaan saya sangat bergantung pada apakah saya sudah
+                                    memiliki sifat-sifat baik tersebut</td>
                             </tr>
                             <tr>
                                 <td>MI4</td>
@@ -933,7 +945,7 @@
                 </p>
 
                 <div class="mermaid">
-                    graph LR
+                    flowchart TD
                     A[👤 Responden<br />buka website] --> B[📱 Isi Kuesioner<br />index.html]
                     B --> C[⚙️ Proses Jawaban<br />app.js]
                     C --> D[☁️ Simpan ke Cloud<br />Google Sheets]
@@ -1144,6 +1156,183 @@ boot_model <- <span class="code-function">bootstrap_model</span>(
             </div>
         </section>
 
+        <!-- DEMOGRAFI RESPONDEN -->
+        <section id="demografi">
+            <h2>👥 Profil Demografi Responden</h2>
+            <p style="color: var(--text-muted); margin-bottom: 2rem;">Statistik deskriptif karakteristik responden
+                berdasarkan data kuesioner.</p>
+
+            <div class="grid">
+                <!-- Seksi/Jabatan -->
+                <div class="card">
+                    <h3 style="margin-top: 0;">📋 Seksi / Jabatan</h3>
+                    <table style="font-size: 0.9rem;">
+                        <tr>
+                            <th>Kategori</th>
+                            <th>Jumlah</th>
+                            <th>%</th>
+                        </tr>
+                        <tr>
+                            <td>Pengawasan (AR)</td>
+                            <td>95</td>
+                            <td>52.5%</td>
+                        </tr>
+                        <tr>
+                            <td>Fungsional Pemeriksa Pajak</td>
+                            <td>31</td>
+                            <td>17.1%</td>
+                        </tr>
+                        <tr>
+                            <td>Pelayanan</td>
+                            <td>31</td>
+                            <td>17.1%</td>
+                        </tr>
+                        <tr>
+                            <td>Pemeriksaan, Penilaian dan Penagihan</td>
+                            <td>24</td>
+                            <td>13.3%</td>
+                        </tr>
+                    </table>
+                    <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem; text-align: right;">
+                        <em>N=181 (13 Jan 2026)</em>
+                    </p>
+                </div>
+
+                <!-- Jenis Kelamin -->
+                <div class="card">
+                    <h3 style="margin-top: 0;">⚧️ Jenis Kelamin</h3>
+                    <table style="font-size: 0.9rem;">
+                        <tr>
+                            <th>Kategori</th>
+                            <th>Jumlah</th>
+                            <th>%</th>
+                        </tr>
+                        <tr>
+                            <td>Laki-laki</td>
+                            <td>110</td>
+                            <td>60.8%</td>
+                        </tr>
+                        <tr>
+                            <td>Perempuan</td>
+                            <td>71</td>
+                            <td>39.2%</td>
+                        </tr>
+                    </table>
+                    <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem; text-align: right;">
+                        <em>N=181 (13 Jan 2026)</em>
+                    </p>
+                </div>
+
+                <!-- Usia -->
+                <div class="card">
+                    <h3 style="margin-top: 0;">📅 Usia</h3>
+                    <table style="font-size: 0.9rem;">
+                        <tr>
+                            <th>Kategori</th>
+                            <th>Jumlah</th>
+                            <th>%</th>
+                        </tr>
+                        <tr>
+                            <td>31-40 tahun</td>
+                            <td>69</td>
+                            <td>38.1%</td>
+                        </tr>
+                        <tr>
+                            <td>41-50 tahun</td>
+                            <td>65</td>
+                            <td>35.9%</td>
+                        </tr>
+                        <tr>
+                            <td>20-30 tahun</td>
+                            <td>25</td>
+                            <td>13.8%</td>
+                        </tr>
+                        <tr>
+                            <td>>50 tahun</td>
+                            <td>22</td>
+                            <td>12.2%</td>
+                        </tr>
+                    </table>
+                    <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem; text-align: right;">
+                        <em>N=181 (13 Jan 2026)</em>
+                    </p>
+                </div>
+
+                <!-- Pendidikan -->
+                <div class="card">
+                    <h3 style="margin-top: 0;">🎓 Pendidikan</h3>
+                    <table style="font-size: 0.9rem;">
+                        <tr>
+                            <th>Kategori</th>
+                            <th>Jumlah</th>
+                            <th>%</th>
+                        </tr>
+                        <tr>
+                            <td>Sarjana/DIV</td>
+                            <td>103</td>
+                            <td>56.9%</td>
+                        </tr>
+                        <tr>
+                            <td>Magister/Doktor</td>
+                            <td>50</td>
+                            <td>27.6%</td>
+                        </tr>
+                        <tr>
+                            <td>DI/DIII</td>
+                            <td>28</td>
+                            <td>15.5%</td>
+                        </tr>
+                    </table>
+                    <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem; text-align: right;">
+                        <em>N=181 (13 Jan 2026)</em>
+                    </p>
+                </div>
+
+                <!-- Lama Bekerja -->
+                <div class="card">
+                    <h3 style="margin-top: 0;">⏱️ Lama Bekerja</h3>
+                    <table style="font-size: 0.9rem;">
+                        <tr>
+                            <th>Kategori</th>
+                            <th>Jumlah</th>
+                            <th>%</th>
+                        </tr>
+                        <tr>
+                            <td>≥16 tahun</td>
+                            <td>100</td>
+                            <td>55.2%</td>
+                        </tr>
+                        <tr>
+                            <td>11-15 tahun</td>
+                            <td>45</td>
+                            <td>24.9%</td>
+                        </tr>
+                        <tr>
+                            <td>6-10 tahun</td>
+                            <td>34</td>
+                            <td>18.8%</td>
+                        </tr>
+                        <tr>
+                            <td>≤5 tahun</td>
+                            <td>2</td>
+                            <td>1.1%</td>
+                        </tr>
+                    </table>
+                    <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem; text-align: right;">
+                        <em>N=181 (13 Jan 2026)</em>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Updated Timestamp -->
+            <div
+                style="background: rgba(16, 185, 129, 0.1); border: 1px solid #10b981; border-radius: 8px; padding: 1rem; margin-top: 2rem;">
+                <p style="margin: 0; color: #059669; font-size: 0.9rem;">
+                    ✅ <strong>Data diupdate: 13 Jan 2026, 17:20 WIB</strong> — Berdasarkan output R Studio (N=181)
+                </p>
+            </div>
+        </section>
+
         <!-- RESULTS -->
         <section id="results">
             <h2>📊 Monitoring Data (Live) & Preview Analisis</h2>
@@ -1162,7 +1351,7 @@ boot_model <- <span class="code-function">bootstrap_model</span>(
                     style="text-align: right; margin-top: 0.8rem; border-top: 1px solid rgba(59, 130, 246, 0.2); padding-top: 0.5rem;">
                     <span class="badge"
                         style="background: rgba(59, 130, 246, 0.2); color: #60a5fa; font-size: 0.75rem; font-weight: normal;">
-                        🕒 Terakhir diupdate: 13 Jan 2026, 09:21 WIB (Data N=136)
+                        🕒 Terakhir diupdate: 13 Jan 2026, 17:20 WIB (Data N=181)
                     </span>
                 </div>
             </div>
@@ -1348,16 +1537,17 @@ boot_model <- <span class="code-function">bootstrap_model</span>(
 
     <script>
         // Initialize Mermaid
+        // Initialize Mermaid with Light Theme
         mermaid.initialize({
             startOnLoad: true,
-            theme: 'dark',
+            theme: 'default',
             themeVariables: {
-                primaryColor: '#6366f1',
-                primaryTextColor: '#fff',
-                primaryBorderColor: '#4f46e5',
-                lineColor: '#94a3b8',
-                secondaryColor: '#1e293b',
-                tertiaryColor: '#0f172a'
+                primaryColor: '#e0e7ff',
+                primaryTextColor: '#3730a3',
+                primaryBorderColor: '#6366f1',
+                lineColor: '#64748b',
+                secondaryColor: '#f1f5f9',
+                tertiaryColor: '#ffffff'
             }
         });
 
@@ -1436,22 +1626,22 @@ boot_model <- <span class="code-function">bootstrap_model</span>(
                 avgOI: avgOI.toFixed(2),
                 avgMI: avgMI.toFixed(2),
                 avgUPB: avgUPB.toFixed(2),
-                // Updated Preview Values (Sesuai R Output N=136)
+                // Updated Preview Values (Sesuai R Output N=181)
                 paths: {
-                    TL_OI: 0.479,
-                    TL_UPB: 0.120, // H1 Supported now!
-                    OI_UPB: 0.436,
-                    MI_UPB: 0.028
+                    TL_OI: 0.504,
+                    TL_UPB: 0.164, // H1 Supported (lemah tapi positif)
+                    OI_UPB: 0.415,
+                    MI_UPB: 0.013
                 },
                 r2: {
-                    OI: 0.230,
-                    UPB: 0.268
+                    OI: 0.254,
+                    UPB: 0.275
                 },
                 reliability: {
-                    TL: { cr: 0.983, ave: 0.844 },
-                    OI: { cr: 0.875, ave: 0.588 },
-                    MI: { cr: 0.932, ave: 0.734 },
-                    UPB: { cr: 0.855, ave: 0.498 } // Back to Warning area (0.498 < 0.5), honest data.
+                    TL: { cr: 0.981, ave: 0.824 },
+                    OI: { cr: 0.868, ave: 0.572 },
+                    MI: { cr: 0.923, ave: 0.706 },
+                    UPB: { cr: 0.848, ave: 0.485 } // AVE < 0.5, perlu review
                 }
             };
         }
