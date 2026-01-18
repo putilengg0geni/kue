@@ -639,8 +639,8 @@
                                 </div>
                                 <div className="bg-white p-6 rounded-xl shadow border-l-4 border-purple-500">
                                     <p className="text-sm text-slate-500">Status</p>
-                                    <p className="text-lg font-bold text-slate-900">
-                                        {stats && stats.totalResponses >= 234 ? '✅ Tercapai' : '⏳ Pengumpulan'}
+                                    <p className="text-lg font-bold text-emerald-600">
+                                        ✅ Final (N=239)
                                     </p>
                                 </div>
                             </div>
@@ -856,8 +856,11 @@
                         <h1 className="text-2xl md:text-4xl font-extrabold text-slate-900 mb-6 leading-tight">
                             Pengaruh Transformational Leadership Terhadap Unethical Pro-Organizational Behavior (UPB)
                         </h1>
+                        <div className="mb-6 inline-flex items-center px-4 py-2 rounded-full bg-emerald-100 text-emerald-800 font-bold text-sm border border-emerald-200">
+                            <ShieldCheck size={16} className="mr-2" /> Status: Analisis Final (N=239) - Partial Mediation Supported
+                        </div>
                         <p className="text-lg text-slate-600 mb-8 max-w-3xl">
-                            Studi empiris di lingkungan Kantor Wilayah DJP Sumatera Barat dan Jambi, dengan <strong>Organizational Identification</strong> sebagai variabel mediasi dan <strong>Moral Identity</strong> sebagai variabel moderasi.
+                            Studi empiris di lingkungan Kantor Wilayah DJP Sumatera Barat dan Jambi. Hasil penelitian menunjukkan bahwa <strong>Transformational Leadership</strong> berpengaruh positif terhadap UPB, dimediasi sebagian (Partial Mediation) oleh <strong>Organizational Identification</strong>. Namun, <strong>Moral Identity</strong> tidak terbukti memoderasi hubungan tersebut.
                         </p>
                         <div className="flex flex-wrap gap-4">
                             <button onClick={() => setActiveTab('framework')} className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold shadow hover:bg-blue-700 transition flex items-center">
@@ -979,35 +982,55 @@
                         <HypothesisCard
                             code="H1"
                             text="Transformational leadership berpengaruh positif signifikan terhadap UPB."
+                            result="didukung"
                         />
                         <HypothesisCard
                             code="H2"
                             text="Transformational leadership berpengaruh positif signifikan terhadap Organizational Identification."
+                            result="didukung"
                         />
                         <HypothesisCard
                             code="H3"
                             text="Organizational Identification berpengaruh positif signifikan terhadap UPB."
+                            result="didukung"
                         />
                         <HypothesisCard
                             code="H4"
                             text="Organizational Identification memediasi pengaruh Transformational Leadership terhadap UPB."
+                            result="didukung"
                         />
                         <HypothesisCard
                             code="H5"
                             text="Moral Identity memoderasi (memperlemah) hubungan Organizational Identification terhadap UPB."
-                            highlight
+                            result="ditolak"
                         />
                     </div>
                 </div>
             </div>
         );
 
-        const HypothesisCard = ({ code, text, highlight }) => (
-            <div className={`p-4 rounded-lg border ${highlight ? 'bg-green-50 border-green-200' : 'bg-slate-50 border-slate-200'}`}>
-                <span className={`font-bold text-sm ${highlight ? 'text-green-700' : 'text-blue-900'}`}>{code}</span>
-                <p className="text-sm text-slate-700 mt-1">{text}</p>
-            </div>
-        );
+        const HypothesisCard = ({ code, text, result }) => {
+            let badgeColor = "bg-slate-100 text-slate-500";
+            let badgeText = "";
+
+            if (result === "didukung") {
+                badgeColor = "bg-emerald-100 text-emerald-700 border border-emerald-200";
+                badgeText = "✅ Didukung";
+            } else if (result === "ditolak") {
+                badgeColor = "bg-red-100 text-red-700 border border-red-200";
+                badgeText = "❌ Ditolak";
+            }
+
+            return (
+                <div className={`p-4 rounded-lg border bg-white border-slate-200 shadow-sm`}>
+                    <div className="flex justify-between items-start mb-2">
+                        <span className="font-bold text-sm text-blue-900 bg-blue-50 px-2 py-1 rounded">{code}</span>
+                        {badgeText && <span className={`text-xs font-bold px-2 py-1 rounded-full ${badgeColor}`}>{badgeText}</span>}
+                    </div>
+                    <p className="text-sm text-slate-700">{text}</p>
+                </div>
+            );
+        };
 
         const MethodologySection = () => (
             <div className="space-y-6 animate-fade-in">
@@ -1029,9 +1052,9 @@
                             </div>
                             <div className="h-px bg-slate-100"></div>
                             <div>
-                                <p className="text-sm text-slate-500 font-semibold">Sampel (Krejcie & Morgan)</p>
-                                <p className="text-2xl font-bold text-slate-800">234 <span className="text-base font-normal text-slate-500">Responden</span></p>
-                                <p className="text-xs text-slate-500 mt-1">Teknik: Proportionate Stratified Random Sampling (39.39% per unit).</p>
+                                <p className="text-sm text-slate-500 font-semibold">Sampel Final</p>
+                                <p className="text-2xl font-bold text-slate-800">239 <span className="text-base font-normal text-slate-500">Responden</span></p>
+                                <p className="text-xs text-slate-500 mt-1">Realisasi: 102% dari target (234). Teknik: Proportionate Stratified Random Sampling.</p>
                             </div>
                         </div>
                     </div>
@@ -1214,8 +1237,8 @@
                     <h4 className="font-bold text-slate-800 mb-2">Penjelasan Hubungan (Hipotesis)</h4>
                     <p className="text-sm text-slate-600">
                         Simulasi ini memvisualisasikan bagaimana 3 variabel input mempengaruhi variabel ke-4 (Output).
-                        Meningkatnya <strong>Transformational Leadership (Var 1)</strong> dan <strong>Organizational Identification (Var 2)</strong> cenderung menaikkan risiko UPB.
-                        Namun, <strong>Moral Identity (Var 3)</strong> berfungsi sebagai "rem" atau moderator yang dapat memperlemah pengaruh negatif tersebut.
+                        Meningkatnya <strong>Transformational Leadership (Var 1)</strong> dan <strong>Organizational Identification (Var 2)</strong> secara signifikan <strong>menaikkan risiko UPB</strong> (Partial Mediation).
+                        Namun, berdasarkan hasil akhir, <strong>Moral Identity (Var 3) TIDAK TERBUKTI</strong> berfungsi sebagai moderator yang signifikan untuk memperlemah pengaruh tersebut dalam studi ini.
                     </p>
                 </div>
             </div>
