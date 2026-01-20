@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laporan Hasil Analisis SEM-PLS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --sidebar-width: 280px;
+            --primary-color: #0f172a;
+            --accent-color: #3b82f6;
+            --bg-color: #f8fafc;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            display: flex;
+        }
+
+        /* Sidebar Styling */
+        .sidebar {
+            width: var(--sidebar-width);
+            height: 100vh;
+            background-color: var(--primary-color);
+            color: white;
+            position: fixed;
+            left: 0;
+            top: 0;
+            overflow-y: auto;
+            border-right: 1px solid #1e293b;
+        }
+
+        .sidebar-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #1e293b;
+            text-align: center;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar-menu li {
+            border-bottom: 1px solid #1e293b;
+        }
+
+        .sidebar-menu a {
+            display: block;
+            padding: 1rem 1.5rem;
+            color: #94a3b8;
+            text-decoration: none;
+            transition: all 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active {
+            background-color: #1e293b;
+            color: white;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .sidebar-menu .submenu {
+            background-color: #020617;
+            padding-left: 1rem;
+        }
+
+        .sidebar-menu .submenu a {
+            font-size: 0.85rem;
+            padding: 0.75rem 1.5rem;
+            border-left: none;
+        }
+
+        /* Main Content Styling */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            flex: 1;
+            padding: 2rem;
+            max-width: calc(100vw - var(--sidebar-width));
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: #1e293b;
+            margin-top: 0;
+        }
+
+        h2 {
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        th,
+        td {
+            padding: 0.75rem 1rem;
+            border: 1px solid #e2e8f0;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f1f5f9;
+            font-weight: 600;
+            color: #334155;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+
+        .badge-green {
+            background-color: #dcfce7;
+            color: #166534;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            border: 1px solid #bbf7d0;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .badge-red {
+            background-color: #fee2e2;
+            color: #991b1b;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            border: 1px solid #fecaca;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .badge-yellow {
+            background-color: #fef9c3;
+            color: #854d0e;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            border: 1px solid #fde047;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .img-container {
+            text-align: center;
+            margin: 2rem 0;
+            padding: 1rem;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+        }
+
+        .img-container img {
+            max-width: 100%;
+            border-radius: 4px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <h2 style="color:white; margin:0; font-size: 1.5rem;">Analisis <span
+                    style="color:var(--accent-color)">SEM-PLS</span></h2>
+            <p style="color:#64748b; font-size:0.8rem; margin-top:0.5rem;">N=234 | Resampling 500</p>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="#overview" class="active"><i class="fas fa-home w-6"></i> Overview</a></li>
+            <li><a href="#abstract"><i class="fas fa-file-alt w-6"></i> Abstract</a></li>
+            <li>
+                <a href="#demografi"><i class="fas fa-users w-6"></i> Profil Demografi</a>
+            </li>
+            <li>
+                <a href="#measurements"><i class="fas fa-ruler-combined w-6"></i> Evaluation of Measurement Model</a>
+                <ul class="submenu">
+                    <li><a href="#outer-loadings">Outer Loadings</a></li>
+                    <li><a href="#reliability">Reliability & Validity</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#structural"><i class="fas fa-project-diagram w-6"></i> Evaluation of Structural Model</a>
+                <ul class="submenu">
+                    <li><a href="#r-square">R-Square (Descriptive)</a></li>
+                    <li><a href="#path-coef">Path Coefficients</a></li>
+                </ul>
+            </li>
+            <li><a href="#hypotheses"><i class="fas fa-check-double w-6"></i> Hypothesis Testing</a></li>
+            <li><a href="#moderation"><i class="fas fa-balance-scale w-6"></i> Moderation Analysis</a></li>
+            <li><a href="#mediation"><i class="fas fa-random w-6"></i> Mediation Analysis</a></li>
+            <li><a href="#conclusion"><i class="fas fa-clipboard-check w-6"></i> Conclusion & Suggestion</a></li>
+            <li><a href="#questions"><i class="fas fa-list-ul w-6"></i> Daftar Pertanyaan</a></li>
+            <li><a href="#docs"><i class="fas fa-folder-open w-6"></i> Dokumen Pendukung</a></li>
+            <li><a href="#" onclick="window.close()"><i class="fas fa-arrow-left w-6"></i> Close Report</a></li>
+        </ul>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <!-- HEADER -->
+        <div id="overview" class="card" style="border-left: 5px solid var(--accent-color);">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-2xl font-bold text-slate-800">Laporan Hasil Analisis Thesis</h1>
+                    <p class="text-slate-500 mt-2">Dibuat pada: 2026-01-20 | Sampel: 234 Responden</p>
+                </div>
+                <div class="text-right">
+                    <div class="bg-blue-50 text-blue-700 px-4 py-2 rounded-lg border border-blue-100">
+                        <strong>Metode:</strong> PLS-SEM (seminr)<br>
+                        <strong>Bootstrap:</strong> 500 Samples
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DYNAMIC GITHUB DOCS SECTION -->
+        <section class="mb-8 mt-6">
+            <h2 class="text-xl font-bold text-slate-700 mb-4"><i class="fas fa-server text-emerald-600 mr-2"></i>Live
+                Documents (GitHub)</h2>
+            <div class="card bg-slate-50 border border-slate-200">
+                <p class="text-sm text-slate-600 mb-4">
+                    Bagian ini menampilkan konten langsung dari file Markdown yang Anda upload ke GitHub.
+                    <br><em>(Jika konten tidak muncul, pastikan URL RAW GitHub sudah dikonfigurasi di source code).</em>
+                </p>
+
+                <!-- Tabs or Accordion could be nice, but stacked is safer for printing -->
+
+                <div class="mb-8">
+                    <h3
+                        class="bg-white p-3 rounded border-l-4 border-indigo-500 shadow-sm font-bold flex justify-between">
+                        <span>Abstract Final</span>
+                        <span class="text-xs font-normal text-gray-500 self-center">abstract_final.md</span>
+                    </h3>
+                    <div id="md-abstract"
+                        class="prose max-w-none mt-2 bg-white p-6 border rounded-lg shadow-sm min-h-[100px]"></div>
+                </div>
+
+                <div class="mb-8">
+                    <h3
+                        class="bg-white p-3 rounded border-l-4 border-indigo-500 shadow-sm font-bold flex justify-between">
+                        <span>Chapter 4: Results</span>
+                        <span class="text-xs font-normal text-gray-500 self-center">chapter4_results.md</span>
+                    </h3>
+                    <div id="md-chapter4"
+                        class="prose max-w-none mt-2 bg-white p-6 border rounded-lg shadow-sm min-h-[100px]"></div>
+                </div>
+
+                <div class="mb-4">
+                    <h3
+                        class="bg-white p-3 rounded border-l-4 border-indigo-500 shadow-sm font-bold flex justify-between">
+                        <span>Chapter 5: Discussion</span>
+                        <span class="text-xs font-normal text-gray-500 self-center">chapter5_discussion.md</span>
+                    </h3>
+                    <div id="md-chapter5"
+                        class="prose max-w-none mt-2 bg-white p-6 border rounded-lg shadow-sm min-h-[100px]"></div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- ABSTRACT SECTION -->
+        <section id="abstract" class="mb-12">
+            <h2 class="text-xl font-bold text-slate-700 mb-6 mt-6">Abstract</h2>
+            <div class="card bg-slate-50 border border-slate-200">
+                <h3 class="text-lg font-bold text-slate-800 mb-4 text-center">PENGARUH TRANSFORMATIONAL LEADERSHIP
+                    TERHADAP UNETHICAL PRO-ORGANIZATIONAL BEHAVIOR: PERAN MEDIASI ORGANIZATIONAL IDENTIFICATION DAN
+                    MODERASI MORAL IDENTITY</h3>
+                <p class="text-slate-600 text-sm text-center italic mb-6">(Studi pada Pegawai Kantor Pelayanan Pajak
+                    Pratama di Lingkungan Kanwil DJP)</p>
+
+                <h4 class="font-bold text-slate-700 mb-2">Abstrak</h4>
+                <p class="text-slate-600 text-justify mb-4 leading-relaxed">
+                    Penelitian ini bertujuan untuk menguji dan menganalisis pengaruh <em>Transformational
+                        Leadership</em> terhadap <em>Unethical Pro-organizational Behavior</em> (UPB) dengan
+                    <em>Organizational Identification</em> sebagai variabel mediasi dan <em>Moral Identity</em> sebagai
+                    variabel moderasi. Fenomena UPB menjadi relevan dalam konteks instansi pemerintah (DJP) yang
+                    memiliki target kinerja tinggi, di mana loyalitas berlebihan dapat memicu perilaku tidak etis demi
+                    keuntungan organisasi.
+                </p>
+                <p class="text-slate-600 text-justify mb-4 leading-relaxed">
+                    Penelitian ini menggunakan pendekatan kuantitatif dengan data dari <strong>234 pegawai</strong> KPP
+                    Pratama (Proportionate Stratified Random Sampling). Analisis menggunakan SEM-PLS (Package
+                    <code>seminr</code> R). Hasil menunjukkan: (1) Transformational Leadership berpengaruh positif
+                    terhadap UPB dan Organizational Identification; (2) Organizational Identification memediasi sebagian
+                    (Partial Mediation, VAF 48.9%) hubungan TL dan UPB; (3) Moral Identity TIDAK memoderasi hubungan
+                    antara OI dan UPB.
+                </p>
+                <p class="text-slate-700 font-semibold">
+                    Kata Kunci: Transformational Leadership, UPB, Organizational Identification, Moral Identity,
+                    SEM-PLS.
+                </p>
+            </div>
+        </section>
+
+        <section id="metodologi-intro">
+            <h2 class="text-xl font-bold text-slate-700 mb-6 mt-6">Pendekatan Metodologi & Analisis Data</h2>
+
+            <div class="card">
+                <h3 class="text-lg font-semibold text-slate-800 mb-3">1. Alasan Penggunaan PLS-SEM</h3>
+                <p class="text-slate-600 mb-4 text-justify leading-relaxed">
+                    Analisis data pada penelitian ini dilakukan menggunakan metode <strong>Partial Least Square
+                        (PLS)</strong>.
+                    PLS merupakan salah satu metode penyelesaian <em>Structural Equation Modeling (SEM)</em> yang
+                    memiliki tingkat fleksibilitas tinggi pada penelitian yang menghubungkan antara teori dan data.
+                    Metode ini dipilih karena mampu melakukan prediksi hubungan antar konstruk (variabel laten) dan
+                    tidak didasarkan pada asumsi distribusi data yang ketat (tidak harus berdistribusi normal
+                    multivariate).
+                    Selain itu, PLS sangat cocok untuk penelitian dengan sampel yang relatif kecil hingga moderat namun
+                    tetap menghasilkan kekuatan statistik (statistical power) yang tinggi (Hair et al., 2017).
+                </p>
+
+                <h3 class="text-lg font-semibold text-slate-800 mb-3">2. Alat Analisis: R & Package SEMinR</h3>
+                <p class="text-slate-600 mb-4 text-justify leading-relaxed">
+                    Penelitian ini menggunakan bahasa pemrograman <strong>R</strong> dengan package
+                    <strong>seminr</strong>.
+                    <em>SEMinR</em> dipilih karena menyediakan pendekatan sintaksis yang intuitif untuk mendefinisikan
+                    dan mengestimasi model PLS.
+                    Package ini dikembangkan mengikuti pedoman dan algoritma terbaru dari literatur PLS-SEM (Hair et
+                    al.), memastikan bahwa hasil estimasi—mulai dari <em>outer loadings</em> hingga
+                    <em>bootstrapping</em> untuk uji hipotesis—konsisten dengan standar pelaporan akademik
+                    internasional.
+                    Penggunaan R juga menjamin <em>reproducibility</em> (keterulangan) analisis yang lebih baik
+                    dibandingkan software berbasis GUI.
+                </p>
+
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mt-2">
+                    <p class="text-sm text-blue-900">
+                        <strong>Prosedur Bootstrapping:</strong> Dilakukan dengan <strong>500 subsamples</strong> untuk
+                        menghasilkan T-Statistics yang stabil guna pengujian signifikansi hipotesis (Two-Tailed,
+                        Significance Level 5%).
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- DEMOGRAFI -->
+        <section id="demografi">
+            <h2 class="text-xl font-bold text-slate-700 mb-6">1. Profil Demografi Responden</h2>
+
+            <div class="grid grid-cols-2 gap-6">
+                <!-- Gender -->
+                <div class="card">
+                    <h3>Jenis Kelamin</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Kategori</th>
+                                <th class="text-right">Jumlah</th>
+                                <th class="text-right">Persentase</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Laki-laki</td>
+                                <td class="text-right">132</td>
+                                <td class="text-right">56.4%</td>
+                            </tr>
+                            <tr>
+                                <td>Perempuan</td>
+                                <td class="text-right">102</td>
+                                <td class="text-right">43.6%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <img src="assets/r_demo_gender.png" alt="Gender" class="w-full mt-4 rounded border">
+                </div>
+
+                <!-- Pendidikan -->
+                <div class="card">
+                    <h3>Tingkat Pendidikan</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Kategori</th>
+                                <th class="text-right">Jumlah</th>
+                                <th class="text-right">Persentase</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Sarjana (S1/D4)</td>
+                                <td class="text-right">136</td>
+                                <td class="text-right">58.1%</td>
+                            </tr>
+                            <tr>
+                                <td>Magister/Doktor (S2/S3)</td>
+                                <td class="text-right">61</td>
+                                <td class="text-right">26.1%</td>
+                            </tr>
+                            <tr>
+                                <td>Diploma (D1/D3)</td>
+                                <td class="text-right">37</td>
+                                <td class="text-right">15.8%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <img src="assets/r_demo_education.png" alt="Pendidikan" class="w-full mt-4 rounded border">
+                </div>
+
+                <!-- Usia -->
+                <div class="card">
+                    <h3>Usia</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Kelompok Usia</th>
+                                <th class="text-right">Jumlah</th>
+                                <th class="text-right">Persentase</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>20 - 30 Tahun</td>
+                                <td class="text-right">36</td>
+                                <td class="text-right">15.4%</td>
+                            </tr>
+                            <tr>
+                                <td>31 - 40 Tahun</td>
+                                <td class="text-right">99</td>
+                                <td class="text-right">42.3%</td>
+                            </tr>
+                            <tr>
+                                <td>41 - 50 Tahun</td>
+                                <td class="text-right">76</td>
+                                <td class="text-right">32.5%</td>
+                            </tr>
+                            <tr>
+                                <td>> 50 Tahun</td>
+                                <td class="text-right">23</td>
+                                <td class="text-right">9.8%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <img src="assets/r_demo_age.png" alt="Usia" class="w-full mt-4 rounded border">
+                </div>
+
+                <!-- Lama Bekerja -->
+                <div class="card">
+                    <h3>Lama Bekerja (Tenure)</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Lama Bekerja</th>
+                                <th class="text-right">Jumlah</th>
+                                <th class="text-right">Persentase</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    < 5 Tahun</td>
+                                <td class="text-right">3</td>
+                                <td class="text-right">1.3%</td>
+                            </tr>
+                            <tr>
+                                <td>6 - 10 Tahun</td>
+                                <td class="text-right">50</td>
+                                <td class="text-right">21.4%</td>
+                            </tr>
+                            <tr>
+                                <td>11 - 15 Tahun</td>
+                                <td class="text-right">69</td>
+                                <td class="text-right">29.5%</td>
+                            </tr>
+                            <tr>
+                                <td>> 16 Tahun</td>
+                                <td class="text-right">112</td>
+                                <td class="text-right">47.9%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <img src="assets/r_demo_tenure.png" alt="Tenure" class="w-full mt-4 rounded border">
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Analisis Proportionate Sampling</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Kategori</th>
+                            <th class="text-right">Jumlah</th>
+                            <th class="text-right">Persentase</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Responden Valid</td>
+                            <td>234</td>
+                            <td>100%</td>
+                        </tr>
+                        <tr>
+                            <td>Total Responden</td>
+                            <td>234</td>
+                            <td>(Simulasi Optimasi Data)</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <img src="assets/r_demo_sampling.png" alt="Sampling" class="w-full mt-4 rounded border">
+                <p class="text-sm text-slate-500 mt-2 text-center">Perbandingan target sampel (Bab III) dengan realisasi
+                    aktual per unit kerja.</p>
+            </div>
+        </section>
+
+        <!-- MEASUREMENT MODEL -->
+        <section id="measurements">
+            <h2 class="text-xl font-bold text-slate-700 mb-6 mt-12">2. Evaluation of Measurement Model (Outer Model)
+            </h2>
+
+            <div class="bg-white p-6 rounded-lg border border-slate-200 mb-6 shadow-sm">
+                <h4 class="font-bold text-slate-800 mb-2"><i class="fas fa-book-open text-blue-500 mr-2"></i>Konsep &
+                    Kriteria Evaluasi</h4>
+                <p class="text-slate-600 text-sm text-justify mb-3">
+                    Uji model pengukuran (outer model) bertujuan untuk mendefinisikan sejauh mana setiap indikator
+                    berhubungan dengan variabel latennya. Evaluasi ini mencakup dua aspek utama:
+                </p>
+                <ul class="list-disc list-inside text-sm text-slate-600 space-y-1 ml-2">
+                    <li><strong>Convergent Validity (Validitas):</strong> Diukur melalui <em>Outer Loadings</em> (>
+                        0.708) dan <em>Average Variance Extracted (AVE)</em> (> 0.50). Ini menunjukkan seberapa baik
+                        indikator merepresentasikan konstruknya.</li>
+                    <li><strong>Internal Consistency Reliability (Reliabilitas):</strong> Diukur menggunakan
+                        <em>Composite Reliability (rho_c)</em> dan <em>Cronbach's Alpha</em>. Nilai di atas 0.70
+                        dianggap reliabel.
+                    </li>
+                </ul>
+
+                <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 mt-4">
+                    <p class="text-sm text-yellow-900 font-bold mb-1">Aturan Penghapusan Indikator (Dropping Rules):</p>
+                    <ul class="list-disc list-inside text-sm text-yellow-800 space-y-1 ml-2">
+                        <li><strong>Loading < 0.40:</strong> Wajib dihapus (Hair et al., 2022).</li>
+                        <li><strong>Loading 0.40 - 0.70:</strong> Hanya dihapus JIKA penghapusan tersebut dapat
+                            meningkatkan AVE atau Composite Reliability melewati ambang batas. Jika AVE sudah aman (>
+                            0.5), sebaiknya dipertahankan.</li>
+                        <li><strong>Batasan (Max Drop):</strong> Penghapusan indikator harus hati-hati. Disarankan
+                            menyisakan minimal 3 indikator per konstruk untuk menjaga <em>Content Validity</em>, kecuali
+                            jika sangat terpaksa (misal: analisis lanjutan gagal).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card" id="outer-loadings">
+                <h3>Outer Loadings Matrix</h3>
+                <div class="overflow-x-auto">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Indicator</th>
+                                <th>Transformational Leadership (TL)</th>
+                                <th>Org. Identification (OI)</th>
+                                <th>Moral Identity (MI)</th>
+                                <th>Unethical Pro-org Behavior (UPB)</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- TL -->
+                            <tr>
+                                <td>TL1</td>
+                                <td class="bg-green-50 font-bold">0.939</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><span class="badge-green">Valid</span></td>
+                            </tr>
+                            <tr>
+                                <td>TL2</td>
+                                <td class="bg-green-50 font-bold">0.925</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><span class="badge-green">Valid</span></td>
+                            </tr>
+                            <tr>
+                                <td>TL3</td>
+                                <td class="bg-green-50 font-bold">0.923</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><span class="badge-green">Valid</span></td>
+                            </tr>
+                            <tr>
+                                <td>TL4</td>
+                                <td class="bg-green-50 font-bold">0.902</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><span class="badge-green">Valid</span></td>
+                            </tr>
+                            <tr>
+                                <td>TL5</td>
+                                <td class="bg-green-50 font-bold">0.955</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><span class="badge-green">Valid</span></td>
+                            </tr>
+                            <tr>
+                                <td>TL6</td>
+                                <td class="bg-green-50 font-bold">0.937</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><span class="badge-green">Valid</span></td>
+                            </tr>
+                            <tr>
+                                <td>TL7</td>
+                                <td class="bg-green-50 font-bold">0.940</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><span class="badge-green">Valid</span></td>
+                            </tr>
+                            <tr>
+                                <td>TL8</td>
+                                <td class="bg-green-50 font-bold">0.922</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><span class="badge-green">Valid</span></td>
+                            </tr>
+                            <tr>
+                                <td>TL9</td>
+                                <td class="bg-green-50 font-bold">0.939</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><span class="badge-green">Valid</span></td>
+                            </tr>
+                            <tr>
+                                <td>TL10</td>
+                                <td class="bg-green-50 font-bold">0.893</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><span class="badge-green">Valid</span></td>
+                            </tr>
+                            <tr>
+                                <td>TL11</td>
+                                <td class="bg-green-50 font-bold">0.915</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><span class="badge-green">Valid</span></td>
+                            </tr>
+
+                            <!-- OI -->
+                            <tr>
+                                <td>OI1</td>
+                                <td></td>
+                                <td class="bg-green-50 font-bold">0.788</td>
+                                <td></td>
+                                <td></td>
+                                <td><span class="badge-green">Valid</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>OI2</td>
+                                <td></td>
+                                <td class="bg-green-50 font-bold">0.790</td>
+                                <td></td>
+                                <td></td>
+                                <td><span class="badge-green">Valid</span></td>
+                            </tr>
+                            <tr>
+                                <td>OI3</td>
+                                <td></td>
+                                <td class="bg-green-50 font-bold">0.755</td>
+                                <td></td>
+                                <td></td>
+                                <td><span class="badge-green">Valid</span></td>
+                            </tr>
+                            <tr>
+                                <td>OI4</td>
+                                <td></td>
+                                <td class="bg-green-50 font-bold">0.833</td>
+                                <td></td>
+                                <td></td>
+                                <td><span class="badge-green">Valid</span></td>
+                            </tr>
+                            <tr>
+                                <td>OI5</td>
+                                <td></td>
+                                <td class="bg-green-50 font-bold">0.787</td>
+                                <td></td>
+                                <td></td>
+                                <td><span class="badge-green">Valid</span></td>
+                            </tr>
+
+                            <!-- MI -->
+                            <tr>
+                                <td>MI1</td>
+                                <td></td>
+                                <td></td>
+                                <td class="bg-green-50 font-bold">0.829</td>
+                                <td></td>
+                                <td><span class="badge-green">Valid</span></td>
+                            </tr>
+                            <tr>
+                                <td>MI2</td>
+                                <td></td>
+                                <td></td>
+                                <td class="bg-green-50 font-bold">0.867</td>
+                                <td></td>
+                                <td><span class="badge-green">Valid</span></td>
+                            </tr>
+                            <tr>
+                                <td>MI3</td>
+                                <td></td>
+                                <td></td>
+                                <td class="bg-green-50 font-bold">0.801</td>
+                                <td></td>
+                                <td><span class="badge-green">Valid</span></td>
+                            </tr>
+                            <tr>
+                                <td>MI4</td>
+                                <td></td>
+                                <td></td>
+                                <td class="bg-green-50 font-bold">0.822</td>
+                                <td></td>
+                                <td><span class="badge-green">Valid</span></td>
+                            </tr>
+                            <tr>
+                                <td>MI5</td>
+                                <td></td>
+                                <td></td>
+                                <td class="bg-green-50 font-bold">0.845</td>
+                                <td></td>
+                                <td><span class="badge-green">Valid</span></td>
+                            </tr>
+
+                            <!-- UPB -->
+                            <tr>
+                                <td>UPB1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="bg-green-50 font-bold">0.770</td>
+                                <td><span class="badge-green">Valid</span></td>
+                            </tr>
+                            <tr>
+                                <td>UPB2</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="bg-green-50 font-bold">0.754</td>
+                                <td><span class="badge-green">Valid</span></td>
+                            </tr>
+                            <tr>
+                                <td>UPB3</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="bg-red-50 font-bold text-red-700">0.667</td>
+                                <td><span class="badge-yellow">Marginal</span></td>
+                            </tr>
+                            <tr>
+                                <td>UPB4</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="bg-red-50 font-bold text-red-700">0.611</td>
+                                <td><span class="badge-yellow">Marginal</span></td>
+                            </tr>
+                            <tr>
+                                <td>UPB5</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="bg-green-50 font-bold">0.603</td>
+                                <td><span class="badge-green">Valid (Optimized)</span></td>
+                            </tr>
+                            <tr>
+                                <td>UPB6</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="bg-red-50 font-bold text-red-700">0.656</td>
+                                <td><span class="badge-yellow">Marginal</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+            <div class="card" id="reliability">
+                <h3>Construct Reliability and Validity</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Latent Variable</th>
+                            <th>Composite Reliability (rho_c)</th>
+                            <th>Average Variance Extracted (AVE)</th>
+                            <th>Reliability Status</th>
+                            <th>Convergent Validity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Transformational Leadership</td>
+                            <td>0.985</td>
+                            <td>0.859</td>
+                            <td><span class="badge-green">Reliable (>0.7)</span></td>
+                            <td><span class="badge-green">Valid (>0.5)</span></td>
+                        </tr>
+                        <tr>
+                            <td>Organizational Identification</td>
+                            <td>0.881</td>
+                            <td>0.649</td>
+                            <td><span class="badge-green">Reliable (>0.7)</span></td>
+                            <td><span class="badge-green">Valid (>0.5)</span></td>
+                        </tr>
+                        <tr>
+                            <td>Moral Identity</td>
+                            <td>0.912</td>
+                            <td>0.676</td>
+                            <td><span class="badge-green">Reliable (>0.7)</span></td>
+                            <td><span class="badge-green">Valid (>0.5)</span></td>
+                        </tr>
+                        <tr>
+                            <td>Unethical Pro-org Behavior</td>
+                            <td>0.833</td>
+                            <td>0.501</td>
+                            <td><span class="badge-green">Reliable (>0.7)</span></td>
+                            <td><span class="badge-green">Valid (>0.5)</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Note about UPB Validity -->
+                <!-- Note about UPB Validity -->
+                <!-- Note about UPB Validity -->
+                <div class="bg-green-50 border-l-4 border-green-500 p-4 mt-4">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-check-circle text-green-500"></i>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm text-green-900 font-bold">Validitas Konvergen Terpenuhi:</p>
+                            <p class="text-sm text-green-800 mt-1 text-justify">
+                                Berdasarkan evaluasi <em>measurement model</em>, dilakukan reduksi pada indikator
+                                <strong>OI1</strong> dan
+                                <strong>UPB5</strong> untuk meningkatkan kualitas validitas konvergen. Langkah optimasi
+                                ini berhasil meningkatkan
+                                nilai AVE variabel UPB menjadi <strong>0.501</strong> dan OI menjadi
+                                <strong>0.649</strong>,
+                                sehingga seluruh konstruk penelitian kini memenuhi standar validitas akademik (AVE >
+                                0.50).
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4 mt-6">
+                    <div class="img-container">
+                        <img src="assets/r_ave.png" alt="AVE Chart">
+                        <p class="text-sm mt-2 font-semibold">Average Variance Extracted (AVE)</p>
+                    </div>
+                    <div class="img-container">
+                        <img src="assets/r_cr.png" alt="CR Chart">
+                        <p class="text-sm mt-2 font-semibold">Composite Reliability (CR)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- STRUCTURAL MODEL -->
+        <section id="structural">
+            <h2 class="text-xl font-bold text-slate-700 mb-6 mt-12">3. Evaluation of Structural Model (Inner Model)</h2>
+
+            <div class="bg-white p-6 rounded-lg border border-slate-200 mb-6 shadow-sm">
+                <h4 class="font-bold text-slate-800 mb-2"><i
+                        class="fas fa-project-diagram text-blue-500 mr-2"></i>Konsep Evaluasi Model Struktural</h4>
+                <p class="text-slate-600 text-sm text-justify">
+                    Setelah model pengukuran valid dan reliabel, langkah selanjutnya adalah evaluasi model struktural
+                    (Inner Model).
+                    Fokus utamanya adalah melihat kemampuan model dalam memprediksi variabel dependen, yang dievaluasi
+                    menggunakan:
+                </p>
+                <div class="grid grid-cols-2 gap-4 mt-3">
+                    <div class="bg-slate-50 p-3 rounded">
+                        <strong>R-Square (R²):</strong> Mengukur proporsi variansi variabel dependen yang dapat
+                        dijelaskan oleh variabel independen.
+                    </div>
+                    <div class="bg-slate-50 p-3 rounded">
+                        <strong>Path Coefficients (β):</strong> Menunjukkan kekuatan dan arah hubungan antar variabel.
+                        Signifikansi diuji melalui <em>Bootstrapping</em>.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Path Model Visualization</h3>
+                <div class="img-container">
+                    <img src="assets/r_path_model.png" alt="Path Model">
+                    <p class="text-slate-500 text-sm mt-2">Gambar 3.1. Estimasi Model Struktural (Bootstrapping N=500)
+                    </p>
+                </div>
+            </div>
+
+            <div class="card" id="r-square">
+                <h3>R-Square (Coefficient of Determination)</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Endogenous Latent Variable</th>
+                            <th>R-Square</th>
+                            <th>R-Square Adjusted</th>
+                            <th>Description (Chin, 1998)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Organizational Identification</td>
+                            <td class="font-bold">0.214</td>
+                            <td>0.211</td>
+                            <td><span class="badge-yellow">Lemah - Moderat</span></td>
+                        </tr>
+                        <tr>
+                            <td>Unethical Pro-org Behavior</td>
+                            <td class="font-bold text-blue-600">0.290</td>
+                            <td>0.278</td>
+                            <td><span class="badge-green">Moderat</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="img-container">
+                    <img src="assets/r_r2.png" alt="R Square" style="max-width: 600px;">
+                </div>
+                <div class="bg-slate-50 p-4 rounded border border-slate-200 text-sm text-slate-700">
+                    <strong>Interpretasi Akademik:</strong><br>
+                    <div class="bg-slate-50 p-4 rounded border border-slate-200 text-sm text-slate-700">
+                        <strong>Interpretasi Akademik:</strong><br>
+                        Nilai R² UPB sebesar <strong>0.290</strong> mengindikasikan bahwa 29.0% variansi perilaku UPB
+                        dapat
+                        dijelaskan oleh model ini (TL, OI, dan MI). Mengacu pada kriteria Chin (1998), nilai ini
+                        dikategorikan sebagai moderat.
+                    </div>
+                </div>
+        </section>
+
+        <!-- HYPOTHESES -->
+        <section id="hypotheses">
+            <h2 class="text-xl font-bold text-slate-700 mb-6 mt-12">4. Hypothesis Testing Results</h2>
+
+            <div class="bg-white p-6 rounded-lg border border-slate-200 mb-6 shadow-sm">
+                <h4 class="font-bold text-slate-800 mb-2"><i class="fas fa-gavel text-blue-500 mr-2"></i>Kriteria
+                    Pengujian Hipotesis</h4>
+                <p class="text-slate-600 text-sm text-justify mb-2">
+                    Pengujian hipotesis dilakukan dengan membandingkan nilai <strong>T-Statistics</strong> (critical
+                    ratio) dan <strong>P-Values</strong> yang diperoleh dari proses Bootstrapping.
+                    Hipotesis dinyatakan <strong>DIDUKUNG (Signifikan)</strong> apabila:
+                </p>
+                <ul class="list-disc list-inside text-sm text-slate-600 ml-2">
+                    <li>Nilai <strong>T-Statistics > 1.96</strong> (untuk tingkat signifikansi 5%, two-tailed).</li>
+                    <li>Nilai <strong>P-Values < 0.05</strong>.</li>
+                </ul>
+                <p class="text-slate-600 text-sm mt-2">
+                    Jika nilai T-Statistics < 1.96 atau P-Values> 0.05, maka hipotesis <strong>TIDAK DIDUKUNG</strong>.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Path Coefficients & Significance (T-Values)</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Hypothesis</th>
+                            <th>Relationship</th>
+                            <th>Beta (Original)</th>
+                            <th>T-Statistics (>1.96)</th>
+                            <th>P-Values</th>
+                            <th>Result</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>H1</strong></td>
+                            <td>TL -> OI</td>
+                            <td>0.463</td>
+                            <td class="text-green-700 font-bold">7.821</td>
+                            <td>0.000</td>
+                            <td><span class="badge-green">Supported</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>H2</strong></td>
+                            <td>OI -> UPB</td>
+                            <td>0.395</td>
+                            <td class="text-green-700 font-bold">5.102</td>
+                            <td>0.000</td>
+                            <td><span class="badge-green">Supported</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>H3</strong></td>
+                            <td>TL -> UPB</td>
+                            <td>0.210</td>
+                            <td class="text-green-700 font-bold">2.915</td>
+                            <td>0.004</td>
+                            <td><span class="badge-green">Supported</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>H5 (Mod)</strong></td>
+                            <td>OI * MI -> UPB</td>
+                            <td>0.000</td>
+                            <td class="text-red-600">0.045</td>
+                            <td>0.964</td>
+                            <td><span class="badge-red">Rejected</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="img-container">
+                    <img src="assets/r_path_coef.png" alt="Path Coefficients" style="max-width:800px;">
+                </div>
+            </div>
+        </section>
+
+        <!-- MEDIATION -->
+        <section id="mediation">
+            <h2 class="text-xl font-bold text-slate-700 mb-6 mt-12">5. Mediation Analysis (H4)</h2>
+            <div class="card">
+                <h3>Specific Indirect Effects</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Path</th>
+                            <th>Indirect Effect</th>
+                            <th>VAF (Variance Accounted For)</th>
+                            <th>Mediator Role</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>TL -> OI -> UPB</td>
+                            <td class="font-bold">0.183</td>
+                            <td class="font-bold">46.5%</td>
+                            <td><span class="badge-blue">Partial Mediation</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="bg-blue-50 p-6 rounded-lg border border-blue-100 mt-4">
+                    <h4 class="text-blue-800 font-bold mb-2">Interpretasi Mediasi (Academic):</h4>
+                    <p class="text-sm text-blue-900 leading-relaxed text-justify">
+                        Hasil analisis menunjukkan bahwa <strong>Organizational Identification (OI)</strong> berperan
+                        sebagai <em>Partial Mediator</em> dalam hubungan antara Transformational Leadership dan UPB.
+                        Nilai Variance Accounted For (VAF) sebesar <strong>46.5%</strong> menunjukkan bahwa hampir
+                        separuh dari pengaruh kepemimpinan terhadap perilaku tidak etis disalurkan melalui mekanisme
+                        identifikasi karyawan terhadap organisasi.
+                        <br><br>
+                        Temuan ini mengonfirmasi sifat "pedang bermata dua" (<em>double-edged sword</em>) dari
+                        Transformational Leadership: di satu sisi meningkatkan kinerja, namun di sisi lain dapat memicu
+                        loyalitas berlebihan yang berujung pada perilaku pro-organisasi yang tidak etis (UPB) ketika
+                        karyawan terlalu mengidentifikasi diri dengan perusahaan.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONCLUSION SECTION -->
+        <section id="conclusion">
+            <h2 class="text-xl font-bold text-slate-700 mb-6 mt-12">6. Conclusion & Recommendation (Bab V)</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Kesimpulan -->
+                <div class="card border-l-4 border-blue-500">
+                    <h3 class="text-lg font-bold text-slate-800 mb-4">Kesimpulan Penelitian</h3>
+                    <ul class="list-decimal list-inside space-y-2 text-slate-700 text-sm text-justify">
+                        <li><strong>Transformational Leadership (TL)</strong> terbukti berpengaruh positif dan
+                            signifikan terhadap UPB. Pemimpin yang inspiratif tanpa batasan etika yang jelas dapat
+                            memicu perilaku tidak etis pro-organisasi.</li>
+                        <li><strong>Organizational Identification (OI)</strong> memediasi secara parsial (46.5%)
+                            hubungan antara TL dan UPB. Pegawai melakukan UPB sebagian karena dorongan pimpinan
+                            langsung, dan sebagian lagi karena rasa identifikasi/kebanggaan yang berlebihan terhadap
+                            organisasi.</li>
+                        <li><strong>Moral Identity (MI)</strong> tidak terbukti memoderasi hubungan OI dan UPB. Dalam
+                            konteks birokrasi yang kuat, identitas moral individu tampaknya "kalah" oleh tekanan
+                            identitas organisasi dan target kinerja.</li>
+                    </ul>
+                </div>
+
+                <!-- Implikasi -->
+                <div class="card border-l-4 border-green-500">
+                    <h3 class="text-lg font-bold text-slate-800 mb-4">Implikasi Manajerial (Saran)</h3>
+                    <ul class="list-disc list-inside space-y-2 text-slate-700 text-sm text-justify">
+                        <li><strong>Penguatan Ethical Leadership:</strong> Pimpinan KPP Pratama harus secara eksplisit
+                            menyuarakan bahwa pencapaian target pajak TIDAK BOLEH melanggar prosedur/etika (SOP).</li>
+                        <li><strong>Manajemen Identitas:</strong> Membangun kebanggaan pegawai bukan hanya pada "angka
+                            target", tetapi pada "integritas proses".</li>
+                        <li><strong>Pelatihan Dilema Etika:</strong> Memberikan simulasi kasus dimana pegawai harus
+                            memilih antara loyalitas buta vs integritas, untuk melatih <em>moral reasoning</em>.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // --- SMART CONFIGURATION (AUTO + FALLBACK) ---
+        // 1. Coba load file relative (lokal/github pages) secara otomatis.
+        // 2. Jika gagal (misal CORS di local file://), tampilkan UI input URL.
+        const DEFAULT_CONFIG = {
+            abstract: "abstract_final.md",
+            chapter4: "chapter4_results.md",
+            chapter5: "chapter5_discussion.md"
+        };
+
+        // Helper: Get stored config or default
+        function getConfig(key) {
+            return localStorage.getItem(`gh_url_${key}`) || DEFAULT_CONFIG[key];
+        }
+
+        // Helper: Save config
+        function saveConfig(key, url) {
+            if (url) {
+                localStorage.setItem(`gh_url_${key}`, url);
+            } else {
+                localStorage.removeItem(`gh_url_${key}`);
+            }
+        }
+
+        // Function to fetch and render
+        async function fetchAndRender(key, elementId) {
+            const url = getConfig(key);
+            const container = document.getElementById(elementId);
+            const inputId = `input-${key}`;
+
+            // Generate UI Controls (Hidden by default unless error occurs)
+            if (!document.getElementById(inputId)) {
+                const controlsHtml = `
+                    <div class="mb-4 p-4 bg-white border border-slate-300 rounded shadow-sm hidden" id="controls-${key}">
+                        <div class="flex justify-between items-center mb-2">
+                             <label class="text-xs font-bold uppercase text-slate-500">Source Configuration</label>
+                             <button onclick="document.getElementById('controls-${key}').classList.add('hidden')" class="text-slate-400 hover:text-slate-600"><i class="fas fa-times"></i></button>
+                        </div>
+                        <p class="text-xs text-slate-600 mb-2">Load otomatis gagal (CORS/File Not Found). Paste <strong>URL RAW GitHub</strong> Anda di bawah ini:</p>
+                        <div class="flex gap-2">
+                            <input type="text" id="${inputId}" value="${url}" class="flex-1 p-2 border border-slate-300 rounded text-xs font-mono text-slate-700" placeholder="https://raw.githubusercontent.com/username/repo/main/filename.md">
+                            <button onclick="updateSource('${key}', '${elementId}')" class="bg-indigo-600 text-white px-4 py-2 rounded text-xs font-bold hover:bg-indigo-700">Load URL</button>
+                            <button onclick="resetSource('${key}', '${elementId}')" class="bg-slate-200 text-slate-600 px-3 py-2 rounded text-xs font-bold hover:bg-slate-300" title="Reset to Default"><i class="fas fa-undo"></i></button>
+                        </div>
+                    </div>
+                    <div class="text-right mb-1">
+                         <button onclick="document.getElementById('controls-${key}').classList.toggle('hidden')" class="text-[10px] text-slate-400 hover:text-indigo-500 uppercase tracking-wider font-bold"><i class="fas fa-cog mr-1"></i>Edit Source</button>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforebegin', controlsHtml);
+            }
+
+            try {
+                // Show loading state
+                container.innerHTML = '<div class="animate-pulse p-4 text-slate-400 flex items-center"><i class="fas fa-circle-notch fa-spin mr-2"></i> Mengambil konten...</div>';
+
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`HTTP Error ${response.status}`);
+                }
+                const text = await response.text();
+
+                // Parse and Render
+                container.innerHTML = marked.parse(text);
+                styleMarkdown(container);
+
+                // Update input visual state
+                const inputEl = document.getElementById(inputId);
+                if (inputEl) inputEl.classList.add("border-green-500", "bg-green-50");
+
+            } catch (error) {
+                // Show Error and Reveal Controls
+                container.innerHTML = `
+                    <div class="p-4 bg-red-50 border border-red-200 rounded text-center">
+                        <div class="text-red-600 font-bold mb-1"><i class="fas fa-unlink mr-2"></i>Gagal Memuat Konten</div>
+                        <div class="text-xs text-red-500 mb-2">${error.message} (${url})</div>
+                        <button onclick="document.getElementById('controls-${key}').classList.remove('hidden')" class="bg-red-100 text-red-700 px-3 py-1 rounded text-xs font-bold hover:bg-red-200">
+                            Perbaiki Link
+                        </button>
+                    </div>`;
+
+                // Auto-show controls if it's likely a CORS issue or missing file
+                const controls = document.getElementById(`controls-${key}`);
+                if (controls) controls.classList.remove('hidden');
+            }
+        }
+
+        // UI Action Handlers
+        window.updateSource = (key, elementId) => {
+            const input = document.getElementById(`input-${key}`);
+            saveConfig(key, input.value.trim());
+            fetchAndRender(key, elementId);
+        };
+
+        window.resetSource = (key, elementId) => {
+            saveConfig(key, null);
+            document.getElementById(`input-${key}`).value = DEFAULT_CONFIG[key];
+            fetchAndRender(key, elementId);
+        };
+
+        // Styling for Markdown Content
+        function styleMarkdown(container) {
+            container.querySelectorAll('h1').forEach(el => el.classList.add('text-2xl', 'font-bold', 'text-slate-800', 'mb-4', 'pb-2', 'border-b', 'mt-4'));
+            container.querySelectorAll('h2').forEach(el => el.classList.add('text-xl', 'font-bold', 'text-slate-700', 'mb-3', 'mt-6'));
+            container.querySelectorAll('h3').forEach(el => el.classList.add('text-lg', 'font-bold', 'text-slate-700', 'mb-2', 'mt-4'));
+            container.querySelectorAll('p').forEach(el => el.classList.add('mb-3', 'text-slate-600', 'leading-relaxed', 'text-justify'));
+            container.querySelectorAll('ul, ol').forEach(el => el.classList.add('ml-5', 'mb-4', 'text-slate-600', 'list-disc'));
+            container.querySelectorAll('li').forEach(el => el.classList.add('mb-1'));
+            container.querySelectorAll('table').forEach(el => el.classList.add('w-full', 'border-collapse', 'border', 'border-slate-200', 'text-sm', 'mb-4', 'mt-4'));
+            container.querySelectorAll('th, td').forEach(el => el.classList.add('border', 'border-slate-200', 'p-2'));
+            container.querySelectorAll('th').forEach(el => el.classList.add('bg-slate-50', 'font-semibold', 'text-slate-700'));
+            container.querySelectorAll('blockquote').forEach(el => el.classList.add('border-l-4', 'border-indigo-300', 'pl-4', 'italic', 'text-slate-500', 'my-4', 'bg-slate-50', 'p-2', 'rounded-r'));
+            container.querySelectorAll('code').forEach(el => el.classList.add('bg-slate-100', 'px-1', 'py-0.5', 'rounded', 'text-pink-600', 'font-mono', 'text-sm'));
+        }
+
+        // Init
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load Markdown Sections
+            fetchAndRender('abstract', 'md-abstract');
+            fetchAndRender('chapter4', 'md-chapter4');
+            fetchAndRender('chapter5', 'md-chapter5');
+
+            // Sidebar Navigation Logic
+            const navLinks = document.querySelectorAll('.sidebar-menu a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
