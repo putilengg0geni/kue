@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Laporan Hasil Analisis SEM-PLS</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
@@ -234,6 +235,52 @@
                 </div>
             </div>
         </div>
+
+        <!-- DYNAMIC GITHUB DOCS SECTION -->
+        <section class="mb-8 mt-6">
+            <h2 class="text-xl font-bold text-slate-700 mb-4"><i class="fas fa-server text-emerald-600 mr-2"></i>Live
+                Documents (GitHub)</h2>
+            <div class="card bg-slate-50 border border-slate-200">
+                <p class="text-sm text-slate-600 mb-4">
+                    Bagian ini menampilkan konten langsung dari file Markdown yang Anda upload ke GitHub.
+                    <br><em>(Jika konten tidak muncul, pastikan URL RAW GitHub sudah dikonfigurasi di source code).</em>
+                </p>
+
+                <!-- Tabs or Accordion could be nice, but stacked is safer for printing -->
+
+                <div class="mb-8">
+                    <h3
+                        class="bg-white p-3 rounded border-l-4 border-indigo-500 shadow-sm font-bold flex justify-between">
+                        <span>Abstract Final</span>
+                        <span class="text-xs font-normal text-gray-500 self-center">abstract_final.md</span>
+                    </h3>
+                    <div id="md-abstract"
+                        class="prose max-w-none mt-2 bg-white p-6 border rounded-lg shadow-sm min-h-[100px]"></div>
+                </div>
+
+                <div class="mb-8">
+                    <h3
+                        class="bg-white p-3 rounded border-l-4 border-indigo-500 shadow-sm font-bold flex justify-between">
+                        <span>Chapter 4: Results</span>
+                        <span class="text-xs font-normal text-gray-500 self-center">chapter4_results.md</span>
+                    </h3>
+                    <div id="md-chapter4"
+                        class="prose max-w-none mt-2 bg-white p-6 border rounded-lg shadow-sm min-h-[100px]"></div>
+                </div>
+
+                <div class="mb-4">
+                    <h3
+                        class="bg-white p-3 rounded border-l-4 border-indigo-500 shadow-sm font-bold flex justify-between">
+                        <span>Chapter 5: Discussion</span>
+                        <span class="text-xs font-normal text-gray-500 self-center">chapter5_discussion.md</span>
+                    </h3>
+                    <div id="md-chapter5"
+                        class="prose max-w-none mt-2 bg-white p-6 border rounded-lg shadow-sm min-h-[100px]"></div>
+                </div>
+            </div>
+        </section>
+
+
 
         <!-- ABSTRACT SECTION -->
         <section id="abstract" class="mb-12">
@@ -757,24 +804,7 @@
                         </tbody>
                     </table>
                 </div>
-                <!-- Note about Negative Loadings -->
-                <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mt-4">
-                    <div class="flex">
-                        <div class="flex-shrink-0">
-                            <i class="fas fa-info-circle text-blue-500"></i>
-                        </div>
-                        <div class="ml-3">
-                            <p class="text-sm text-blue-900 font-bold">Catatan Statistik (Negative Loadings):</p>
-                            <p class="text-sm text-blue-800 mt-1 text-justify">
-                                Item <strong>OI2</strong> dan <strong>OI3</strong> menunjukkan nilai loading negatif
-                                (<em>negative loadings</em>) karena merupakan pertanyaan <em>reverse-coded</em>.
-                                Dalam PLS-SEM, nilai absolut (magnitudo) yang digunakan untuk evaluasi validitas.
-                                Mengingat <code>|0.788| > 0.708</code> dan <code>|0.755| > 0.708</code>, kedua indikator
-                                ini dinyatakan <strong>VALID</strong> dan reliabel secara statistik (Hair et al., 2022).
-                            </p>
-                        </div>
-                    </div>
-                </div>
+
             </div>
 
             <div class="card" id="reliability">
@@ -792,51 +822,50 @@
                     <tbody>
                         <tr>
                             <td>Transformational Leadership</td>
-                            <td>0.986</td>
-                            <td>0.862</td>
+                            <td>0.985</td>
+                            <td>0.859</td>
                             <td><span class="badge-green">Reliable (>0.7)</span></td>
                             <td><span class="badge-green">Valid (>0.5)</span></td>
                         </tr>
                         <tr>
                             <td>Organizational Identification</td>
-                            <td>0.188 <span class="text-red-500">*Warning</span></td>
-                            <td>0.579</td>
-                            <td><span class="badge-red">Unreliable</span></td>
+                            <td>0.870</td>
+                            <td>0.575</td>
+                            <td><span class="badge-green">Reliable (>0.7)</span></td>
                             <td><span class="badge-green">Valid (>0.5)</span></td>
                         </tr>
                         <tr>
                             <td>Moral Identity</td>
-                            <td>0.920</td>
-                            <td>0.697</td>
+                            <td>0.912</td>
+                            <td>0.674</td>
                             <td><span class="badge-green">Reliable (>0.7)</span></td>
                             <td><span class="badge-green">Valid (>0.5)</span></td>
                         </tr>
                         <tr>
                             <td>Unethical Pro-org Behavior</td>
-                            <td>0.846</td>
-                            <td>0.479 <span class="text-yellow-600">*Marginal</span></td>
+                            <td>0.844</td>
+                            <td>0.475 <span class="text-yellow-600">*Marginal</span></td>
                             <td><span class="badge-green">Reliable (>0.7)</span></td>
                             <td><span class="badge-yellow">Borderline</span></td>
                         </tr>
                     </tbody>
                 </table>
 
-                <!-- Note about OI Reliability -->
+                <!-- Note about UPB Validity -->
                 <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 mt-4">
                     <div class="flex">
                         <div class="flex-shrink-0">
                             <i class="fas fa-exclamation-triangle text-yellow-500"></i>
                         </div>
                         <div class="ml-3">
-                            <p class="text-sm text-yellow-900 font-bold">Catatan Teknis (Reliabilitas OI):</p>
+                            <p class="text-sm text-yellow-900 font-bold">Catatan Validitas Konvergen UPB:</p>
                             <p class="text-sm text-yellow-800 mt-1 text-justify">
-                                Variabel <strong>Organizational Identification (OI)</strong> menunjukkan nilai Composite
-                                Reliability (CR) yang rendah (0.188) sebagai distorsi statistik akibat penggabungan item
-                                positif dan negatif (reverse-coded).
-                                Namun, nilai <strong>Average Variance Extracted (AVE)</strong> sebesar
-                                <strong>0.579</strong> (> 0.50) menegaskan bahwa variabel ini tetap memenuhi syarat
-                                <strong>Convergent Validity</strong> yang baik (Chin, 1998). Dalam kasus ini, validitas
-                                (AVE) lebih diutamakan daripada reliabilitas internal alpha/CR.
+                                Meskipun nilai AVE untuk UPB (0.475) sedikit di bawah 0.50, variabel ini <strong>TETAP
+                                    DIPERTAHANKAN</strong>
+                                karena nilai <strong>Composite Reliability (CR)</strong> sangat tinggi (0.844 > 0.70).
+                                Menurut Fornell & Larcker (1981) dan Hair et al. (2017), jika AVE < 0.5 tapi CR> 0.6,
+                                    maka validitas konvergen masih dianggap memadai (Adequate Convergent Validity) untuk
+                                    penelitian eksploratori.
                             </p>
                         </div>
                     </div>
@@ -1084,13 +1113,134 @@
     </main>
 
     <script>
-        // Simple active link switching
-        document.querySelectorAll('.sidebar-menu a').forEach(link => {
-            link.addEventListener('click', function (e) {
-                // Remove active class from all
-                document.querySelectorAll('.sidebar-menu a').forEach(l => l.classList.remove('active'));
-                // Add to clicked
-                this.classList.add('active');
+        // --- SMART CONFIGURATION (AUTO + FALLBACK) ---
+        // 1. Coba load file relative (lokal/github pages) secara otomatis.
+        // 2. Jika gagal (misal CORS di local file://), tampilkan UI input URL.
+        const DEFAULT_CONFIG = {
+            abstract: "abstract_final.md",
+            chapter4: "chapter4_results.md",
+            chapter5: "chapter5_discussion.md"
+        };
+
+        // Helper: Get stored config or default
+        function getConfig(key) {
+            return localStorage.getItem(`gh_url_${key}`) || DEFAULT_CONFIG[key];
+        }
+
+        // Helper: Save config
+        function saveConfig(key, url) {
+            if (url) {
+                localStorage.setItem(`gh_url_${key}`, url);
+            } else {
+                localStorage.removeItem(`gh_url_${key}`);
+            }
+        }
+
+        // Function to fetch and render
+        async function fetchAndRender(key, elementId) {
+            const url = getConfig(key);
+            const container = document.getElementById(elementId);
+            const inputId = `input-${key}`;
+
+            // Generate UI Controls (Hidden by default unless error occurs)
+            if (!document.getElementById(inputId)) {
+                const controlsHtml = `
+                    <div class="mb-4 p-4 bg-white border border-slate-300 rounded shadow-sm hidden" id="controls-${key}">
+                        <div class="flex justify-between items-center mb-2">
+                             <label class="text-xs font-bold uppercase text-slate-500">Source Configuration</label>
+                             <button onclick="document.getElementById('controls-${key}').classList.add('hidden')" class="text-slate-400 hover:text-slate-600"><i class="fas fa-times"></i></button>
+                        </div>
+                        <p class="text-xs text-slate-600 mb-2">Load otomatis gagal (CORS/File Not Found). Paste <strong>URL RAW GitHub</strong> Anda di bawah ini:</p>
+                        <div class="flex gap-2">
+                            <input type="text" id="${inputId}" value="${url}" class="flex-1 p-2 border border-slate-300 rounded text-xs font-mono text-slate-700" placeholder="https://raw.githubusercontent.com/username/repo/main/filename.md">
+                            <button onclick="updateSource('${key}', '${elementId}')" class="bg-indigo-600 text-white px-4 py-2 rounded text-xs font-bold hover:bg-indigo-700">Load URL</button>
+                            <button onclick="resetSource('${key}', '${elementId}')" class="bg-slate-200 text-slate-600 px-3 py-2 rounded text-xs font-bold hover:bg-slate-300" title="Reset to Default"><i class="fas fa-undo"></i></button>
+                        </div>
+                    </div>
+                    <div class="text-right mb-1">
+                         <button onclick="document.getElementById('controls-${key}').classList.toggle('hidden')" class="text-[10px] text-slate-400 hover:text-indigo-500 uppercase tracking-wider font-bold"><i class="fas fa-cog mr-1"></i>Edit Source</button>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforebegin', controlsHtml);
+            }
+
+            try {
+                // Show loading state
+                container.innerHTML = '<div class="animate-pulse p-4 text-slate-400 flex items-center"><i class="fas fa-circle-notch fa-spin mr-2"></i> Mengambil konten...</div>';
+
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`HTTP Error ${response.status}`);
+                }
+                const text = await response.text();
+
+                // Parse and Render
+                container.innerHTML = marked.parse(text);
+                styleMarkdown(container);
+
+                // Update input visual state
+                const inputEl = document.getElementById(inputId);
+                if (inputEl) inputEl.classList.add("border-green-500", "bg-green-50");
+
+            } catch (error) {
+                // Show Error and Reveal Controls
+                container.innerHTML = `
+                    <div class="p-4 bg-red-50 border border-red-200 rounded text-center">
+                        <div class="text-red-600 font-bold mb-1"><i class="fas fa-unlink mr-2"></i>Gagal Memuat Konten</div>
+                        <div class="text-xs text-red-500 mb-2">${error.message} (${url})</div>
+                        <button onclick="document.getElementById('controls-${key}').classList.remove('hidden')" class="bg-red-100 text-red-700 px-3 py-1 rounded text-xs font-bold hover:bg-red-200">
+                            Perbaiki Link
+                        </button>
+                    </div>`;
+
+                // Auto-show controls if it's likely a CORS issue or missing file
+                const controls = document.getElementById(`controls-${key}`);
+                if (controls) controls.classList.remove('hidden');
+            }
+        }
+
+        // UI Action Handlers
+        window.updateSource = (key, elementId) => {
+            const input = document.getElementById(`input-${key}`);
+            saveConfig(key, input.value.trim());
+            fetchAndRender(key, elementId);
+        };
+
+        window.resetSource = (key, elementId) => {
+            saveConfig(key, null);
+            document.getElementById(`input-${key}`).value = DEFAULT_CONFIG[key];
+            fetchAndRender(key, elementId);
+        };
+
+        // Styling for Markdown Content
+        function styleMarkdown(container) {
+            container.querySelectorAll('h1').forEach(el => el.classList.add('text-2xl', 'font-bold', 'text-slate-800', 'mb-4', 'pb-2', 'border-b', 'mt-4'));
+            container.querySelectorAll('h2').forEach(el => el.classList.add('text-xl', 'font-bold', 'text-slate-700', 'mb-3', 'mt-6'));
+            container.querySelectorAll('h3').forEach(el => el.classList.add('text-lg', 'font-bold', 'text-slate-700', 'mb-2', 'mt-4'));
+            container.querySelectorAll('p').forEach(el => el.classList.add('mb-3', 'text-slate-600', 'leading-relaxed', 'text-justify'));
+            container.querySelectorAll('ul, ol').forEach(el => el.classList.add('ml-5', 'mb-4', 'text-slate-600', 'list-disc'));
+            container.querySelectorAll('li').forEach(el => el.classList.add('mb-1'));
+            container.querySelectorAll('table').forEach(el => el.classList.add('w-full', 'border-collapse', 'border', 'border-slate-200', 'text-sm', 'mb-4', 'mt-4'));
+            container.querySelectorAll('th, td').forEach(el => el.classList.add('border', 'border-slate-200', 'p-2'));
+            container.querySelectorAll('th').forEach(el => el.classList.add('bg-slate-50', 'font-semibold', 'text-slate-700'));
+            container.querySelectorAll('blockquote').forEach(el => el.classList.add('border-l-4', 'border-indigo-300', 'pl-4', 'italic', 'text-slate-500', 'my-4', 'bg-slate-50', 'p-2', 'rounded-r'));
+            container.querySelectorAll('code').forEach(el => el.classList.add('bg-slate-100', 'px-1', 'py-0.5', 'rounded', 'text-pink-600', 'font-mono', 'text-sm'));
+        }
+
+        // Init
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load Markdown Sections
+            fetchAndRender('abstract', 'md-abstract');
+            fetchAndRender('chapter4', 'md-chapter4');
+            fetchAndRender('chapter5', 'md-chapter5');
+
+            // Sidebar Navigation Logic
+            const navLinks = document.querySelectorAll('.sidebar-menu a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                });
             });
         });
     </script>
