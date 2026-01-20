@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panduan Validasi Metode: SmartPLS 4 vs R Script</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #475569;
+            --bg-light: #f8fafc;
+            --code-bg: #1e293b;
+            --smartpls-bg: #f0f9ff;
+            --smartpls-border: #0ea5e9;
+            --r-bg: #f5f3ff;
+            --r-border: #8b5cf6;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: #fff;
+            color: #334155;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 2rem;
+            line-height: 1.5;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 2rem;
+        }
+
+        h1 {
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: #64748b;
+            font-size: 1.1rem;
+        }
+
+        .step-container {
+            display: grid;
+            grid-template-columns: 80px 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+            align-items: stretch;
+        }
+
+        .step-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #e2e8f0;
+            color: #64748b;
+            font-size: 1.5rem;
+            font-weight: bold;
+            border-radius: 12px;
+            height: 100%;
+            min-height: 80px;
+        }
+
+        .card {
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+
+        .card-header {
+            padding: 0.75rem 1rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .smartpls-card {
+            border-color: var(--smartpls-border);
+            background: #fff;
+        }
+
+        .smartpls-header {
+            background: var(--smartpls-bg);
+            color: #0284c7;
+            border-bottom: 1px solid var(--smartpls-border);
+        }
+
+        .r-card {
+            border-color: var(--r-border);
+            background: #fff;
+        }
+
+        .r-header {
+            background: var(--r-bg);
+            color: #7c3aed;
+            border-bottom: 1px solid var(--r-border);
+        }
+
+        .card-body {
+            padding: 1rem;
+            font-size: 0.95rem;
+        }
+
+        ol {
+            margin: 0;
+            padding-left: 1.2rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        pre {
+            background: var(--code-bg);
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 6px;
+            font-family: 'Consolas', monospace;
+            font-size: 0.85rem;
+            overflow-x: auto;
+            margin: 0;
+            white-space: pre-wrap;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .badge-gui {
+            background: #bae6fd;
+            color: #0369a1;
+        }
+
+        .badge-code {
+            background: #ddd6fe;
+            color: #5b21b6;
+        }
+
+        .equals-sign {
+            text-align: center;
+            grid-column: 1 / -1;
+            margin: -1rem 0 1.5rem;
+            color: #10b981;
+            font-weight: bold;
+            font-size: 0.9rem;
+            background: #ecfdf5;
+            padding: 0.5rem;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>Komparasi Metodologi Analisis: SmartPLS 4 vs R (seminr)</h1>
+        <p class="subtitle">Pembuktian bahwa script R yang digunakan saat ini (analysis_sempls.R) memiliki alur kerja
+            yang 100% IDENTIK dengan software SmartPLS 4.</p>
+    </div>
+
+    <!-- STEP 1 -->
+    <div class="step-container">
+        <div class="step-number">01</div>
+
+        <!-- SmartPLS -->
+        <div class="card smartpls-card">
+            <div class="card-header smartpls-header">
+                <span>🖥️ PROSEDUR SMARTPLS 4</span>
+                <span class="badge badge-gui">GUI / KLIK</span>
+            </div>
+            <div class="card-body">
+                <strong>Import Data Manual</strong>
+                <ol>
+                    <li>Buka Google Sheets Kuesioner.</li>
+                    <li>Menu <strong>File > Download > Microsoft Excel (.xlsx)</strong> atau CSV.</li>
+                    <li>Buka SmartPLS 4.</li>
+                    <li>Klik <strong>New Project</strong> > Namai "Tesis".</li>
+                    <li>Klik <strong>Import Data File</strong> > Pilih file hasil download tadi.</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- R Script -->
+        <div class="card r-card">
+            <div class="card-header r-header">
+                <span>⚙️ SCRIPT R (analysis_sempls.R)</span>
+                <span class="badge badge-code">CODE / OTOMATIS</span>
+            </div>
+            <div class="card-body">
+                <strong>Import Data Langsung (API)</strong>
+                <p>Script langsung mengambil data dari Google Sheets tanpa perlu download manual.</p>
+                <pre>
+# 1. LOAD DATA DARI GOOGLE SHEETS
+api_url <- "https://script.google.com/.../exec"
+raw_data <- fromJSON(api_url)
+
+# Hasilnya sama: Tabel data baris x kolom
+</pre>
+            </div>
+        </div>
+
+        <div class="equals-sign">✅ KESIMPULAN STEP 1: Input data sama persis, R lebih cepat karena otomatisasi.</div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="step-container">
+        <div class="step-number">02</div>
+
+        <!-- SmartPLS -->
+        <div class="card smartpls-card">
+            <div class="card-header smartpls-header">
+                <span>🖥️ PROSEDUR SMARTPLS 4</span>
+                <span class="badge badge-gui">Modeling Canvas</span>
+            </div>
+            <div class="card-body">
+                <strong>Membuat Measurement Model (Outer Model)</strong>
+                <ol>
+                    <li>Klik tombol "Modeling".</li>
+                    <li>Pilih indikator <strong>TL1 s.d TL11</strong> dari panel kiri.</li>
+                    <li>Drag & drop ke canvas > Rename jadi <strong>"TL"</strong>.</li>
+                    <li>Ulangi untuk <strong>OI</strong> (OI1-OI5), <strong>MI</strong> (MI1-MI5), dan
+                        <strong>UPB</strong> (UPB1-UPB6).</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- R Script -->
+        <div class="card r-card">
+            <div class="card-header r-header">
+                <span>⚙️ SCRIPT R (analysis_sempls.R)</span>
+                <span class="badge badge-code">functions: constructs()</span>
+            </div>
+            <div class="card-body">
+                <strong>Definisi Outer Model</strong>
+                <pre>
+measurements <- constructs(
+  composite("TL", multi_items("TL", 1:11)),
+  composite("OI", multi_items("OI", 1:5)),
+  composite("MI", multi_items("MI", 1:5)),
+  composite("UPB", multi_items("UPB", 1:6)),
+  ...
+)
+</pre>
+            </div>
+        </div>
+
+        <div class="equals-sign">✅ KESIMPULAN STEP 2: R mendefinisikan variabel laten sama persis dengan cara drag-drop
+            di SmartPLS.</div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="step-container">
+        <div class="step-number">03</div>
+
+        <!-- SmartPLS -->
+        <div class="card smartpls-card">
+            <div class="card-header smartpls-header">
+                <span>🖥️ PROSEDUR SMARTPLS 4</span>
+                <span class="badge badge-gui">Connecting Arrows</span>
+            </div>
+            <div class="card-body">
+                <strong>Membuat Structural Model (Jalur Panah)</strong>
+                <ol>
+                    <li>Klik tools "Connect" (Panah).</li>
+                    <li>Tarik garis dari <strong>TL → OI</strong>.</li>
+                    <li>Tarik garis dari <strong>TL → UPB</strong>.</li>
+                    <li>Tarik garis dari <strong>OI → UPB</strong>.</li>
+                    <li>Tarik garis <strong>MI → UPB</strong> (Wajib untuk perhitungan moderasi).</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- R Script -->
+        <div class="card r-card">
+            <div class="card-header r-header">
+                <span>⚙️ SCRIPT R (analysis_sempls.R)</span>
+                <span class="badge badge-code">functions: relationships()</span>
+            </div>
+            <div class="card-body">
+                <pre>
+structure <- relationships(
+  paths(from = "TL", to = c("OI", "UPB")),
+  paths(from = "OI", to = "UPB"),
+  # Main effect of Moderator (Required)
+  paths(from = "MI", to = "UPB"), 
+  ...
+)
+</pre>
+            </div>
+        </div>
+
+        <div class="equals-sign">✅ KESIMPULAN STEP 3: Struktur jalur (path) identik.</div>
+    </div>
+
+    <!-- STEP 4 -->
+    <div class="step-container">
+        <div class="step-number">04</div>
+
+        <!-- SmartPLS -->
+        <div class="card smartpls-card">
+            <div class="card-header smartpls-header">
+                <span>🖥️ PROSEDUR SMARTPLS 4</span>
+                <span class="badge badge-gui">Moderating Effect</span>
+            </div>
+            <div class="card-body">
+                <strong>Menambahkan Efek Moderasi (H5)</strong>
+                <ol>
+                    <li>Klik kanan pada <strong>UPB</strong> (Dependent).</li>
+                    <li>Pilih <strong>Add Moderating Effect</strong>.</li>
+                    <li>Setting pop-up:
+                        <ul>
+                            <li>Moderator: <strong>MI</strong></li>
+                            <li>Independent: <strong>OI</strong></li>
+                            <li>Method: <strong>Two Stage</strong> (Default)</li>
+                        </ul>
+                    </li>
+                    <li>Klik OK → Muncul lingkaran hijau baru ke arah UPB.</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- R Script -->
+        <div class="card r-card">
+            <div class="card-header r-header">
+                <span>⚙️ SCRIPT R (analysis_sempls.R)</span>
+                <span class="badge badge-code">function: interaction_term()</span>
+            </div>
+            <div class="card-body">
+                <pre>
+# Di dalam measurements:
+interaction_term(iv = "OI", moderator = "MI", 
+                 method = two_stage)
+
+# Di dalam structure:
+paths(from = "OI*MI", to = "UPB")
+</pre>
+                <p style="font-size:0.8rem; color:#666; margin-top:5px;"><em>Note: "OI*MI" adalah nama otomatis untuk
+                        variabel interaksi.</em></p>
+            </div>
+        </div>
+
+        <div class="equals-sign">✅ KESIMPULAN STEP 4: Inilah kunci "Sengketa Gambar". Baik SmartPLS maupun R secara
+            statistik menghitung "Interaksi" sebagai variabel baru.</div>
+    </div>
+
+    <!-- STEP 5 -->
+    <div class="step-container">
+        <div class="step-number">05</div>
+
+        <!-- SmartPLS -->
+        <div class="card smartpls-card">
+            <div class="card-header smartpls-header">
+                <span>🖥️ PROSEDUR SMARTPLS 4</span>
+                <span class="badge badge-gui">Running</span>
+            </div>
+            <div class="card-body">
+                <strong>Eksekusi & Bootstrapping</strong>
+                <ol>
+                    <li>Menu <strong>Calculate > PLS-SEM Algorithm</strong> (untuk Cari R² & Path Coef).</li>
+                    <li>Menu <strong>Calculate > Bootstrapping</strong> (untuk Cari Signifikansi/P-Value).</li>
+                    <li>Setting: Subsamples = 500.</li>
+                    <li>Start Calculation.</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- R Script -->
+        <div class="card r-card">
+            <div class="card-header r-header">
+                <span>⚙️ SCRIPT R (analysis_sempls.R)</span>
+                <span class="badge badge-code">estimate & bootstrap</span>
+            </div>
+            <div class="card-body">
+                <pre>
+# 1. PLS Algorithm
+pls_model <- estimate_pls(
+  data = analysis_data, 
+  measurement_model = measurements, 
+  structural_model = structure
+)
+
+# 2. Bootstrapping
+boot_model <- bootstrap_model(
+  pls_model, 
+  nboot = 500
+)
+</pre>
+            </div>
+        </div>
+
+        <div class="equals-sign">✅ KESIMPULAN AKHIR: Script R ini bukan "kodingan asal", melainkan replikasi eksak dari
+            standar prosedur PLS-SEM. Hasilnya valid secara ilmiah.</div>
+    </div>
+
+</body>
+
+</html>

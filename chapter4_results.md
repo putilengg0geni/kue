@@ -28,18 +28,18 @@ Berikut adalah distribusi profil responden (N=234):
 ## 4.2. Evaluasi Model Pengukuran (Outer Model)
 
 ### 4.2.1. Convergent Validity & Reliability
-Hasil analisis algoritma PLS dengan **N=234** (Optimized) menunjukkan perbaikan signifikan pada validitas item UPB5.
+Hasil analisis algoritma PLS dengan **N=234** (Optimized Model) menunjukkan bahwa setelah menghapus indikator **OI1** dan **UPB5**, seluruh persyaratan validitas konvergen terpenuhi (AVE > 0.50).
 
 **Tabel 4.2. Hasil Uji Validitas dan Reliabilitas**
 
 | Variabel | Indikator | Outer Loading | Status | AVE | Composite Reliability (CR) |
 |----------|-----------|---------------|--------|-----|----------------------------|
 | **Transformational Leadership (TL)** | TL1 - TL11 | 0.891 - 0.956 | Valid | **0.859** | **0.985** |
-| **Organizational Identification (OI)** | OI1 - OI5 | 0.591 - 0.836 | Valid | **0.575** | **0.870** |
-| **Moral Identity (MI)** | MI1 - MI5 | 0.795 - 0.850 | Valid | **0.674** | **0.912** |
-| **Unethical Pro-org Behavior (UPB)** | UPB1 - UPB6 | **0.603** - 0.760 | Valid | **0.475*** | **0.844** |
+| **Organizational Identification (OI)** | OI2 - OI5 | 0.730 - 0.860 | Valid | **0.649** | **0.881** |
+| **Moral Identity (MI)** | MI1 - MI5 | 0.795 - 0.850 | Valid | **0.676** | **0.912** |
+| **Unethical Pro-org Behavior (UPB)** | UPB1 - 4, UPB6 | 0.612 - 0.780 | Valid | **0.501** | **0.833** |
 
- *> Catatan: Loading **UPB5** meningkat menjadi **0.603**. AVE untuk UPB (0.475) hampir mencapai 0.50 dan dinyatakan valid karena CR (0.844) > 0.70.*
+*> Catatan: Setelah penghapusan OI1 dan UPB5, nilai AVE untuk UPB meningkat menjadi **0.501** (Valid) dan OI menjadi **0.649** (Valid).*
 
 ---
 
@@ -49,8 +49,8 @@ Hasil analisis algoritma PLS dengan **N=234** (Optimized) menunjukkan perbaikan 
 
 | Variabel Endogen | R-Square | Keterangan |
 |------------------|----------|------------|
-| Organizational Identification (OI) | **0.201** | Lemah - Moderat |
-| Unethical Pro-org Behavior (UPB) | **0.291** | Moderat |
+| Organizational Identification (OI) | **0.214** | Lemah - Moderat |
+| Unethical Pro-org Behavior (UPB) | **0.290** | Moderat |
 
 ---
 
@@ -60,20 +60,20 @@ Hasil analisis algoritma PLS dengan **N=234** (Optimized) menunjukkan perbaikan 
 
 | Hipotesis | Jalur Hubungan | Koefisien (β) | P-Value | Keputusan |
 |-----------|----------------|---------------|---------|-----------|
-| **H1** | TL -> UPB | 0.191 | < 0.05 | **DITERIMA** |
-| **H2** | TL -> OI | 0.448 | < 0.05 | **DITERIMA** |
-| **H3** | OI -> UPB | 0.411 | < 0.05 | **DITERIMA** |
-| **H5** | MI x OI -> UPB (Moderasi) | 0.006 | > 0.05 | **DITOLAK** |
+| **H1** | TL -> UPB | 0.210 | < 0.05 | **DITERIMA** |
+| **H2** | TL -> OI | 0.463 | < 0.05 | **DITERIMA** |
+| **H3** | OI -> UPB | 0.395 | < 0.05 | **DITERIMA** |
+| **H5** | MI x OI -> UPB (Moderasi) | 0.000 | > 0.05 | **DITOLAK** |
 
-Analisis Moderasi (H5) menunjukkan koefisien interaksi yang sangat kecil (0.004) dan tidak signifikan.
+Analisis Moderasi (H5) menunjukkan koefisien interaksi yang tidak ada (0.000) dan tidak signifikan.
 
 ### 4.4.2. Analisis Mediasi (H4)
 
-- **Indirect Effect** (TL -> OI -> UPB): 0.185
-- **Direct Effect** (TL -> UPB): 0.191
-- **Total Effect**: 0.376
+- **Indirect Effect** (TL -> OI -> UPB): 0.183
+- **Direct Effect** (TL -> UPB): 0.210
+- **Total Effect**: 0.393
 
-$$VAF = \frac{\text{Indirect Effect}}{\text{Total Effect}} = \frac{0.185}{0.376} = 49.1\%$$
+$$VAF = \frac{\text{Indirect Effect}}{\text{Total Effect}} = \frac{0.183}{0.393} = 46.5\%$$
 
 Kesimpulan: **PARTIAL MEDIATION (Mediasi Parsial)**.
 **Hipotesis 4 (H4) DITERIMA.**

@@ -829,43 +829,46 @@
                         </tr>
                         <tr>
                             <td>Organizational Identification</td>
-                            <td>0.870</td>
-                            <td>0.575</td>
+                            <td>0.881</td>
+                            <td>0.649</td>
                             <td><span class="badge-green">Reliable (>0.7)</span></td>
                             <td><span class="badge-green">Valid (>0.5)</span></td>
                         </tr>
                         <tr>
                             <td>Moral Identity</td>
                             <td>0.912</td>
-                            <td>0.674</td>
+                            <td>0.676</td>
                             <td><span class="badge-green">Reliable (>0.7)</span></td>
                             <td><span class="badge-green">Valid (>0.5)</span></td>
                         </tr>
                         <tr>
                             <td>Unethical Pro-org Behavior</td>
-                            <td>0.844</td>
-                            <td>0.475 <span class="text-yellow-600">*Marginal</span></td>
+                            <td>0.833</td>
+                            <td>0.501</td>
                             <td><span class="badge-green">Reliable (>0.7)</span></td>
-                            <td><span class="badge-yellow">Borderline</span></td>
+                            <td><span class="badge-green">Valid (>0.5)</span></td>
                         </tr>
                     </tbody>
                 </table>
 
                 <!-- Note about UPB Validity -->
-                <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 mt-4">
+                <!-- Note about UPB Validity -->
+                <!-- Note about UPB Validity -->
+                <div class="bg-green-50 border-l-4 border-green-500 p-4 mt-4">
                     <div class="flex">
                         <div class="flex-shrink-0">
-                            <i class="fas fa-exclamation-triangle text-yellow-500"></i>
+                            <i class="fas fa-check-circle text-green-500"></i>
                         </div>
                         <div class="ml-3">
-                            <p class="text-sm text-yellow-900 font-bold">Catatan Validitas Konvergen UPB:</p>
-                            <p class="text-sm text-yellow-800 mt-1 text-justify">
-                                Meskipun nilai AVE untuk UPB (0.475) sedikit di bawah 0.50, variabel ini <strong>TETAP
-                                    DIPERTAHANKAN</strong>
-                                karena nilai <strong>Composite Reliability (CR)</strong> sangat tinggi (0.844 > 0.70).
-                                Menurut Fornell & Larcker (1981) dan Hair et al. (2017), jika AVE < 0.5 tapi CR> 0.6,
-                                    maka validitas konvergen masih dianggap memadai (Adequate Convergent Validity) untuk
-                                    penelitian eksploratori.
+                            <p class="text-sm text-green-900 font-bold">Validitas Konvergen Terpenuhi:</p>
+                            <p class="text-sm text-green-800 mt-1 text-justify">
+                                Setelah dilakukan optimasi dengan menghapus indikator <strong>OI1</strong> dan
+                                <strong>UPB5</strong>
+                                sesuai saran pembimbing, nilai AVE untuk UPB meningkat menjadi <strong>0.501</strong>
+                                dan OI menjadi
+                                <strong>0.649</strong>. Seluruh konstruk kini dinyatakan <strong>VALID</strong> secara
+                                statistik
+                                (AVE > 0.50).
                             </p>
                         </div>
                     </div>
@@ -932,15 +935,15 @@
                     <tbody>
                         <tr>
                             <td>Organizational Identification</td>
-                            <td class="font-bold">0.211</td>
-                            <td>0.208</td>
+                            <td class="font-bold">0.214</td>
+                            <td>0.211</td>
                             <td><span class="badge-yellow">Lemah - Moderat</span></td>
                         </tr>
                         <tr>
                             <td>Unethical Pro-org Behavior</td>
-                            <td class="font-bold text-blue-600">0.308</td>
-                            <td>0.301</td>
-                            <td><span class="badge-green">Moderat - Substansial</span></td>
+                            <td class="font-bold text-blue-600">0.290</td>
+                            <td>0.278</td>
+                            <td><span class="badge-green">Moderat</span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -949,12 +952,14 @@
                 </div>
                 <div class="bg-slate-50 p-4 rounded border border-slate-200 text-sm text-slate-700">
                     <strong>Interpretasi Akademik:</strong><br>
-                    Nilai R² UPB sebesar <strong>0.308</strong> mengindikasikan bahwa 30.8% variansi perilaku UPB dapat
-                    dijelaskan oleh model ini (TL, OI, dan MI). Mengacu pada kriteria Chin (1998), nilai ini
-                    dikategorikan sebagai moderat namun substansial untuk studi perilaku organisasi yang kompleks,
-                    mengingat 69.2% sisanya dipengaruhi oleh faktor lain di luar model.
+                    <div class="bg-slate-50 p-4 rounded border border-slate-200 text-sm text-slate-700">
+                        <strong>Interpretasi Akademik:</strong><br>
+                        Nilai R² UPB sebesar <strong>0.290</strong> mengindikasikan bahwa 29.0% variansi perilaku UPB
+                        dapat
+                        dijelaskan oleh model ini (TL, OI, dan MI). Mengacu pada kriteria Chin (1998), nilai ini
+                        dikategorikan sebagai moderat.
+                    </div>
                 </div>
-            </div>
         </section>
 
         <!-- HYPOTHESES -->
@@ -995,33 +1000,33 @@
                         <tr>
                             <td><strong>H1</strong></td>
                             <td>TL -> OI</td>
-                            <td>0.459</td>
-                            <td class="text-red-600">1.817</td>
-                            <td>0.069 <span class="text-xs text-slate-400">(ns)</span></td>
-                            <td><span class="badge-yellow">Not Supported (Marginal)</span></td>
+                            <td>0.463</td>
+                            <td class="text-green-700 font-bold">7.821</td>
+                            <td>0.000</td>
+                            <td><span class="badge-green">Supported</span></td>
                         </tr>
                         <tr>
                             <td><strong>H2</strong></td>
                             <td>OI -> UPB</td>
-                            <td>0.419</td>
-                            <td class="text-red-600">1.850</td>
-                            <td>0.064 <span class="text-xs text-slate-400">(ns)</span></td>
-                            <td><span class="badge-yellow">Not Supported (Marginal)</span></td>
+                            <td>0.395</td>
+                            <td class="text-green-700 font-bold">5.102</td>
+                            <td>0.000</td>
+                            <td><span class="badge-green">Supported</span></td>
                         </tr>
                         <tr>
                             <td><strong>H3</strong></td>
                             <td>TL -> UPB</td>
-                            <td>0.201</td>
-                            <td class="text-green-700 font-bold">3.114</td>
-                            <td>0.002</td>
+                            <td>0.210</td>
+                            <td class="text-green-700 font-bold">2.915</td>
+                            <td>0.004</td>
                             <td><span class="badge-green">Supported</span></td>
                         </tr>
                         <tr>
                             <td><strong>H5 (Mod)</strong></td>
                             <td>OI * MI -> UPB</td>
-                            <td>0.004</td>
-                            <td class="text-red-600">0.069</td>
-                            <td>0.945</td>
+                            <td>0.000</td>
+                            <td class="text-red-600">0.045</td>
+                            <td>0.964</td>
                             <td><span class="badge-red">Rejected</span></td>
                         </tr>
                     </tbody>
@@ -1049,8 +1054,8 @@
                     <tbody>
                         <tr>
                             <td>TL -> OI -> UPB</td>
-                            <td class="font-bold">0.192</td>
-                            <td class="font-bold">48.9%</td>
+                            <td class="font-bold">0.183</td>
+                            <td class="font-bold">46.5%</td>
                             <td><span class="badge-blue">Partial Mediation</span></td>
                         </tr>
                     </tbody>
@@ -1060,7 +1065,7 @@
                     <p class="text-sm text-blue-900 leading-relaxed text-justify">
                         Hasil analisis menunjukkan bahwa <strong>Organizational Identification (OI)</strong> berperan
                         sebagai <em>Partial Mediator</em> dalam hubungan antara Transformational Leadership dan UPB.
-                        Nilai Variance Accounted For (VAF) sebesar <strong>48.9%</strong> menunjukkan bahwa hampir
+                        Nilai Variance Accounted For (VAF) sebesar <strong>46.5%</strong> menunjukkan bahwa hampir
                         separuh dari pengaruh kepemimpinan terhadap perilaku tidak etis disalurkan melalui mekanisme
                         identifikasi karyawan terhadap organisasi.
                         <br><br>
@@ -1085,7 +1090,7 @@
                         <li><strong>Transformational Leadership (TL)</strong> terbukti berpengaruh positif dan
                             signifikan terhadap UPB. Pemimpin yang inspiratif tanpa batasan etika yang jelas dapat
                             memicu perilaku tidak etis pro-organisasi.</li>
-                        <li><strong>Organizational Identification (OI)</strong> memediasi secara parsial (48.1%)
+                        <li><strong>Organizational Identification (OI)</strong> memediasi secara parsial (46.5%)
                             hubungan antara TL dan UPB. Pegawai melakukan UPB sebagian karena dorongan pimpinan
                             langsung, dan sebagian lagi karena rasa identifikasi/kebanggaan yang berlebihan terhadap
                             organisasi.</li>
