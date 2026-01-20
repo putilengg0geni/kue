@@ -65,7 +65,7 @@ Hasil analisis algoritma PLS dengan **N=234** (Optimized Model) menunjukkan bahw
 | **H3** | OI -> UPB | 0.395 | < 0.05 | **DITERIMA** |
 | **H5** | MI x OI -> UPB (Moderasi) | 0.000 | > 0.05 | **DITOLAK** |
 
-Analisis Moderasi (H5) menunjukkan koefisien interaksi yang tidak ada (0.000) dan tidak signifikan.
+Analisis Moderasi (H5) menunjukkan koefisien interaksi yang **sangat lemah (0.000)** dan nilai P-Values yang **tidak signifikan (> 0.05)**. Hal ini menegaskan bahwa Interaksi antara Moral Identity dan Organizational Identification **tidak memperkuat maupun memperlemah** pengaruh terhadap UPB.
 
 ### 4.4.2. Analisis Mediasi (H4)
 
@@ -73,7 +73,11 @@ Analisis Moderasi (H5) menunjukkan koefisien interaksi yang tidak ada (0.000) da
 - **Direct Effect** (TL -> UPB): 0.210
 - **Total Effect**: 0.393
 
-$$VAF = \frac{\text{Indirect Effect}}{\text{Total Effect}} = \frac{0.183}{0.393} = 46.5\%$$
+**Perhitungan VAF (Variance Accounted For):**
+
+> **VAF** = Indirect Effect / Total Effect  
+> **VAF** = 0.183 / 0.393  
+> **VAF** = **46.5%**
 
 Kesimpulan: **PARTIAL MEDIATION (Mediasi Parsial)**.
 **Hipotesis 4 (H4) DITERIMA.**
