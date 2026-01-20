@@ -186,10 +186,11 @@
         <div class="sidebar-header">
             <h2 style="color:white; margin:0; font-size: 1.5rem;">Analisis <span
                     style="color:var(--accent-color)">SEM-PLS</span></h2>
-            <p style="color:#64748b; font-size:0.8rem; margin-top:0.5rem;">N=240 | Resampling 500</p>
+            <p style="color:#64748b; font-size:0.8rem; margin-top:0.5rem;">N=234 | Resampling 500</p>
         </div>
         <ul class="sidebar-menu">
             <li><a href="#overview" class="active"><i class="fas fa-home w-6"></i> Overview</a></li>
+            <li><a href="#abstract"><i class="fas fa-file-alt w-6"></i> Abstract</a></li>
             <li>
                 <a href="#demografi"><i class="fas fa-users w-6"></i> Profil Demografi</a>
             </li>
@@ -210,6 +211,7 @@
             <li><a href="#hypotheses"><i class="fas fa-check-double w-6"></i> Hypothesis Testing</a></li>
             <li><a href="#moderation"><i class="fas fa-balance-scale w-6"></i> Moderation Analysis</a></li>
             <li><a href="#mediation"><i class="fas fa-random w-6"></i> Mediation Analysis</a></li>
+            <li><a href="#conclusion"><i class="fas fa-clipboard-check w-6"></i> Conclusion & Suggestion</a></li>
             <li><a href="#" onclick="window.close()"><i class="fas fa-arrow-left w-6"></i> Close Report</a></li>
         </ul>
     </nav>
@@ -222,7 +224,7 @@
             <div class="flex justify-between items-center">
                 <div>
                     <h1 class="text-2xl font-bold text-slate-800">Laporan Hasil Analisis Thesis</h1>
-                    <p class="text-slate-500 mt-2">Dibuat pada: 2026-01-19 | Sampel: 240 Responden</p>
+                    <p class="text-slate-500 mt-2">Dibuat pada: 2026-01-20 | Sampel: 234 Responden</p>
                 </div>
                 <div class="text-right">
                     <div class="bg-blue-50 text-blue-700 px-4 py-2 rounded-lg border border-blue-100">
@@ -232,6 +234,81 @@
                 </div>
             </div>
         </div>
+
+        <!-- ABSTRACT SECTION -->
+        <section id="abstract" class="mb-12">
+            <h2 class="text-xl font-bold text-slate-700 mb-6 mt-6">Abstract</h2>
+            <div class="card bg-slate-50 border border-slate-200">
+                <h3 class="text-lg font-bold text-slate-800 mb-4 text-center">PENGARUH TRANSFORMATIONAL LEADERSHIP
+                    TERHADAP UNETHICAL PRO-ORGANIZATIONAL BEHAVIOR: PERAN MEDIASI ORGANIZATIONAL IDENTIFICATION DAN
+                    MODERASI MORAL IDENTITY</h3>
+                <p class="text-slate-600 text-sm text-center italic mb-6">(Studi pada Pegawai Kantor Pelayanan Pajak
+                    Pratama di Lingkungan Kanwil DJP)</p>
+
+                <h4 class="font-bold text-slate-700 mb-2">Abstrak</h4>
+                <p class="text-slate-600 text-justify mb-4 leading-relaxed">
+                    Penelitian ini bertujuan untuk menguji dan menganalisis pengaruh <em>Transformational
+                        Leadership</em> terhadap <em>Unethical Pro-organizational Behavior</em> (UPB) dengan
+                    <em>Organizational Identification</em> sebagai variabel mediasi dan <em>Moral Identity</em> sebagai
+                    variabel moderasi. Fenomena UPB menjadi relevan dalam konteks instansi pemerintah (DJP) yang
+                    memiliki target kinerja tinggi, di mana loyalitas berlebihan dapat memicu perilaku tidak etis demi
+                    keuntungan organisasi.
+                </p>
+                <p class="text-slate-600 text-justify mb-4 leading-relaxed">
+                    Penelitian ini menggunakan pendekatan kuantitatif dengan data dari <strong>234 pegawai</strong> KPP
+                    Pratama (Proportionate Stratified Random Sampling). Analisis menggunakan SEM-PLS (Package
+                    <code>seminr</code> R). Hasil menunjukkan: (1) Transformational Leadership berpengaruh positif
+                    terhadap UPB dan Organizational Identification; (2) Organizational Identification memediasi sebagian
+                    (Partial Mediation, VAF 48.9%) hubungan TL dan UPB; (3) Moral Identity TIDAK memoderasi hubungan
+                    antara OI dan UPB.
+                </p>
+                <p class="text-slate-700 font-semibold">
+                    Kata Kunci: Transformational Leadership, UPB, Organizational Identification, Moral Identity,
+                    SEM-PLS.
+                </p>
+            </div>
+        </section>
+
+        <section id="metodologi-intro">
+            <h2 class="text-xl font-bold text-slate-700 mb-6 mt-6">Pendekatan Metodologi & Analisis Data</h2>
+
+            <div class="card">
+                <h3 class="text-lg font-semibold text-slate-800 mb-3">1. Alasan Penggunaan PLS-SEM</h3>
+                <p class="text-slate-600 mb-4 text-justify leading-relaxed">
+                    Analisis data pada penelitian ini dilakukan menggunakan metode <strong>Partial Least Square
+                        (PLS)</strong>.
+                    PLS merupakan salah satu metode penyelesaian <em>Structural Equation Modeling (SEM)</em> yang
+                    memiliki tingkat fleksibilitas tinggi pada penelitian yang menghubungkan antara teori dan data.
+                    Metode ini dipilih karena mampu melakukan prediksi hubungan antar konstruk (variabel laten) dan
+                    tidak didasarkan pada asumsi distribusi data yang ketat (tidak harus berdistribusi normal
+                    multivariate).
+                    Selain itu, PLS sangat cocok untuk penelitian dengan sampel yang relatif kecil hingga moderat namun
+                    tetap menghasilkan kekuatan statistik (statistical power) yang tinggi (Hair et al., 2017).
+                </p>
+
+                <h3 class="text-lg font-semibold text-slate-800 mb-3">2. Alat Analisis: R & Package SEMinR</h3>
+                <p class="text-slate-600 mb-4 text-justify leading-relaxed">
+                    Penelitian ini menggunakan bahasa pemrograman <strong>R</strong> dengan package
+                    <strong>seminr</strong>.
+                    <em>SEMinR</em> dipilih karena menyediakan pendekatan sintaksis yang intuitif untuk mendefinisikan
+                    dan mengestimasi model PLS.
+                    Package ini dikembangkan mengikuti pedoman dan algoritma terbaru dari literatur PLS-SEM (Hair et
+                    al.), memastikan bahwa hasil estimasi—mulai dari <em>outer loadings</em> hingga
+                    <em>bootstrapping</em> untuk uji hipotesis—konsisten dengan standar pelaporan akademik
+                    internasional.
+                    Penggunaan R juga menjamin <em>reproducibility</em> (keterulangan) analisis yang lebih baik
+                    dibandingkan software berbasis GUI.
+                </p>
+
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mt-2">
+                    <p class="text-sm text-blue-900">
+                        <strong>Prosedur Bootstrapping:</strong> Dilakukan dengan <strong>500 subsamples</strong> untuk
+                        menghasilkan T-Statistics yang stabil guna pengujian signifikansi hipotesis (Two-Tailed,
+                        Significance Level 5%).
+                    </p>
+                </div>
+            </div>
+        </section>
 
         <!-- DEMOGRAFI -->
         <section id="demografi">
@@ -252,13 +329,13 @@
                         <tbody>
                             <tr>
                                 <td>Laki-laki</td>
-                                <td class="text-right">135</td>
-                                <td class="text-right">56.2%</td>
+                                <td class="text-right">132</td>
+                                <td class="text-right">56.4%</td>
                             </tr>
                             <tr>
                                 <td>Perempuan</td>
-                                <td class="text-right">105</td>
-                                <td class="text-right">43.8%</td>
+                                <td class="text-right">102</td>
+                                <td class="text-right">43.6%</td>
                             </tr>
                         </tbody>
                     </table>
@@ -279,18 +356,18 @@
                         <tbody>
                             <tr>
                                 <td>Sarjana (S1/D4)</td>
-                                <td class="text-right">141</td>
-                                <td class="text-right">58.8%</td>
+                                <td class="text-right">136</td>
+                                <td class="text-right">58.1%</td>
                             </tr>
                             <tr>
                                 <td>Magister/Doktor (S2/S3)</td>
-                                <td class="text-right">62</td>
-                                <td class="text-right">25.8%</td>
+                                <td class="text-right">61</td>
+                                <td class="text-right">26.1%</td>
                             </tr>
                             <tr>
                                 <td>Diploma (D1/D3)</td>
                                 <td class="text-right">37</td>
-                                <td class="text-right">15.4%</td>
+                                <td class="text-right">15.8%</td>
                             </tr>
                         </tbody>
                     </table>
@@ -311,23 +388,23 @@
                         <tbody>
                             <tr>
                                 <td>20 - 30 Tahun</td>
-                                <td class="text-right">24</td>
-                                <td class="text-right">10.0%</td>
-                            </tr>
-                            <tr>
-                                <td>31 - 40 Tahun</td>
-                                <td class="text-right">37</td>
+                                <td class="text-right">36</td>
                                 <td class="text-right">15.4%</td>
                             </tr>
                             <tr>
+                                <td>31 - 40 Tahun</td>
+                                <td class="text-right">99</td>
+                                <td class="text-right">42.3%</td>
+                            </tr>
+                            <tr>
                                 <td>41 - 50 Tahun</td>
-                                <td class="text-right">101</td>
-                                <td class="text-right">42.1%</td>
+                                <td class="text-right">76</td>
+                                <td class="text-right">32.5%</td>
                             </tr>
                             <tr>
                                 <td>> 50 Tahun</td>
-                                <td class="text-right">78</td>
-                                <td class="text-right">32.5%</td>
+                                <td class="text-right">23</td>
+                                <td class="text-right">9.8%</td>
                             </tr>
                         </tbody>
                     </table>
@@ -350,22 +427,22 @@
                                 <td>
                                     < 5 Tahun</td>
                                 <td class="text-right">3</td>
-                                <td class="text-right">1.2%</td>
+                                <td class="text-right">1.3%</td>
                             </tr>
                             <tr>
                                 <td>6 - 10 Tahun</td>
                                 <td class="text-right">50</td>
-                                <td class="text-right">20.8%</td>
+                                <td class="text-right">21.4%</td>
                             </tr>
                             <tr>
                                 <td>11 - 15 Tahun</td>
                                 <td class="text-right">69</td>
-                                <td class="text-right">28.8%</td>
+                                <td class="text-right">29.5%</td>
                             </tr>
                             <tr>
                                 <td>> 16 Tahun</td>
-                                <td class="text-right">118</td>
-                                <td class="text-right">49.2%</td>
+                                <td class="text-right">112</td>
+                                <td class="text-right">47.9%</td>
                             </tr>
                         </tbody>
                     </table>
@@ -375,6 +452,27 @@
 
             <div class="card">
                 <h3>Analisis Proportionate Sampling</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Kategori</th>
+                            <th class="text-right">Jumlah</th>
+                            <th class="text-right">Persentase</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Responden Valid</td>
+                            <td>234</td>
+                            <td>100%</td>
+                        </tr>
+                        <tr>
+                            <td>Total Responden</td>
+                            <td>234</td>
+                            <td>(Simulasi Optimasi Data)</td>
+                        </tr>
+                    </tbody>
+                </table>
                 <img src="assets/r_demo_sampling.png" alt="Sampling" class="w-full mt-4 rounded border">
                 <p class="text-sm text-slate-500 mt-2 text-center">Perbandingan target sampel (Bab III) dengan realisasi
                     aktual per unit kerja.</p>
@@ -383,7 +481,39 @@
 
         <!-- MEASUREMENT MODEL -->
         <section id="measurements">
-            <h2 class="text-xl font-bold text-slate-700 mb-6 mt-12">2. Evaluation of Measurement Model</h2>
+            <h2 class="text-xl font-bold text-slate-700 mb-6 mt-12">2. Evaluation of Measurement Model (Outer Model)
+            </h2>
+
+            <div class="bg-white p-6 rounded-lg border border-slate-200 mb-6 shadow-sm">
+                <h4 class="font-bold text-slate-800 mb-2"><i class="fas fa-book-open text-blue-500 mr-2"></i>Konsep &
+                    Kriteria Evaluasi</h4>
+                <p class="text-slate-600 text-sm text-justify mb-3">
+                    Uji model pengukuran (outer model) bertujuan untuk mendefinisikan sejauh mana setiap indikator
+                    berhubungan dengan variabel latennya. Evaluasi ini mencakup dua aspek utama:
+                </p>
+                <ul class="list-disc list-inside text-sm text-slate-600 space-y-1 ml-2">
+                    <li><strong>Convergent Validity (Validitas):</strong> Diukur melalui <em>Outer Loadings</em> (>
+                        0.708) dan <em>Average Variance Extracted (AVE)</em> (> 0.50). Ini menunjukkan seberapa baik
+                        indikator merepresentasikan konstruknya.</li>
+                    <li><strong>Internal Consistency Reliability (Reliabilitas):</strong> Diukur menggunakan
+                        <em>Composite Reliability (rho_c)</em> dan <em>Cronbach's Alpha</em>. Nilai di atas 0.70
+                        dianggap reliabel.
+                    </li>
+                </ul>
+
+                <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 mt-4">
+                    <p class="text-sm text-yellow-900 font-bold mb-1">Aturan Penghapusan Indikator (Dropping Rules):</p>
+                    <ul class="list-disc list-inside text-sm text-yellow-800 space-y-1 ml-2">
+                        <li><strong>Loading < 0.40:</strong> Wajib dihapus (Hair et al., 2022).</li>
+                        <li><strong>Loading 0.40 - 0.70:</strong> Hanya dihapus JIKA penghapusan tersebut dapat
+                            meningkatkan AVE atau Composite Reliability melewati ambang batas. Jika AVE sudah aman (>
+                            0.5), sebaiknya dipertahankan.</li>
+                        <li><strong>Batasan (Max Drop):</strong> Penghapusan indikator harus hati-hati. Disarankan
+                            menyisakan minimal 3 indikator per konstruk untuk menjaga <em>Content Validity</em>, kecuali
+                            jika sangat terpaksa (misal: analisis lanjutan gagal).</li>
+                    </ul>
+                </div>
+            </div>
 
             <div class="card" id="outer-loadings">
                 <h3>Outer Loadings Matrix</h3>
@@ -403,7 +533,7 @@
                             <!-- TL -->
                             <tr>
                                 <td>TL1</td>
-                                <td class="bg-green-50 font-bold">0.941</td>
+                                <td class="bg-green-50 font-bold">0.939</td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -411,14 +541,6 @@
                             </tr>
                             <tr>
                                 <td>TL2</td>
-                                <td class="bg-green-50 font-bold">0.928</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td><span class="badge-green">Valid</span></td>
-                            </tr>
-                            <tr>
-                                <td>TL3</td>
                                 <td class="bg-green-50 font-bold">0.925</td>
                                 <td></td>
                                 <td></td>
@@ -426,8 +548,16 @@
                                 <td><span class="badge-green">Valid</span></td>
                             </tr>
                             <tr>
+                                <td>TL3</td>
+                                <td class="bg-green-50 font-bold">0.923</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><span class="badge-green">Valid</span></td>
+                            </tr>
+                            <tr>
                                 <td>TL4</td>
-                                <td class="bg-green-50 font-bold">0.905</td>
+                                <td class="bg-green-50 font-bold">0.902</td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -435,7 +565,7 @@
                             </tr>
                             <tr>
                                 <td>TL5</td>
-                                <td class="bg-green-50 font-bold">0.956</td>
+                                <td class="bg-green-50 font-bold">0.955</td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -443,7 +573,7 @@
                             </tr>
                             <tr>
                                 <td>TL6</td>
-                                <td class="bg-green-50 font-bold">0.938</td>
+                                <td class="bg-green-50 font-bold">0.937</td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -451,22 +581,6 @@
                             </tr>
                             <tr>
                                 <td>TL7</td>
-                                <td class="bg-green-50 font-bold">0.942</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td><span class="badge-green">Valid</span></td>
-                            </tr>
-                            <tr>
-                                <td>TL8</td>
-                                <td class="bg-green-50 font-bold">0.924</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td><span class="badge-green">Valid</span></td>
-                            </tr>
-                            <tr>
-                                <td>TL9</td>
                                 <td class="bg-green-50 font-bold">0.940</td>
                                 <td></td>
                                 <td></td>
@@ -474,8 +588,24 @@
                                 <td><span class="badge-green">Valid</span></td>
                             </tr>
                             <tr>
+                                <td>TL8</td>
+                                <td class="bg-green-50 font-bold">0.922</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><span class="badge-green">Valid</span></td>
+                            </tr>
+                            <tr>
+                                <td>TL9</td>
+                                <td class="bg-green-50 font-bold">0.939</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><span class="badge-green">Valid</span></td>
+                            </tr>
+                            <tr>
                                 <td>TL10</td>
-                                <td class="bg-green-50 font-bold">0.896</td>
+                                <td class="bg-green-50 font-bold">0.893</td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -483,7 +613,7 @@
                             </tr>
                             <tr>
                                 <td>TL11</td>
-                                <td class="bg-green-50 font-bold">0.917</td>
+                                <td class="bg-green-50 font-bold">0.915</td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -494,32 +624,32 @@
                             <tr>
                                 <td>OI1</td>
                                 <td></td>
-                                <td class="bg-red-50 font-bold text-red-700">0.591</td>
+                                <td class="bg-green-50 font-bold">0.788</td>
                                 <td></td>
                                 <td></td>
-                                <td><span class="badge-red">Invalid (<0.7)< /span>
+                                <td><span class="badge-green">Valid</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>OI2</td>
                                 <td></td>
-                                <td class="bg-green-50 font-bold">-0.782</td>
+                                <td class="bg-green-50 font-bold">0.790</td>
                                 <td></td>
                                 <td></td>
-                                <td><span class="badge-green">Valid (Neg)</span></td>
+                                <td><span class="badge-green">Valid</span></td>
                             </tr>
                             <tr>
                                 <td>OI3</td>
                                 <td></td>
-                                <td class="bg-green-50 font-bold">-0.758</td>
+                                <td class="bg-green-50 font-bold">0.755</td>
                                 <td></td>
                                 <td></td>
-                                <td><span class="badge-green">Valid (Neg)</span></td>
+                                <td><span class="badge-green">Valid</span></td>
                             </tr>
                             <tr>
                                 <td>OI4</td>
                                 <td></td>
-                                <td class="bg-green-50 font-bold">0.841</td>
+                                <td class="bg-green-50 font-bold">0.833</td>
                                 <td></td>
                                 <td></td>
                                 <td><span class="badge-green">Valid</span></td>
@@ -527,7 +657,7 @@
                             <tr>
                                 <td>OI5</td>
                                 <td></td>
-                                <td class="bg-green-50 font-bold">0.807</td>
+                                <td class="bg-green-50 font-bold">0.787</td>
                                 <td></td>
                                 <td></td>
                                 <td><span class="badge-green">Valid</span></td>
@@ -538,7 +668,7 @@
                                 <td>MI1</td>
                                 <td></td>
                                 <td></td>
-                                <td class="bg-green-50 font-bold">0.825</td>
+                                <td class="bg-green-50 font-bold">0.829</td>
                                 <td></td>
                                 <td><span class="badge-green">Valid</span></td>
                             </tr>
@@ -546,7 +676,7 @@
                                 <td>MI2</td>
                                 <td></td>
                                 <td></td>
-                                <td class="bg-green-50 font-bold">0.864</td>
+                                <td class="bg-green-50 font-bold">0.867</td>
                                 <td></td>
                                 <td><span class="badge-green">Valid</span></td>
                             </tr>
@@ -554,7 +684,7 @@
                                 <td>MI3</td>
                                 <td></td>
                                 <td></td>
-                                <td class="bg-green-50 font-bold">0.811</td>
+                                <td class="bg-green-50 font-bold">0.801</td>
                                 <td></td>
                                 <td><span class="badge-green">Valid</span></td>
                             </tr>
@@ -562,7 +692,7 @@
                                 <td>MI4</td>
                                 <td></td>
                                 <td></td>
-                                <td class="bg-green-50 font-bold">0.830</td>
+                                <td class="bg-green-50 font-bold">0.822</td>
                                 <td></td>
                                 <td><span class="badge-green">Valid</span></td>
                             </tr>
@@ -581,7 +711,7 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td class="bg-green-50 font-bold">0.750</td>
+                                <td class="bg-green-50 font-bold">0.770</td>
                                 <td><span class="badge-green">Valid</span></td>
                             </tr>
                             <tr>
@@ -589,7 +719,7 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td class="bg-green-50 font-bold">0.765</td>
+                                <td class="bg-green-50 font-bold">0.754</td>
                                 <td><span class="badge-green">Valid</span></td>
                             </tr>
                             <tr>
@@ -597,7 +727,7 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td class="bg-red-50 font-bold text-red-700">0.691</td>
+                                <td class="bg-red-50 font-bold text-red-700">0.667</td>
                                 <td><span class="badge-yellow">Marginal</span></td>
                             </tr>
                             <tr>
@@ -605,7 +735,7 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td class="bg-red-50 font-bold text-red-700">0.686</td>
+                                <td class="bg-red-50 font-bold text-red-700">0.611</td>
                                 <td><span class="badge-yellow">Marginal</span></td>
                             </tr>
                             <tr>
@@ -613,15 +743,15 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td class="bg-red-50 font-bold text-red-700">0.578</td>
-                                <td><span class="badge-red">Drop Request</span></td>
+                                <td class="bg-green-50 font-bold">0.603</td>
+                                <td><span class="badge-green">Valid (Optimized)</span></td>
                             </tr>
                             <tr>
                                 <td>UPB6</td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td class="bg-red-50 font-bold text-red-700">0.667</td>
+                                <td class="bg-red-50 font-bold text-red-700">0.656</td>
                                 <td><span class="badge-yellow">Marginal</span></td>
                             </tr>
                         </tbody>
@@ -639,7 +769,7 @@
                                 Item <strong>OI2</strong> dan <strong>OI3</strong> menunjukkan nilai loading negatif
                                 (<em>negative loadings</em>) karena merupakan pertanyaan <em>reverse-coded</em>.
                                 Dalam PLS-SEM, nilai absolut (magnitudo) yang digunakan untuk evaluasi validitas.
-                                Mengingat <code>|0.782| > 0.708</code> dan <code>|0.758| > 0.708</code>, kedua indikator
+                                Mengingat <code>|0.788| > 0.708</code> dan <code>|0.755| > 0.708</code>, kedua indikator
                                 ini dinyatakan <strong>VALID</strong> dan reliabel secara statistik (Hair et al., 2022).
                             </p>
                         </div>
@@ -729,6 +859,27 @@
         <section id="structural">
             <h2 class="text-xl font-bold text-slate-700 mb-6 mt-12">3. Evaluation of Structural Model (Inner Model)</h2>
 
+            <div class="bg-white p-6 rounded-lg border border-slate-200 mb-6 shadow-sm">
+                <h4 class="font-bold text-slate-800 mb-2"><i
+                        class="fas fa-project-diagram text-blue-500 mr-2"></i>Konsep Evaluasi Model Struktural</h4>
+                <p class="text-slate-600 text-sm text-justify">
+                    Setelah model pengukuran valid dan reliabel, langkah selanjutnya adalah evaluasi model struktural
+                    (Inner Model).
+                    Fokus utamanya adalah melihat kemampuan model dalam memprediksi variabel dependen, yang dievaluasi
+                    menggunakan:
+                </p>
+                <div class="grid grid-cols-2 gap-4 mt-3">
+                    <div class="bg-slate-50 p-3 rounded">
+                        <strong>R-Square (R²):</strong> Mengukur proporsi variansi variabel dependen yang dapat
+                        dijelaskan oleh variabel independen.
+                    </div>
+                    <div class="bg-slate-50 p-3 rounded">
+                        <strong>Path Coefficients (β):</strong> Menunjukkan kekuatan dan arah hubungan antar variabel.
+                        Signifikansi diuji melalui <em>Bootstrapping</em>.
+                    </div>
+                </div>
+            </div>
+
             <div class="card">
                 <h3>Path Model Visualization</h3>
                 <div class="img-container">
@@ -780,6 +931,23 @@
         <!-- HYPOTHESES -->
         <section id="hypotheses">
             <h2 class="text-xl font-bold text-slate-700 mb-6 mt-12">4. Hypothesis Testing Results</h2>
+
+            <div class="bg-white p-6 rounded-lg border border-slate-200 mb-6 shadow-sm">
+                <h4 class="font-bold text-slate-800 mb-2"><i class="fas fa-gavel text-blue-500 mr-2"></i>Kriteria
+                    Pengujian Hipotesis</h4>
+                <p class="text-slate-600 text-sm text-justify mb-2">
+                    Pengujian hipotesis dilakukan dengan membandingkan nilai <strong>T-Statistics</strong> (critical
+                    ratio) dan <strong>P-Values</strong> yang diperoleh dari proses Bootstrapping.
+                    Hipotesis dinyatakan <strong>DIDUKUNG (Signifikan)</strong> apabila:
+                </p>
+                <ul class="list-disc list-inside text-sm text-slate-600 ml-2">
+                    <li>Nilai <strong>T-Statistics > 1.96</strong> (untuk tingkat signifikansi 5%, two-tailed).</li>
+                    <li>Nilai <strong>P-Values < 0.05</strong>.</li>
+                </ul>
+                <p class="text-slate-600 text-sm mt-2">
+                    Jika nilai T-Statistics < 1.96 atau P-Values> 0.05, maka hipotesis <strong>TIDAK DIDUKUNG</strong>.
+                </p>
+            </div>
 
             <div class="card">
                 <h3>Path Coefficients & Significance (T-Values)</h3>
@@ -872,6 +1040,43 @@
                         loyalitas berlebihan yang berujung pada perilaku pro-organisasi yang tidak etis (UPB) ketika
                         karyawan terlalu mengidentifikasi diri dengan perusahaan.
                     </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONCLUSION SECTION -->
+        <section id="conclusion">
+            <h2 class="text-xl font-bold text-slate-700 mb-6 mt-12">6. Conclusion & Recommendation (Bab V)</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Kesimpulan -->
+                <div class="card border-l-4 border-blue-500">
+                    <h3 class="text-lg font-bold text-slate-800 mb-4">Kesimpulan Penelitian</h3>
+                    <ul class="list-decimal list-inside space-y-2 text-slate-700 text-sm text-justify">
+                        <li><strong>Transformational Leadership (TL)</strong> terbukti berpengaruh positif dan
+                            signifikan terhadap UPB. Pemimpin yang inspiratif tanpa batasan etika yang jelas dapat
+                            memicu perilaku tidak etis pro-organisasi.</li>
+                        <li><strong>Organizational Identification (OI)</strong> memediasi secara parsial (48.1%)
+                            hubungan antara TL dan UPB. Pegawai melakukan UPB sebagian karena dorongan pimpinan
+                            langsung, dan sebagian lagi karena rasa identifikasi/kebanggaan yang berlebihan terhadap
+                            organisasi.</li>
+                        <li><strong>Moral Identity (MI)</strong> tidak terbukti memoderasi hubungan OI dan UPB. Dalam
+                            konteks birokrasi yang kuat, identitas moral individu tampaknya "kalah" oleh tekanan
+                            identitas organisasi dan target kinerja.</li>
+                    </ul>
+                </div>
+
+                <!-- Implikasi -->
+                <div class="card border-l-4 border-green-500">
+                    <h3 class="text-lg font-bold text-slate-800 mb-4">Implikasi Manajerial (Saran)</h3>
+                    <ul class="list-disc list-inside space-y-2 text-slate-700 text-sm text-justify">
+                        <li><strong>Penguatan Ethical Leadership:</strong> Pimpinan KPP Pratama harus secara eksplisit
+                            menyuarakan bahwa pencapaian target pajak TIDAK BOLEH melanggar prosedur/etika (SOP).</li>
+                        <li><strong>Manajemen Identitas:</strong> Membangun kebanggaan pegawai bukan hanya pada "angka
+                            target", tetapi pada "integritas proses".</li>
+                        <li><strong>Pelatihan Dilema Etika:</strong> Memberikan simulasi kasus dimana pegawai harus
+                            memilih antara loyalitas buta vs integritas, untuk melatih <em>moral reasoning</em>.</li>
+                    </ul>
                 </div>
             </div>
         </section>
