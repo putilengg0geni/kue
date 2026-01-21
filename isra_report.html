@@ -3,306 +3,155 @@
 <html lang='id'>
 <head>
     <meta charset='UTF-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>Laporan Hasil Analisis | Isra Ahadiwustha (24081060)</title>
-    <script src='https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js'></script>
-    <link href='https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap' rel='stylesheet'>
+    <title>Analisis SEM-PLS | KPP Pratama Padang Satu</title>
+    <link href='https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap' rel='stylesheet'>
     <style>
         :root {
-            --primary: #6366f1;
-            --primary-dark: #4f46e5;
-            --secondary: #ec4899;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --danger: #ef4444;
-            --bg-dark: #0f172a;
-            --bg-card: rgba(30, 41, 59, 0.8);
-            --text: #e2e8f0;
-            --text-muted: #94a3b8;
-            --border: rgba(148, 163, 184, 0.2);
+            --bg-sidebar: #1a202c;
+            --bg-main: #f7fafc;
+            --card-bg: #ffffff;
+            --text-main: #2d3748;
+            --text-light: #718096;
+            --primary: #3182ce;
+            --success: #48bb78;
+            --warning: #ecc94b;
+            --danger: #f56565;
+            --border: #e2e8f0;
         }
+        * { box-sizing: border-box; }
+        body { font-family: 'Roboto', sans-serif; margin: 0; display: flex; height: 100vh; background-color: var(--bg-main); color: var(--text-main); }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        aside { width: 260px; background-color: var(--bg-sidebar); color: #fff; flex-shrink: 0; overflow-y: auto; display:flex; flex-direction:column;}
+        .brand { padding: 1.5rem; font-size: 1.2rem; font-weight: 700; border-bottom: 1px solid #2d3748; }
+        .brand span { color: var(--primary); }
+        .nav-item { padding: 0.8rem 1.5rem; color: #a0aec0; text-decoration: none; display: block; font-size: 0.9rem; border-left: 3px solid transparent; transition:0.2s; }
+        .nav-item:hover, .nav-item.active { background-color: #2d3748; color: #fff; border-left-color: var(--primary); }
+        .nav-header { padding: 1.5rem 1.5rem 0.5rem; font-size: 0.75rem; text-transform: uppercase; color: #718096; font-weight: 700; }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
-            color: var(--text);
-            min-height: 100vh;
-            line-height: 1.6;
-        }
+        main { flex: 1; padding: 2rem; overflow-y: auto; }
+        .header { margin-bottom: 2rem; }
+        .header h1 { font-size: 1.8rem; margin: 0; font-weight: 700; }
+        .header p { color: var(--text-light); margin-top: 0.5rem; }
 
-        /* Navigation */
-        nav {
-            position: fixed; top: 0; left: 0; right: 0;
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
-            z-index: 1000;
-            padding: 1rem 2rem;
-        }
-        nav ul {
-            display: flex; gap: 1.5rem; list-style: none;
-            max-width: 1200px; margin: 0 auto; justify-content: center; flex-wrap: wrap;
-        }
-        nav a {
-            color: var(--text-muted); text-decoration: none; font-size: 0.85rem; font-weight: 500;
-            transition: color 0.3s; padding: 0.5rem;
-        }
-        nav a:hover, nav a.active { color: var(--primary); }
+        .card { background: var(--card-bg); border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); padding: 1.5rem; margin-bottom: 1.5rem; border: 1px solid var(--border); }
+        .card h3 { margin-top: 0; font-size: 1.1rem; color: var(--text-main); margin-bottom: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.8rem; }
 
-        /* Main */
-        main { max-width: 1200px; margin: 0 auto; padding: 6rem 2rem 4rem; }
-        section { margin-bottom: 4rem; scroll-margin-top: 5rem; }
+        .info-block { background-color: #ebf8ff; border-left: 4px solid var(--primary); padding: 1rem; border-radius: 4px; margin-bottom: 1.5rem; font-size: 0.9rem; }
+        .info-block h4 { margin: 0 0 0.5rem 0; color: #2c5282; font-size: 0.95rem; }
+        .info-block ul { margin: 0; padding-left: 1.2rem; color: #2b6cb0; }
 
-        h1 {
-            font-size: 2rem; font-weight: 700;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            text-align: center; margin-bottom: 0.5rem;
-            line-height: 1.3;
-        }
-        .subtitle { text-align: center; color: var(--text-muted); margin-bottom: 2rem; font-size: 1rem; }
-        h2 { font-size: 1.75rem; color: var(--primary); border-bottom: 2px solid var(--border); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
-        h3 { font-size: 1.25rem; font-weight: 600; color: var(--text); margin: 0 0 1rem; }
+        .warning-block { background-color: #fffff0; border-left: 4px solid var(--warning); padding: 1rem; border-radius: 4px; margin-bottom: 1.5rem; font-size: 0.9rem; }
+        .warning-block h4 { margin: 0 0 0.5rem 0; color: #744210; font-size: 0.95rem; }
+        .warning-block ul { margin: 0; padding-left: 1.2rem; color: #975a16; }
 
-        /* Cards & Components */
-        .card {
-            background: var(--bg-card);
-            border-radius: 16px; padding: 2rem;
-            border: 1px solid var(--border);
-            backdrop-filter: blur(10px); margin-bottom: 1.5rem;
-            color: var(--text);
-        }
+        .table-container { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+        th { text-align: left; padding: 0.8rem; background-color: #f7fafc; color: var(--text-light); font-weight: 600; border-bottom: 2px solid var(--border); text-transform:uppercase; font-size:0.75rem; }
+        td { padding: 0.8rem; border-bottom: 1px solid var(--border); vertical-align: middle; }
+        tr:last-child td { border-bottom: none; }
 
-        .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; }
-        .stat-card {
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(236, 72, 153, 0.2));
-            border-radius: 12px; padding: 1.5rem; text-align: center; border: 1px solid var(--border);
-        }
-        .stat-value { font-size: 2rem; font-weight: 700; color: var(--primary); }
-        .stat-label { font-size: 0.85rem; color: var(--text-muted); }
+        .badge { padding: 0.25rem 0.5rem; border-radius: 9999px; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; }
+        .badge-success { background-color: #c6f6d5; color: #22543d; }
+        .badge-warning { background-color: #fefcbf; color: #744210; }
+        .badge-danger { background-color: #fed7d7; color: #822727; }
 
-        /* Tables (Dark Theme) */
-        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
-        th, td { padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid var(--border); }
-        th { background: rgba(99, 102, 241, 0.2); color: var(--primary); font-weight: 600; }
-        tr:hover td { background: rgba(99, 102, 241, 0.1); }
-        td { color: var(--text); }
-
-        /* Badges */
-        .badge { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; }
-        .badge-success { background: rgba(16, 185, 129, 0.2); color: var(--success); }
-        .badge-warning { background: rgba(245, 158, 11, 0.2); color: var(--warning); }
-        .badge-danger { background: rgba(239, 68, 68, 0.2); color: var(--danger); }
-
-        /* Mermaid Fix */
-        .mermaid { background: rgba(30, 41, 59, 0.5); border-radius: 12px; padding: 2rem; text-align: center; display: flex; justify-content: center; }
-        img { max-width: 100%; border-radius: 8px; border: 1px solid var(--border); }
-
-        /* Collapsible */
-        .collapsible { background: var(--bg-card); border-radius: 12px; margin-bottom: 1rem; overflow: hidden; border: 1px solid var(--border); }
-        .collapsible-header {
-            padding: 1rem 1.5rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; transition: background 0.3s;
-        }
-        .collapsible-header:hover { background: rgba(99, 102, 241, 0.1); }
-        .collapsible-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
-        .collapsible.open .collapsible-content { max-height: 2000px; }
-        .collapsible-header::after { content: '▼'; font-size: 0.75rem; transition: transform 0.3s; }
-        .collapsible.open .collapsible-header::after { transform: rotate(180deg); }
-
-        /* Formula */
-        .formula {
-            background: rgba(99, 102, 241, 0.1); border-radius: 8px; padding: 1rem 1.5rem;
-            font-family: 'Times New Roman', serif; font-size: 1.1rem; margin: 1rem 0; border-left: 3px solid var(--primary);
-        }
     </style>
 </head>
 <body>
-
-    <nav>
-        <ul>
-            <li><a href='#overview'>Overview</a></li>
-            <li><a href='#methodology'>Metodologi</a></li>
-            <li><a href='#results'>Hasil & Evaluasi</a></li>
-            <li><a href='#hypotheses'>Uji Hipotesis</a></li>
-        </ul>
-    </nav>
+    <aside>
+        <div class='brand'>SEM-PLS <span>Report</span></div>
+        <div class='nav-header'>Main Menu</div>
+        <a href='#overview' class='nav-item active'>Overview & Abstract</a>
+        <a href='#outer' class='nav-item'>Evaluasi Measurement Model</a>
+        <a href='#inner' class='nav-item'>Evaluasi Structural Model</a>
+        <a href='#hypothesis' class='nav-item'>Uji Hipotesis</a>
+        <a href='#charts' class='nav-item'>Visualisasi Model</a>
+    </aside>
 
     <main>
-        <!-- OVERVIEW -->
-        <section id='overview'>
-            <p style='text-align:center; color: var(--primary); font-weight: 600; letter-spacing: 1px; margin-bottom:1rem;'>LAPORAN HASIL ANALISIS PLS-SEM</p>
-            <h1>Pengaruh Ethical Leadership terhadap Employee Integrity melalui Ethical Climate dan Job Satisfaction sebagai Variabel Mediasi</h1>
-            <p class='subtitle'>Studi Kasus pada KPP Pratama Padang Satu</p>
+        <div class='header'>
+            <h1>Laporan Analisis SEM-PLS</h1>
+            <p>Studi Kasus: Pengaruh Ethical Leadership terhadap Employee Integrity (KPP Pratama Padang Satu)</p>
+        </div>
 
-            <div class='card' style='text-align: center;'>
-                <p><strong>Disusun Oleh:</strong></p>
-                <p style='font-size: 1.25rem; font-weight: 700; color: var(--text);'>ISRA AHADIWUSTHA</p>
-                <p style='color: var(--text-muted);'>NIM. 24081060 - Magister Manajemen UNP</p>
-            </div>
-
-            <div class='stat-grid'>
-                <div class='stat-card'>
-                    <div class='stat-value'>104</div>
-                    <div class='stat-label'>Responden</div>
-                </div>
-                <div class='stat-card'>
-                    <div class='stat-value'>4</div>
-                    <div class='stat-label'>Variabel Laten (EL, EC, JS, EI)</div>
-                </div>
-                <div class='stat-card'>
-                    <div class='stat-value'>8</div>
-                    <div class='stat-label'>Hipotesis (H1-H8)</div>
-                </div>
-            </div>
-
-            <br>
+        <section id='outer'>
             <div class='card'>
-                <h3 style='text-align:center;'>Model Penelitian dan Hipotesis</h3>
-                <div class='mermaid'>
-                    
-graph LR
-    EL[Ethical Leadership] --> EC[Ethical Climate]
-    EL --> JS[Job Satisfaction]
-    EC --> EI[Employee Integrity]
-    JS --> EI
+                <h3>1. Evaluasi Measurement Model (Outer Model)</h3>
 
-    style EL fill:#6366f1,stroke:#4f46e5,color:#fff
-    style EC fill:#8b5cf6,stroke:#7c3aed,color:#fff
-    style JS fill:#ec4899,stroke:#db2777,color:#fff
-    style EI fill:#10b981,stroke:#059669,color:#fff
+                <div class='info-block'>
+                    <h4>Konsep & Kriteria Evaluasi</h4>
+                    <p>Uji model pengukuranbertujuan mendefinisikan sejauh mana setiap indikator berhubungan dengan variabel latennya.</p>
+                    <ul>
+                        <li><strong>Convergent Validity (Validitas):</strong> Diukur melalui Outer Loadings (> 0.708) dan Average Variance Extracted (AVE) (> 0.50).</li>
+                        <li><strong>Internal Consistency Reliability (Reliabilitas):</strong> Diukur menggunakan Composite Reliability dan Cronbach's Alpha (Nilai > 0.70 dianggap reliabel).</li>
+                    </ul>
+                </div>
 
+                <div class='warning-block'>
+                    <h4>Aturan Penghapusan Indikator (Dropping Rules):</h4>
+                    <ul>
+                        <li><strong>Loading < 0.40:</strong> Wajib dihapus (Hair et al., 2022).</li>
+                        <li><strong>Loading 0.40 - 0.70:</strong> Hanya dihapus JIKA penghapusan tersebut dapat meningkatkan AVE atau Composite Reliability melewati ambang batas.</li>
+                        <li><strong>Batasan (Max Drop):</strong> Penghapusan indikator harus hati-hati. Disarankan menyisakan minimal 3 indikator per konstruk.</li>
+                    </ul>
                 </div>
-                 <div style='margin-top: 1rem; overflow-x: auto;'>
-                    <table style='font-size: 0.9rem;'>
-                        <thead>
-                            <tr>
-                                <th>Kode</th>
-                                <th>Pernyataan Hipotesis</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>H1</td><td>Ethical Leadership (EL) berpengaruh positif signifikan terhadap Ethical Climate (EC)</td></tr>
-                            <tr><td>H2</td><td>Ethical Leadership (EL) berpengaruh positif signifikan terhadap Job Satisfaction (JS)</td></tr>
-                            <tr><td>H3</td><td>Ethical Climate (EC) berpengaruh positif signifikan terhadap Employee Integrity (EI)</td></tr>
-                            <tr><td>H4</td><td>Job Satisfaction (JS) berpengaruh positif signifikan terhadap Employee Integrity (EI)</td></tr>
-                            <tr><td>H5</td><td>Ethical Climate (EC) berpengaruh positif signifikan terhadap Job Satisfaction (JS)</td></tr>
-                            <tr><td>H6</td><td>EL berpengaruh terhadap EI melalui Ethical Climate (EC)</td></tr>
-                            <tr><td>H7</td><td>EL berpengaruh terhadap EI melalui Job Satisfaction (JS)</td></tr>
-                            <tr><td>H8</td><td>EL berpengaruh terhadap JS melalui Ethical Climate (EC)</td></tr>
-                        </tbody>
-                    </table>
-                </div>
+
+                <h4 style='color:var(--text-main); margin-bottom:1rem;'>Outer Loadings Matrix & Status</h4>
+                <div class='table-container'><table><thead><tr><th>Indicator</th><th>Construct</th><th>Loading Value</th><th>Status</th></tr></thead><tbody><tr><td>IE1</td><td>EC</td><td>0.834</td><td><span class='badge badge-success'>Valid</span></td></tr><tr><td>IE2</td><td>EC</td><td>0.861</td><td><span class='badge badge-success'>Valid</span></td></tr><tr><td>IE3</td><td>EC</td><td>0.789</td><td><span class='badge badge-success'>Valid</span></td></tr><tr><td>IE4</td><td>EC</td><td>0.569</td><td><span class='badge badge-warning'>Marginal</span></td></tr><tr><td>IE5</td><td>EC</td><td>0.606</td><td><span class='badge badge-warning'>Marginal</span></td></tr><tr><td>IE6</td><td>EC</td><td>0.394</td><td><span class='badge badge-danger'>Invalid</span></td></tr><tr><td>IE7</td><td>EC</td><td>0.829</td><td><span class='badge badge-success'>Valid</span></td></tr><tr><td>IE8</td><td>EC</td><td>0.832</td><td><span class='badge badge-success'>Valid</span></td></tr><tr><td>IE9</td><td>EC</td><td>0.821</td><td><span class='badge badge-success'>Valid</span></td></tr><tr><td>IE10</td><td>EC</td><td>0.779</td><td><span class='badge badge-success'>Valid</span></td></tr><tr><td>IE11</td><td>EC</td><td>0.844</td><td><span class='badge badge-success'>Valid</span></td></tr><tr><td>IE12</td><td>EC</td><td>0.219</td><td><span class='badge badge-danger'>Invalid</span></td></tr><tr><td>IE13</td><td>EC</td><td>0.128</td><td><span class='badge badge-danger'>Invalid</span></td></tr><tr><td>IE14</td><td>EC</td><td>0.087</td><td><span class='badge badge-danger'>Invalid</span></td></tr><tr><td>IP1</td><td>EI</td><td>0.872</td><td><span class='badge badge-success'>Valid</span></td></tr><tr><td>IP2</td><td>EI</td><td>0.78</td><td><span class='badge badge-success'>Valid</span></td></tr><tr><td>IP3</td><td>EI</td><td>0.864</td><td><span class='badge badge-success'>Valid</span></td></tr><tr><td>IP4</td><td>EI</td><td>0.85</td><td><span class='badge badge-success'>Valid</span></td></tr><tr><td>IP5</td><td>EI</td><td>0.934</td><td><span class='badge badge-success'>Valid</span></td></tr><tr><td>KE1</td><td>EL</td><td>0.871</td><td><span class='badge badge-success'>Valid</span></td></tr><tr><td>KE2</td><td>EL</td><td>0.94</td><td><span class='badge badge-success'>Valid</span></td></tr><tr><td>KE3</td><td>EL</td><td>0.947</td><td><span class='badge badge-success'>Valid</span></td></tr><tr><td>KE4</td><td>EL</td><td>0.95</td><td><span class='badge badge-success'>Valid</span></td></tr><tr><td>KE5</td><td>EL</td><td>0.816</td><td><span class='badge badge-success'>Valid</span></td></tr><tr><td>KE6</td><td>EL</td><td>0.906</td><td><span class='badge badge-success'>Valid</span></td></tr><tr><td>KE7</td><td>EL</td><td>0.949</td><td><span class='badge badge-success'>Valid</span></td></tr><tr><td>KE8</td><td>EL</td><td>0.889</td><td><span class='badge badge-success'>Valid</span></td></tr><tr><td>KE9</td><td>EL</td><td>0.937</td><td><span class='badge badge-success'>Valid</span></td></tr><tr><td>KE10</td><td>EL</td><td>0.878</td><td><span class='badge badge-success'>Valid</span></td></tr><tr><td>KK1</td><td>JS</td><td>0.827</td><td><span class='badge badge-success'>Valid</span></td></tr><tr><td>KK2</td><td>JS</td><td>0.77</td><td><span class='badge badge-success'>Valid</span></td></tr><tr><td>KK3</td><td>JS</td><td>0.862</td><td><span class='badge badge-success'>Valid</span></td></tr><tr><td>KK4</td><td>JS</td><td>0.751</td><td><span class='badge badge-success'>Valid</span></td></tr><tr><td>KK5</td><td>JS</td><td>0.768</td><td><span class='badge badge-success'>Valid</span></td></tr></tbody></table></div>
+
+                <h4 style='color:var(--text-main); margin-top:2rem; margin-bottom:1rem;'>Construct Reliability & Validity</h4>
+                <div class='table-container'><table><thead><tr><th>alpha</th><th>rhoC</th><th>AVE</th><th>rhoA</th></tr></thead><tbody><tr><td>0.976</td><td>0.979</td><td>0.827</td><td>0.977</td></tr><tr><td>0.866</td><td>0.897</td><td>0.454</td><td>0.94</td></tr><tr><td>0.856</td><td>0.896</td><td>0.634</td><td>0.87</td></tr><tr><td>0.912</td><td>0.935</td><td>0.742</td><td>0.916</td></tr></tbody></table></div>
+
+                <h4 style='color:var(--text-main); margin-top:2rem; margin-bottom:1rem;'>Discriminant Validity (HTMT)</h4>
+                <div class='table-container'><table><thead><tr><th>EL</th><th>EC</th><th>JS</th><th>EI</th></tr></thead><tbody><tr><td>NA</td><td>NA</td><td>NA</td><td>NA</td></tr><tr><td>0.638</td><td>NA</td><td>NA</td><td>NA</td></tr><tr><td>0.744</td><td>0.74</td><td>NA</td><td>NA</td></tr><tr><td>0.435</td><td>0.623</td><td>0.564</td><td>NA</td></tr></tbody></table></div>
             </div>
         </section>
 
-        <!-- METHODOLOGY NARRATIVE -->
-        <section id='methodology'>
-            <h2>📐 Metodologi PLS-SEM</h2>
-             <div class='card'>
-                <p>Analisis dilakukan menggunakan metode <strong>Partial Least Squares - Structural Equation Modeling (PLS-SEM)</strong> dengan bantuan package <code>seminr</code> di R, yang setara dengan SmartPLS 4. Evaluasi dilakukan dalam dua tahap: Measurement Model (Outer Model) dan Structural Model (Inner Model).</p>
-            </div>
-
-            <div class='collapsible open'>
-                <div class='collapsible-header'>1. Evaluasi Measurement Model (Outer Model)</div>
-                <div class='collapsible-content'>
-                    <div style='padding: 1rem 1.5rem;'>
-                         <p>Memastikan validitas dan reliabilitas instrumen:</p>
-                        <ul>
-                            <li><strong>Loading Factor > 0.7</strong>: Validitas item indikator.</li>
-                            <li><strong>Composite Reliability (ρc) > 0.7</strong>: Reliabilitas internal konsistensi.</li>
-                            <li><strong>AVE > 0.5</strong>: Validitas konvergen (rata-rata varians yang dijelaskan).</li>
-                            <li><strong>HTMT < 0.90</strong>: Validitas diskriminan (pembeda antar variabel).</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class='collapsible'>
-                <div class='collapsible-header'>2. Evaluasi Structural Model (Inner Model)</div>
-                <div class='collapsible-content'>
-                    <div style='padding: 1rem 1.5rem;'>
-                        <p>Menguji hubungan antar variabel:</p>
-                        <ul>
-                            <li><strong>R-Square (R²)</strong>: Kekuatan prediksi model (0.67=Kuat, 0.33=Moderat, 0.19=Lemah).</li>
-                            <li><strong>Path Coefficients (β) & P-Values</strong>: Signifikansi hubungan hipotesis (Signifikan jika P-Value < 0.05).</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- RESULTS & EVALUATION -->
-        <section id='results'>
-            <h2>📈 Evaluasi Hasil Analisis</h2>
-
-            <div class='card' id='rel'><h3>1. Construct Reliability & Validity (Output)</h3><div style='overflow-x:auto;'><table><thead><tr><th style='color: var(--primary);'>Metric / Path</th><th>alpha</th><th>rhoC</th><th>AVE</th><th>rhoA</th></tr></thead><tbody><tr><td style='font-weight:600; color: var(--text-muted);'>EL</td><td>0.976</td><td>0.979</td><td>0.827</td><td>0.977</td></tr><tr><td style='font-weight:600; color: var(--text-muted);'>EC</td><td>0.866</td><td>0.897</td><td>0.454</td><td>0.94</td></tr><tr><td style='font-weight:600; color: var(--text-muted);'>JS</td><td>0.856</td><td>0.896</td><td>0.634</td><td>0.87</td></tr><tr><td style='font-weight:600; color: var(--text-muted);'>EI</td><td>0.912</td><td>0.935</td><td>0.742</td><td>0.916</td></tr></tbody></table></div></div>
-             <p style='margin-bottom: 2rem; color: var(--text-muted); font-size: 0.9rem;'>
-                <em>Interpretasi: Nilai Cronbach's Alpha dan Composite Reliability berwarna hijau menandakan variabel reliabel (> 0.7). AVE hijau menandakan valid (> 0.5).</em>
-            </p>
-
-            <div class='card' id='htmt'><h3>2. Discriminant Validity (HTMT Criterion)</h3><div style='overflow-x:auto;'><table><thead><tr><th style='color: var(--primary);'>Metric / Path</th><th>EL</th><th>EC</th><th>JS</th><th>EI</th></tr></thead><tbody><tr><td style='font-weight:600; color: var(--text-muted);'>EL</td><td><span style='color: #eda5a5;'>-</span></td><td><span style='color: #eda5a5;'>-</span></td><td><span style='color: #eda5a5;'>-</span></td><td><span style='color: #eda5a5;'>-</span></td></tr><tr><td style='font-weight:600; color: var(--text-muted);'>EC</td><td>0.638</td><td><span style='color: #eda5a5;'>-</span></td><td><span style='color: #eda5a5;'>-</span></td><td><span style='color: #eda5a5;'>-</span></td></tr><tr><td style='font-weight:600; color: var(--text-muted);'>JS</td><td>0.744</td><td>0.74</td><td><span style='color: #eda5a5;'>-</span></td><td><span style='color: #eda5a5;'>-</span></td></tr><tr><td style='font-weight:600; color: var(--text-muted);'>EI</td><td>0.435</td><td>0.623</td><td>0.564</td><td><span style='color: #eda5a5;'>-</span></td></tr></tbody></table></div></div>
-             <p style='margin-bottom: 2rem; color: var(--text-muted); font-size: 0.9rem;'>
-                <em>Interpretasi: Nilai HTMT harus di bawah 0.90 (Gold et al., 2001) agar validitas diskriminan terpenuhi.</em>
-            </p>
-
-            <div class='card' id='rsq'><h3>3. R-Squared (Kekuatan Model)</h3><div style='overflow-x:auto;'><table><thead><tr><th style='color: var(--primary);'>Metric / Path</th><th>R-Squared</th><th>Adj. R-Squared</th></tr></thead><tbody><tr><td style='font-weight:600; color: var(--text-muted);'>EC</td><td>0.431</td><td>0.425</td></tr><tr><td style='font-weight:600; color: var(--text-muted);'>JS</td><td>0.601</td><td>0.593</td></tr><tr><td style='font-weight:600; color: var(--text-muted);'>EI</td><td>0.382</td><td>0.37</td></tr></tbody></table></div></div>
-        </section>
-
-        <!-- HYPOTHESES -->
-        <section id='hypotheses'>
-            <h2>✅ Pengujian Hipotesis (Direct & Indirect)</h2>
-            <p style='color:var(--text-muted); margin-bottom:1rem;'>Pengujian signifikansi menggunakan Bootstrapping 500 subsamples. Hipotesis diterima jika P-Value < 0.05 (T-Statistic > 1.96).</p>
-
-            <div class='card' id='boot'><h3>Tabel Path Coefficients & Signifikansi (Direct Effects)</h3><div style='overflow-x:auto;'><table><thead><tr><th style='color: var(--primary);'>Metric / Path</th><th>Original Est.</th><th>Bootstrap Mean</th><th>Bootstrap SD</th><th>T Stat.</th><th>2.5% CI</th><th>97.5% CI</th><th>Hypothesis_Status</th></tr></thead><tbody><tr><td style='font-weight:600; color: var(--text-muted);'>EL  ->  EC</td><td>0.656</td><td>0.671</td><td>0.08</td><td>8.167</td><td>0.509</td><td>0.819</td><td>Rejected</td></tr><tr><td style='font-weight:600; color: var(--text-muted);'>EL  ->  JS</td><td>0.403</td><td>0.411</td><td>0.093</td><td>4.327</td><td>0.239</td><td>0.596</td><td>Rejected</td></tr><tr><td style='font-weight:600; color: var(--text-muted);'>EC  ->  JS</td><td>0.448</td><td>0.445</td><td>0.098</td><td>4.566</td><td>0.252</td><td>0.62</td><td>Rejected</td></tr><tr><td style='font-weight:600; color: var(--text-muted);'>EC  ->  EI</td><td>0.494</td><td>0.507</td><td>0.146</td><td>3.386</td><td>0.18</td><td>0.759</td><td>Rejected</td></tr><tr><td style='font-weight:600; color: var(--text-muted);'>JS  ->  EI</td><td>0.159</td><td>0.153</td><td>0.119</td><td>1.339</td><td>-0.074</td><td>0.402</td><td>Rejected</td></tr></tbody></table></div></div>
-
+        <section id='inner'>
             <div class='card'>
-                <div class='mermaid'>
-                    graph TD
-                    Start[Mulai Interpretasi] --> CheckP{P-Value < 0.05?}
-                    CheckP -->|Ya| Sig[✅ Hipotesis DITERIMA
-(Signifikan)]
-                    CheckP -->|Tidak| Review[❌ Hipotesis DITOLAK
-(Tidak Signifikan)]
+                <h3>2. Evaluasi Structural Model (Inner Model)</h3>
+                <div class='info-block'>
+                    <h4>Konsep Evaluasi</h4>
+                    <p>Evaluasi model struktural bertujuan untuk memprediksi hubungan antar variabel laten. Kriteria utama adalah koefisien determinasi (R-Square). Nilai R-Square 0.67 (Kuat), 0.33 (Moderat), 0.19 (Lemah).</p>
+                </div>
+                <div class='table-container'><table><thead><tr><th>R^2</th><th>AdjR^2</th></tr></thead><tbody><tr><td>0.431</td><td>0.425</td></tr><tr><td>0.601</td><td>0.593</td></tr><tr><td>0.382</td><td>0.37</td></tr></tbody></table></div>
+            </div>
+        </section>
 
-                    style Sig fill:#10b981,color:#fff
-                    style Review fill:#ef4444,color:#fff
+        <section id='hypothesis'>
+            <div class='card'>
+                <h3>3. Uji Hipotesis (Bootstrapping Output)</h3>
+                <div class='info-block'>
+                    <h4>Kriteria Keputusan</h4>
+                    <p>Hipotesis diterima jika nilai <strong>T-Statistics > 1.96</strong> atau <strong>P-Values < 0.05</strong>.</p>
+                </div>
+                <div class='table-container'><table><thead><tr><th>Original Est.</th><th>Bootstrap Mean</th><th>Bootstrap SD</th><th>T Stat.</th><th>2.5% CI</th><th>97.5% CI</th></tr></thead><tbody><tr><td>0.656</td><td>0.667</td><td>0.079</td><td>8.319</td><td>0.51</td><td>0.808</td></tr><tr><td>0.403</td><td>0.407</td><td>0.085</td><td>4.732</td><td>0.247</td><td>0.581</td></tr><tr><td>0.448</td><td>0.447</td><td>0.089</td><td>5.054</td><td>0.281</td><td>0.622</td></tr><tr><td>0.494</td><td>0.492</td><td>0.142</td><td>3.471</td><td>0.194</td><td>0.735</td></tr><tr><td>0.159</td><td>0.165</td><td>0.109</td><td>1.453</td><td>-0.034</td><td>0.389</td></tr></tbody></table></div>
+            </div>
+        </section>
+
+        <section id='charts'>
+            <div class='card'>
+                <h3>4. Visualisasi Model</h3>
+                <div style='text-align:center;'>
+                    <h4 style='color:var(--text-light); margin-bottom:1rem;'>Structural Model Path Coefficients</h4>
+                    <img src='' style='max-width:100%; border-radius:4px; border:1px solid var(--border);'>
+
+                    <h4 style='color:var(--text-light); margin-top:2rem; margin-bottom:1rem;'>Bootstrapping Significance (T-Values)</h4>
+                    <img src='' style='max-width:100%; border-radius:4px; border:1px solid var(--border);'>
                 </div>
             </div>
         </section>
-
-        <!-- PLOTS -->
-        <section id='plots'>
-            <h2>🖼️ Visualisasi Output</h2>
-            <div class='card' style='text-align:center;'>
-                <h3>Structural Model Plot</h3>
-                <!-- Use Base64 Encoded Image -->
-                <img src='' alt='Structural Plot' style='margin-top:1rem;'>
-            </div>
-             <div class='card' style='text-align:center;'>
-                <h3>Bootstrap T-Values Plot</h3>
-                <!-- Use Base64 Encoded Image -->
-                <img src='' alt='Bootstrap Plot' style='margin-top:1rem;'>
-            </div>
-        </section>
-
-        <footer style='text-align: center; color: var(--text-muted); padding-top: 2rem; border-top: 1px solid var(--border); margin-top: 4rem;'>
-            &copy; 2025 Analisis Statistik - Generated by seminr (R)
-        </footer>
 
     </main>
 
     <script>
-        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
-
-        // Collapsible Logic
-        var coll = document.getElementsByClassName('collapsible-header');
-        for (var i = 0; i < coll.length; i++) {
-        coll[i].addEventListener('click', function() {
-            this.parentElement.classList.toggle('open');
+        const links = document.querySelectorAll('.nav-item');
+        links.forEach(l => {
+            l.addEventListener('click', () => {
+                links.forEach(x => x.classList.remove('active'));
+                l.classList.add('active');
+            });
         });
-        }
     </script>
 </body>
 </html>
