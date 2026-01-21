@@ -86,12 +86,13 @@
         }
 
         h2 {
-            font-size: 12pt;
+            font-size: 13pt;
             font-weight: bold;
             text-transform: uppercase;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-            break-after: avoid;
+            margin-top: 22px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #000;
+            padding-bottom: 6px;
         }
 
         h3 {
@@ -104,8 +105,15 @@
         }
 
         p {
-            margin-bottom: 15px;
-            text-indent: 0;
+            margin-bottom: 12px;
+            text-align: justify;
+            text-indent: 12mm;
+            line-height: 1.4;
+            /* Adjusted to standard academic spacing */
+            font-size: 11.5pt;
+            /* Adjusted for better content fit */
+            orphans: 3;
+            widows: 3;
         }
 
         /* Images & Tables */
@@ -183,13 +191,61 @@
             background: #34495e;
         }
 
+        @page {
+            size: A4;
+            margin: 20mm;
+        }
+
         @media print {
-            .export-controls {
-                display: none;
+
+            html,
+            body {
+                width: 100% !important;
+                height: auto !important;
+                overflow: visible !important;
+                max-width: none !important;
+                margin: 0 !important;
+                padding: 0 !important;
             }
 
+            .print-container {
+                width: 100% !important;
+                max-width: none !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            /* Re-apply columns to the content wrapper */
             .content-body {
-                column-count: 2;
+                column-count: 2 !important;
+                -webkit-column-count: 2 !important;
+                column-gap: 1cm !important;
+                display: block !important;
+                width: 100% !important;
+            }
+
+            /* Spanning Elements (Full Width) */
+            .journal-header,
+            h1,
+            .author-section,
+            .abstract-container,
+            .figure-caption,
+            .full-width-print {
+                column-span: all !important;
+                -webkit-column-span: all !important;
+            }
+
+
+
+            .export-controls {
+                display: none !important;
+            }
+
+            h2,
+            h3 {
+                break-after: avoid;
+                page-break-after: avoid;
+                -webkit-column-break-after: avoid;
             }
         }
     </style>
@@ -209,7 +265,7 @@
         Puti Lenggogeni<sup>1*</sup><br>
         Universitas Negeri Padang<br>
         <span class="corresponding-author">Corresponding Author:</span> <a
-            href="mailto:puti.length@email.com">puti.length@email.com</a>
+            href="mailto:puti.length@email.com">putiakza@gmail.com</a>
     </div>
 
     <div class="abstract-container">
@@ -267,8 +323,24 @@
             mengadopsi perspektif "keranjang busuk" (sistem yang korup), di mana tekanan struktural dan kepemimpinan
             yang terlalu ambisius dapat memicu apa yang disebut oleh Adams & Balfour (2004) sebagai <em>administrative
                 evil</em>—ketika pegawai melakukan kejahatan administratif bukan karena niat jahat, melainkan karena
-            kepatuhan yang berlebihan pada otoritas dan target organisasi. Paradoks efisiensi versus etika ini menjadi
             landasan ontologis utama dalam investigasi empiris ini.</p>
+        <p>Fenomena ini semakin relevan dalam konteks reformasi birokrasi di Indonesia, khususnya di Kementerian
+            Keuangan.
+            Sebagai institusi yang mengelola pilar pendapatan negara, DJP berada di bawah sorotan publik yang intens.
+            Tuntutan untuk mencapai target penerimaan pajak (tax ratio) seringkali berbenturan dengan kondisi ekonomi
+            makro yang fluktuatif. Dalam situasi "krisis pencapaian target" inilah, kepemimpinan transformasional yang
+            tadinya diharapkan menjadi solusi, justru bisa bermutasi menjadi sumber tekanan psikologis. Pemimpin yang
+            mampu mengartikulasikan visi "kemandirian bangsa melalui pajak" secara sangat persuasif dapat, tanpa sadar,
+            membuat bawahan merasa bahwa segala cara—termasuk yang tidak etis—dapat dibenarkan demi tujuan mulia
+            tersebut. Hal ini menciptakan apa yang disebut oleh Tenbrunsel dan Smith-Crowe (2008) sebagai <em>ethical
+                fading</em>, di mana dimensi etika dari sebuah keputusan memudar dan digantikan oleh logika bisnis atau
+            pencapaian target.</p>
+        <p>Oleh karena itu, penelitian ini tidak hanya sekadar menguji hubungan variabel, tetapi berupaya merekonstruksi
+            pemahaman kita tentang loyalitas pegawai negeri. Apakah loyalitas selalu baik? Kapan loyalitas berubah
+            menjadi fanatisme buta? Dan yang paling penting, apakah karakter moral individu cukup kuat untuk menahan
+            arus tekanan organisasi yang begitu deras? Jawaban atas pertanyaan-pertanyaan ini diharapkan dapat
+            memberikan peta jalan baru bagi manajemen sumber daya manusia di sektor publik, dari yang tadinya hanya
+            berfokus pada "kinerja tinggi" menjadi "kinerja tinggi yang beretika".</p>
 
         <h2>TINJAUAN PUSTAKA</h2>
 
@@ -280,17 +352,32 @@
             bawahan mungkin merasa "wajib" untuk mencapai target dengan segala cara, termasuk melanggar prosedur (UPB).
             Dinamika ini menjelaskan bahwa UPB bukanlah bentuk penyimpangan destruktif biasa, melainkan bentuk
             <em>unethical benevolence</em>. Bawahan melanggar aturan bukan untuk merugikan organisasi, tetapi justru
-            untuk "menyelamatkan" organisasi dari kegagalan pencapaian target. Ironi inilah yang membuat UPB sulit
             dideteksi dan diberantas, karena seringkali berlindung di balik topeng loyalitas dan kinerja tinggi.
         </p>
+        <p>Lebih lanjut, teori Pertukaran Sosial juga menjelaskan mekanisme resiprositas negatif. Jika bawahan merasa
+            bahwa pemimpin telah "berkorban" atau "memperjuangkan" kesejahteraan mereka (misalnya, memperjuangkan
+            tukin atau fasilitas), maka rasa utang budi itu akan semakin besar. Bawahan akan, secara kognitif,
+            merasionalisasi perilaku UPB sebagai bentuk "pembayaran kembali" yang wajar. Pemimpin transformasional,
+            dengan karisma dan perhatian personalnya, sangat efektif dalam menciptakan ikatan emosional semacam ini.
+            Mereka tidak memerintahkan kecurangan secara eksplisit, namun mereka menciptakan iklim di mana "kegagalan
+            bukanlah opsi" dan "loyalitas adalah segalanya". Inilah yang disebut Kark et al. (2003) sebagai sisi
+            "dependensi" dari kepemimpinan transformasional, yang sering luput dari literatur manajemen arus utama.</p>
 
         <h3>Mekanisme Mediasi: Organizational Identification (OI)</h3>
         <p>Mengacu pada <em>Social Identity Theory</em> (Tajfel & Turner, 1986), OI adalah persepsi ketunggalan
             (<em>oneness</em>) dengan organisasi. Pegawai dengan OI tinggi mendefinisikan diri mereka melalui atribut
             organisasi. Penelitian ini mengajukan proposisi bahwa TL meningkatkan UPB secara tidak langsung dengan cara
             memperkuat OI. Pegawai yang sangat teridentifikasi akan memandang kritik terhadap organisasi sebagai
-            serangan pribadi, dan keberhasilan organisasi sebagai trofi pribadi, sehingga batasan antara benar dan salah
             menjadi kabur demi "kebaikan" entitas yang mereka cintai.</p>
+        <p>Identifikasi organisasi yang ekstrem dapat mengarah pada gejala <em>organizational narcissism</em>. Pegawai
+            tidak lagi memisahkan identitas diri mereka dari identitas organisasi. Kritik terhadap prosedur kerja DJP,
+            misalnya, dianggap sebagai serangan personal terhadap harga diri mereka. Akibatnya, mereka akan melakukan
+            apa saja untuk memelihara citra positif organisasi, termasuk dengan menyembunyikan kesalahan, memanipulasi
+            laporan kinerja, atau melindungi kolega yang tidak kompeten. Mekanisme psikologis ini menjelaskan mengapa
+            pegawai yang jujur dalam kehidupan pribadi bisa melakukan tindakan tidak jujur di tempat kerja; mereka
+            sedang beroperasi dalam "mode agen" (<em>agentic state</em>) di mana mereka merasa hanya sebagai
+            perpanjangan
+            tangan dari kehendak organisasi.</p>
 
         <h3>Mekanisme Moderasi: Moral Identity (MI)</h3>
         <p><em>Moral Identity</em> (MI) adalah konstruksi kognitif tentang seberapa penting sifat-sifat bermoral (jujur,
@@ -307,69 +394,73 @@
         <!-- Conceptual Framework SVG -->
         <!-- Conceptual Framework SVG -->
         <!-- Conceptual Framework SVG -->
-        <div style="break-inside: avoid; text-align: center; margin: 30px 0;">
-            <svg viewBox="0 0 800 350" xmlns="http://www.w3.org/2000/svg"
-                style="max-width: 100%; height: auto; font-family: 'Book Antiqua', serif;">
-                <!-- Definitions for markers -->
-                <defs>
-                    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                        <polygon points="0 0, 10 3.5, 0 7" fill="#000" />
-                    </marker>
-                </defs>
+    </div>
+    <!-- End of First Column Section -->
 
-                <!-- Nodes (Compressed Gaps) -->
-                <!-- Transformational Leadership (x=0) -->
-                <rect x="0" y="150" width="200" height="80" rx="10" ry="10" fill="#fff" stroke="#000"
-                    stroke-width="1.5" />
-                <text x="100" y="185" text-anchor="middle" font-size="14" font-weight="bold">Transformational</text>
-                <text x="100" y="205" text-anchor="middle" font-size="14" font-weight="bold">Leadership</text>
+    <!-- Conceptual Framework SVG (Full Width) -->
+    <div class="full-width-print"
+        style="text-align: center; margin: 30px 0; width: 100%; break-inside: avoid; page-break-inside: avoid;">
+        <svg viewBox="0 0 800 350" xmlns="http://www.w3.org/2000/svg"
+            style="max-width: 100%; height: auto; font-family: 'Book Antiqua', serif;">
+            <!-- Definitions for markers -->
+            <defs>
+                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#000" />
+                </marker>
+            </defs>
 
-                <!-- Organizational Identification (x=260, Gap=60) -->
-                <rect x="260" y="150" width="200" height="80" rx="10" ry="10" fill="#fff" stroke="#000"
-                    stroke-width="1.5" />
-                <text x="360" y="185" text-anchor="middle" font-size="14" font-weight="bold">Organizational</text>
-                <text x="360" y="205" text-anchor="middle" font-size="14" font-weight="bold">Identification</text>
+            <!-- Nodes (Compressed Gaps) -->
+            <!-- Transformational Leadership (x=0) -->
+            <rect x="0" y="150" width="200" height="80" rx="10" ry="10" fill="#fff" stroke="#000" stroke-width="1.5" />
+            <text x="100" y="185" text-anchor="middle" font-size="14" font-weight="bold">Transformational</text>
+            <text x="100" y="205" text-anchor="middle" font-size="14" font-weight="bold">Leadership</text>
 
-                <!-- Unethical Pro-Org Behavior (x=520, Gap=60, Ends at 720) -->
-                <rect x="520" y="150" width="200" height="80" rx="10" ry="10" fill="#fff" stroke="#000"
-                    stroke-width="1.5" />
-                <text x="620" y="185" text-anchor="middle" font-size="14" font-weight="bold">Unethical Pro-</text>
-                <text x="620" y="205" text-anchor="middle" font-size="14" font-weight="bold">Organizational
-                    Behavior</text>
+            <!-- Organizational Identification (x=260, Gap=60) -->
+            <rect x="260" y="150" width="200" height="80" rx="10" ry="10" fill="#fff" stroke="#000"
+                stroke-width="1.5" />
+            <text x="360" y="185" text-anchor="middle" font-size="14" font-weight="bold">Organizational</text>
+            <text x="360" y="205" text-anchor="middle" font-size="14" font-weight="bold">Identification</text>
 
-                <!-- Moral Identity (x=260) -->
-                <rect x="260" y="20" width="200" height="60" rx="10" ry="10" fill="#fff" stroke="#000"
-                    stroke-width="1.5" />
-                <text x="360" y="55" text-anchor="middle" font-size="14" font-style="italic">Moral Identity</text>
+            <!-- Unethical Pro-Org Behavior (x=520, Gap=60, Ends at 720) -->
+            <rect x="520" y="150" width="200" height="80" rx="10" ry="10" fill="#fff" stroke="#000"
+                stroke-width="1.5" />
+            <text x="620" y="185" text-anchor="middle" font-size="14" font-weight="bold">Unethical Pro-</text>
+            <text x="620" y="205" text-anchor="middle" font-size="14" font-weight="bold">Organizational
+                Behavior</text>
 
-                <!-- Paths (Arrows) -->
-                <!-- H2: TL -> OI (200 to 250) -->
-                <line x1="200" y1="190" x2="250" y2="190" stroke="#000" stroke-width="1.5"
-                    marker-end="url(#arrowhead)" />
-                <text x="230" y="180" text-anchor="middle" font-size="12">H2</text>
+            <!-- Moral Identity (x=260) -->
+            <rect x="260" y="20" width="200" height="60" rx="10" ry="10" fill="#fff" stroke="#000" stroke-width="1.5" />
+            <text x="360" y="55" text-anchor="middle" font-size="14" font-style="italic">Moral Identity</text>
 
-                <!-- H3: OI -> UPB (460 to 510) -->
-                <line x1="460" y1="190" x2="510" y2="190" stroke="#000" stroke-width="1.5"
-                    marker-end="url(#arrowhead)" />
-                <text x="490" y="180" text-anchor="middle" font-size="12">H3</text>
+            <!-- Paths (Arrows) -->
+            <!-- H2: TL -> OI (200 to 250) -->
+            <line x1="200" y1="190" x2="250" y2="190" stroke="#000" stroke-width="1.5" marker-end="url(#arrowhead)" />
+            <text x="230" y="180" text-anchor="middle" font-size="12">H2</text>
 
-                <!-- H1: TL -> UPB (Curved Bottom) -->
-                <path d="M 100 230 V 280 H 620 V 240" fill="none" stroke="#000" stroke-width="1.5"
-                    marker-end="url(#arrowhead)" />
-                <text x="360" y="270" text-anchor="middle" font-size="12" fill="#000">H1</text>
+            <!-- H3: OI -> UPB (460 to 510) -->
+            <line x1="460" y1="190" x2="510" y2="190" stroke="#000" stroke-width="1.5" marker-end="url(#arrowhead)" />
+            <text x="490" y="180" text-anchor="middle" font-size="12">H3</text>
 
-                <!-- H5: Moderation (MI -> Path H3, x=360) -->
-                <line x1="360" y1="80" x2="360" y2="150" stroke="#000" stroke-width="1.5" stroke-dasharray="5,5"
-                    marker-end="url(#arrowhead)" />
-                <text x="370" y="120" text-anchor="start" font-size="12">H5</text>
+            <!-- H1: TL -> UPB (Curved Bottom) -->
+            <path d="M 100 230 V 280 H 620 V 240" fill="none" stroke="#000" stroke-width="1.5"
+                marker-end="url(#arrowhead)" />
+            <text x="360" y="270" text-anchor="middle" font-size="12" fill="#000">H1</text>
 
-                <!-- H4 (Mediation) -->
-                <text x="360" y="320" text-anchor="middle" font-size="12" font-style="italic" fill="#666">(H4: Mediation
-                    Effect)</text>
+            <!-- H5: Moderation (MI -> Path H3, x=360) -->
+            <line x1="360" y1="80" x2="360" y2="150" stroke="#000" stroke-width="1.5" stroke-dasharray="5,5"
+                marker-end="url(#arrowhead)" />
+            <text x="370" y="120" text-anchor="start" font-size="12">H5</text>
 
-            </svg>
-            <div class="figure-caption">Gambar 1. Kerangka Konseptual Penelitian</div>
-        </div>
+            <!-- H4 (Mediation) -->
+            <text x="360" y="320" text-anchor="middle" font-size="12" font-style="italic" fill="#666">(H4: Mediation
+                Effect)</text>
+
+        </svg>
+        <div class="figure-caption">Gambar 1. Kerangka Konseptual Penelitian</div>
+    </div>
+
+    <!-- Start of Second Column Section -->
+    <div class="content-body">
 
         <h2>METODOLOGI PENELITIAN</h2>
 
@@ -392,6 +483,16 @@
             style="background:#f9f9f9; padding:10px; border-left:3px solid #000; font-family:monospace; margin:10px 0; font-size:9pt; text-align: center;">
             AVE = (Σλ²) / (Σλ² + ΣVar(ε))
         </div>
+
+    </div>
+    <!-- End of Methodology Section -->
+
+    <!-- Force Page Break -->
+    <!-- Section Break -->
+    <div style="margin-top: 20px; margin-bottom: 20px;"></div>
+
+    <!-- Start of Results Section -->
+    <div class="content-body">
 
         <h2>HASIL PENELITIAN DAN PEMBAHASAN</h2>
 
@@ -537,13 +638,44 @@
             <em>moral muteness</em> (kebungkaman moral)—mereka tahu sesuatu salah, namun memilih diam atau ikut arus
             karena kuatnya arus tekanan organisasi.
         </p>
-        <p>Analisis ini juga membuka kemungkinan adanya fenomena <em>Ethical Blindness</em> (Palazzo et al., 2012),
-            yaitu ketidakmampuan sementara pembuat keputusan untuk melihat dimensi etis dari suatu keputusan.
-            Identifikasi
-            organisasi yang berlebihan mungkin menciptakan konteks di mana pegawai tidak lagi melihat "memanipulasi
-            data"
-            sebagai isu etika, melainkan semata-mata sebagai "strategi teknis" pencapaian target. Ini adalah peringatan
-            keras bagi manajemen sumber daya manusia di sektor publik.</p>
+        sebagai isu etika, melainkan semata-mata sebagai "strategi teknis" pencapaian target. Ini adalah peringatan
+        keras bagi manajemen sumber daya manusia di sektor publik.</p>
+
+        <h4>Implikasi Teoretis</h4>
+        <p>Penelitian ini memberikan kontribusi signifikan dalam memajukan literatur kepemimpinan dan etika birokrasi.
+            Pertama, studi ini memperluas validitas konsep <em>Unethical Pro-organizational Behavior</em> (UPB) ke dalam
+            konteks sektor publik di negara berkembang (non-Barat). Sebagian besar studi UPB dilakukan di sektor swasta
+            (mis: Umphress et al., 2010), di mana motif profit menjadi driver utama. Temuan ini menegaskan bahwa motif
+            "pengabdian negara" di sektor publik pun dapat didistorsi menjadi pemicu perilaku tidak etis yang serupa.
+        </p>
+        <p>Kedua, penelitian ini memperkaya diskursus mengenai <em>Dark Side of Social Identification</em>. Selama ini,
+            identifikasi organisasi selalu diglorifikasi sebagai prediktor utama kinerja. Studi ini memberikan bukti
+            empiris tandingan bahwa identifikasi yang terlalu kuat (over-identification), tanpa diimbangi nalar kritis,
+            justru berbahaya. Ini mengonfirmasi postulat "The Dark Side of the Good High" bahwa variable positif bisa
+            memiliki dampak negatif jika berlebihan.</p>
+        <p>Ketiga, kegagalan <em>Moral Identity</em> sebagai moderator memberikan wawasan baru tentang dominasi konteks
+            situasional atas disposisi personal. Hal ini menantang asumsi dasar teori interaksionis (person-situation
+            interaction) dan menyarankan agar peneliti masa depan lebih memperhatikan faktor <em>situational
+                strength</em>
+            sebagai variabel kontrol atau moderator kunci.</p>
+
+        <h4>Keterbatasan dan Saran Penelitian Mendatang</h4>
+        <p>Terlepas dari kontribusi yang diberikan, penelitian ini memiliki beberapa keterbatasan. Pertama, desain
+            cross-sectional
+            membatasi kemampuan untuk menarik kesimpulan kausal yang tegas. Ada kemungkinan hubungan timbal balik, di
+            mana
+            pegawai yang melakukan UPB kemudian meningkatkan justifikasi loyalitas mereka untuk mengurangi disonansi
+            kognitif.
+            Penelitian longitudinal di masa depan sangat disarankan.</p>
+        <p>Kedua, penggunaan self-report rentan terhadap bias sosial (social desirability bias), terutama ketika
+            menanyakan
+            perilaku tidak etis. Meskipun anonimitas dijamin, pegawai mungkin masih enggan mengakui pelanggaran
+            tertentu.
+            Metode eksperimental atau penggunaan skenario (vignette) bisa menjadi alternatif untuk mengukur
+            kecenderungan UPB
+            secara lebih objektif. Ketiga, penelitian ini hanya dilakukan pada satu instansi (DJP). Generalisasi ke
+            instansi
+            publik lain dengan karakteristik budaya berbeda perlu dilakukan dengan hati-hati.</p>
 
         <h2>KESIMPULAN DAN REKOMENDASI</h2>
 
