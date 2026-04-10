@@ -158,20 +158,18 @@
             margin-bottom: 8px;
             font-size: 11pt;
         }
-
-        /* Export Controls */
         .export-controls {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
+            position: fixed !important;
+            bottom: 30px !important;
+            right: 30px !important;
             background: #fff;
             padding: 15px;
             border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-            display: flex;
-            flex-direction: column;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            display: flex !important;
+            flex-direction: column !important;
             gap: 10px;
-            z-index: 1000;
+            z-index: 9999 !important;
             font-family: sans-serif;
             border: 1px solid #ddd;
         }
@@ -185,11 +183,17 @@
             cursor: pointer;
             font-size: 14px;
             text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
         }
 
         .btn-export:hover {
             background: #34495e;
         }
+
+
 
         @page {
             size: A4;
@@ -197,6 +201,9 @@
         }
 
         @media print {
+            .export-controls {
+                display: none !important;
+            }
 
             html,
             body {
@@ -237,9 +244,7 @@
 
 
 
-            .export-controls {
-                display: none !important;
-            }
+
 
             h2,
             h3 {
@@ -665,6 +670,42 @@
                 https://doi.org/10.3389/fpsyg.2022.1068606</p>
         </div>
     </div>
+
+    <!-- Export Controls -->
+    <div class="export-controls">
+        <button onclick="downloadAsDoc()" class="btn-export"><span>📄</span> Download as Word</button>
+        <button onclick="window.print()" class="btn-export"><span>🖨️</span> Print to PDF</button>
+        <button onclick="copyToClipboard()" class="btn-export"><span>📋</span> Copy to Clipboard</button>
+    </div>
+
+    <script>
+        function downloadAsDoc() {
+            var header = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML to Word</title><style>body{font-family:'Book Antiqua',serif;}</style></head><body>";
+            var bodyClone = document.body.cloneNode(true);
+            var controls = bodyClone.querySelector('.export-controls');
+            if (controls) controls.remove();
+
+            var sourceHTML = header + bodyClone.innerHTML + "</body></html>";
+            var source = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(sourceHTML);
+            var fileDownload = document.createElement("a");
+            document.body.appendChild(fileDownload);
+            fileDownload.href = source;
+            fileDownload.download = 'Journal_Puti_Lenggogeni_EN.doc';
+            fileDownload.click();
+            document.body.removeChild(fileDownload);
+        }
+
+        function copyToClipboard() {
+            var bodyClone = document.body.cloneNode(true);
+            var controls = bodyClone.querySelector('.export-controls');
+            if (controls) controls.remove();
+            const type = "text/html";
+            const blob = new Blob([bodyClone.innerHTML], { type });
+            const data = [new ClipboardItem({ [type]: blob })];
+            navigator.clipboard.write(data);
+            alert("Copied!");
+        }
+    </script>
 </body>
 
 </html>
