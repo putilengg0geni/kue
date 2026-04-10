@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paradoks Loyalitas: Mengapa Pemimpin Inspiratif Memicu Penyimpangan Etis?</title>
+    <style>
+        body {
+            font-family: "Book Antiqua", "Palatino Linotype", Palatino, serif;
+            font-size: 12pt;
+            line-height: 1.6;
+            color: #000;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px;
+            background-color: #fff;
+            text-align: justify;
+        }
+
+        /* Header */
+        .journal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+            color: #666;
+            font-size: 11pt;
+            border-bottom: none;
+        }
+
+        /* Title */
+        h1 {
+            font-family: "Book Antiqua", serif;
+            font-size: 14pt;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .author-section {
+            text-align: left;
+            margin-bottom: 3rem;
+            font-size: 12pt;
+        }
+
+        .corresponding-author {
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        /* Abstract */
+        .abstract-container {
+            display: grid;
+            grid-template-columns: 3fr 7fr;
+            gap: 30px;
+            border-top: 1px solid #000;
+            border-bottom: 1px solid #000;
+            padding: 20px 0;
+            margin-bottom: 3rem;
+        }
+
+        .article-info-title,
+        .abstract-title {
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .article-info-col {
+            font-style: italic;
+            font-size: 10pt;
+        }
+
+        .abstract-col {
+            text-align: justify;
+        }
+
+        /* Body */
+        .content-body {
+            column-count: 2;
+            column-gap: 40px;
+        }
+
+        h2 {
+            font-size: 13pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 22px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #000;
+            padding-bottom: 6px;
+        }
+
+        h3 {
+            font-size: 12pt;
+            font-weight: bold;
+            font-style: italic;
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+            break-after: avoid;
+        }
+
+        p {
+            margin-bottom: 12px;
+            text-align: justify;
+            text-indent: 12mm;
+            line-height: 1.4;
+            /* Adjusted to standard academic spacing */
+            font-size: 11.5pt;
+            /* Adjusted for better content fit */
+            orphans: 3;
+            widows: 3;
+        }
+
+        /* Images & Tables */
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .figure-caption {
+            text-align: center;
+            font-size: 10pt;
+            font-weight: bold;
+            margin-top: 8px;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 10pt;
+            margin: 20px 0;
+            break-inside: avoid;
+        }
+
+        th,
+        td {
+            border-top: 1px solid #000;
+            border-bottom: 1px solid #000;
+            padding: 6px;
+            text-align: left;
+        }
+
+        th {
+            font-weight: bold;
+            text-align: center;
+            border-bottom: 2px solid #000;
+        }
+
+        caption {
+            font-weight: bold;
+            text-align: left;
+            margin-bottom: 8px;
+            font-size: 11pt;
+        }
+
+        /* Export Controls */
+        .export-controls {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1000;
+            font-family: sans-serif;
+            border: 1px solid #ddd;
+        }
+
+        .btn-export {
+            background: #2c3e50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            text-align: left;
+        }
+
+        .btn-export:hover {
+            background: #34495e;
+        }
+
+        @page {
+            size: A4;
+            margin: 20mm;
+        }
+
+        @media print {
+
+            html,
+            body {
+                width: 100% !important;
+                height: auto !important;
+                overflow: visible !important;
+                max-width: none !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            .print-container {
+                width: 100% !important;
+                max-width: none !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            /* Re-apply columns to the content wrapper */
+            .content-body {
+                column-count: 2 !important;
+                -webkit-column-count: 2 !important;
+                column-gap: 1cm !important;
+                display: block !important;
+                width: 100% !important;
+            }
+
+            /* Spanning Elements (Full Width) */
+            .journal-header,
+            h1,
+            .author-section,
+            .abstract-container,
+            .figure-caption,
+            .full-width-print {
+                column-span: all !important;
+                -webkit-column-span: all !important;
+            }
+
+
+
+            .export-controls {
+                display: none !important;
+            }
+
+            h2,
+            h3 {
+                break-after: avoid;
+                page-break-after: avoid;
+                -webkit-column-break-after: avoid;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="journal-header">
+        <div>Journal of Finance and Business Digital (JFBD)<br>Vol. 1, No. 1, 2026: 1-20</div>
+        <div><img src="Picture1.png" alt="JFBD Logo" style="max-height: 80px; width: auto;"></div>
+    </div>
+
+    <h1>Paradoks Loyalitas: Mengapa Pemimpin Inspiratif Memicu Penyimpangan Etis?</h1>
+
+    <div class="author-section">
+        Puti Lenggogeni<sup>1*</sup>, Syahrizal<sup>2</sup><br>
+        Universitas Negeri Padang<br>
+        <span class="corresponding-author">Corresponding Author:</span> <a
+            href="mailto:putilenggogeni@student.unp.ac.id">putilenggogeni@student.unp.ac.id</a>
+    </div>
+
+    <div class="abstract-container">
+        <div class="article-info-col">
+            <span class="article-info-title">A R T I C L E I N F O</span>
+            <div style="margin-bottom:20px;">
+                <strong>Kata Kunci:</strong><br>
+                Transformational Leadership, Unethical Pro-organizational Behavior, Organizational Identification, Moral
+                Identity, SEM-PLS
+            </div>
+            <div>
+                <em>Received</em> : 21 Januari 2026<br>
+                <em>Revised</em> : -<br>
+                <em>Accepted</em> : -
+            </div>
+            <div style="margin-top:20px; font-size:8pt;">&copy;2026 The Author(s). CC BY License.</div>
+        </div>
+        <div class="abstract-col">
+            <span class="abstract-title">A B S T R A K</span>
+            <p>Penelitian ini bertujuan untuk menguji pengaruh <em>Transformational Leadership</em> terhadap
+                <em>Unethical Pro-organizational Behavior</em> (UPB) dengan <em>Organizational Identification</em>
+                sebagai variabel mediasi dan <em>Moral Identity</em> sebagai variabel moderasi pada pegawai DJP.
+                Menggunakan pendekatan
+                kuantitatif dengan 234 responden yang dipilih melalui <em>Proportionate Stratified Random Sampling</em>,
+                data dianalisis menggunakan SEM-PLS. Hasil penelitian menunjukkan bahwa <em>Transformational
+                    Leadership</em>
+                memiliki pengaruh positif yang signifikan terhadap UPB dan <em>Organizational Identification</em>.
+                <em>Organizational
+                    Identification</em> ditemukan memediasi hubungan antara kepemimpinan dan UPB. Namun, <em>Moral
+                    Identity</em> tidak memiliki peran moderasi yang signifikan dalam hubungan antara identifikasi
+                organisasi dan perilaku tidak etis tersebut. Temuan
+                ini memberikan indikasi bahwa dalam lingkungan organisasi dengan tuntutan kinerja yang tinggi, faktor
+                situasional dan gaya
+                kepemimpinan memiliki pengaruh yang lebih dominan dalam menjelaskan kecenderungan perilaku
+                pro-organisasi yang tidak etis dibandingkan dengan nilai moral internal individu.
+            </p>
+        </div>
+    </div>
+
+    <div class="content-body">
+
+        <h2>PENDAHULUAN</h2>
+        <p>Integritas dan dilema etika dalam birokrasi publik merupakan fenomena yang terus berkembang seiring dengan
+            tingginya tuntutan akuntabilitas dan kinerja. Pegawai di instansi pemerintah, khususnya Direktorat Jenderal
+            Pajak (DJP), menghadapi tantangan dalam menyelaraskan target pencapaian organisasi yang dinamis dengan
+            standar integritas yang ketat. Fenomena <em>Unethical Pro-organizational Behavior</em> (UPB), yang
+            didefinisikan sebagai perilaku tidak etis yang dilakukan secara sengaja untuk memberikan manfaat bagi
+            organisasi, muncul sebagai salah satu bentuk respons terhadap dinamika tersebut. Penelitian ini menganalisis
+            bagaimana kepemimpinan transformasional serta mekanisme identifikasi organisasi berperan dalam membentuk
+            kecenderungan perilaku tersebut.</p>
+        <p>Kajian terdahulu mengenai kepemimpinan transformasional secara ekstensif mengevaluasi pengaruh positifnya
+            terhadap variabel seperti kinerja pegawai, kepuasan kerja, dan <em>Organizational Citizenship Behavior</em>
+            (OCB). Namun, perkembangan studi terbaru mulai meninjau kemungkinan adanya dampak disfungsional dari gaya
+            kepemimpinan ini dalam kondisi tertentu. Effelsberg et al. (2014) mengemukakan bahwa efektivitas pemimpin
+            dalam menyelaraskan nilai-nilai individu dengan visi organisasi berpotensi mengurangi objektivitas bawahan
+            dalam menilai etika suatu tindakan. Penelitian ini berupaya memberikan kontribusi teoretis dengan
+            menganalisis bagaimana identitas sosial berperan dalam mentransmisikan pengaruh kepemimpinan terhadap
+            perilaku tidak etis secara akademis, serta mengevaluasi peran identitas moral individu sebagai faktor
+            kontrol dalam birokrasi.</p>
+        <p>Secara konseptual, penelitian ini mengevaluasi faktor yang mendorong terjadinya pelanggaran etika di
+            lingkungan kerja dengan mempertimbangkan pengaruh sistemik dan situasional. Tekanan struktural dan orientasi
+            pemimpin dapat menjadi predisposisi munculnya perilaku yang menyimpang dari standar etika yang berlaku,
+            meskipun tindakan tersebut secara subjektif ditujukan untuk kepentingan organisasi. Hal ini sejalan dengan
+            pandangan Adams & Balfour (2004) mengenai kompleksitas perilaku administratif dalam konteks organisasi yang
+            hierarkis.</p>
+        <p>Fenomena ini memiliki relevansi tinggi dalam konteks reformasi birokrasi, di mana instansi publik dituntut
+            untuk mencapai sasaran kinerja yang ambisius dalam lingkungan yang kompleks. Tuntutan akan pencapaian target
+            penerimaan negara dapat menciptakan situasi di mana pertimbangan etis dipengaruhi oleh prioritas pencapaian
+            tujuan organisasi (Tenbrunsel & Smith-Crowe, 2008). Dalam kondisi ini, gaya kepemimpinan yang progresif
+            dapat memperkuat orientasi bawahan untuk memprioritaskan kepentingan organisasi di atas pertimbangan
+            lainnya.</p>
+        <p>Oleh karena itu, penelitian ini bertujuan untuk mengevaluasi struktur hubungan antar variabel tersebut guna
+            memberikan rekomendasi bagi pengembangan sumber daya manusia di sektor publik. Pemahaman yang komprehensif
+            mengenai mekanisme psikologis di balik loyalitas dan kepatuhan pegawai diharapkan dapat menjadi dasar bagi
+            perumusan kebijakan yang mendukung terciptanya lingkungan kerja yang tidak hanya berkinerja tinggi, namun
+            juga tetap berlandaskan pada prinsip etika yang konsisten.</p>
+
+        <h2>TINJAUAN PUSTAKA</h2>
+
+        <h3>Transformational Leadership dan Implikasinya Terhadap UPB</h3>
+        <p><em>Transformational Leadership</em> (TL) didefinisikan sebagai gaya kepemimpinan yang mengarahkan norma dan
+            nilai-nilai pengikut untuk melampaui kepentingan pribadi demi mencapai tujuan kolektif (Bass, 1985). Dalam
+            perspektif <em>Social Exchange Theory</em> (Blau, 1964), hubungan timbal balik yang kuat antara atasan dan
+            bawahan dapat membentuk tanggung jawab kewajiban (obligasi). Sebagai bentuk respons terhadap dukungan
+            pemimpin, bawahan mungkin cenderung melakukan upaya maksimal untuk mencapai target organisasi, yang dalam
+            kondisi tertentu dapat mencakup tindakan yang menyimpang dari prosedur standar atau UPB. Dinamika ini
+            menunjukkan bahwa UPB dapat muncul bukan sebagai perilaku destruktif biasa, melainkan sebagai bentuk
+            loyalitas yang mengabaikan batasan etika dalam upaya mencapai kinerja tinggi.</p>
+        <p>Teori Pertukaran Sosial memberikan penjelasan mengenai mekanisme resiprositas dalam hubungan ini. Dukungan
+            dan perhatian personal yang diberikan pemimpin transformasional cenderung meningkatkan komitmen bawahan.
+            Tingginya keterikatan emosional ini dapat memengaruhi penilaian objektif bawahan, sehingga rasionalisasi
+            terhadap perilaku UPB dapat terjadi sebagai bentuk kontribusi kepada organisasi. Fenomena ini menciptakan
+            iklim di mana pencapaian orientasi organisasi menjadi prioritas utama, yang dalam literatur kepemimpinan
+            sering disebut sebagai dimensi dependensi dalam hubungan pemimpin-bawahan (Kark et al., 2003).</p>
+
+        <h3>Mekanisme Mediasi: Organizational Identification (OI)</h3>
+        <p>Mengacu pada <em>Social Identity Theory</em> (Tajfel & Turner, 1986), OI adalah persepsi ketunggalan
+            (<em>oneness</em>) dengan organisasi. Pegawai dengan OI tinggi mendefinisikan diri mereka melalui atribut
+            organisasi. Penelitian ini mengajukan proposisi bahwa TL meningkatkan UPB secara tidak langsung dengan cara
+            memperkuat OI. Pegawai yang sangat teridentifikasi akan memandang kritik terhadap organisasi sebagai
+            menjadi kabur demi "kebaikan" entitas yang mereka cintai.</p>
+        <p>Identifikasi organisasi yang ekstrem dapat mengarah pada gejala <em>organizational narcissism</em>. Pegawai
+            tidak lagi memisahkan identitas diri mereka dari identitas organisasi. Kritik terhadap prosedur kerja DJP,
+            misalnya, dianggap sebagai serangan personal terhadap harga diri mereka. Akibatnya, mereka akan melakukan
+            apa saja untuk memelihara citra positif organisasi, termasuk dengan menyembunyikan kesalahan, memanipulasi
+            laporan kinerja, atau melindungi kolega yang tidak kompeten. Mekanisme psikologis ini menjelaskan mengapa
+            pegawai yang jujur dalam kehidupan pribadi bisa melakukan tindakan tidak jujur di tempat kerja; mereka
+            sedang beroperasi dalam "mode agen" (<em>agentic state</em>) di mana mereka merasa hanya sebagai
+            perpanjangan
+            tangan dari kehendak organisasi.</p>
+
+        <h3>Mekanisme Moderasi: Moral Identity (MI)</h3>
+        <p><em>Moral Identity</em> (MI) adalah konstruksi kognitif tentang seberapa penting sifat-sifat bermoral (jujur,
+            adil, peduli) bagi konsep diri seseorang (Aquino & Reed, 2002). Secara teoretis, MI seharusnya berfungsi
+            sebagai mekanisme kontrol diri (<em>self-regulatory mechanism</em>). Individu dengan MI tinggi diharapkan
+            memiliki ambang batas toleransi yang lebih rendah terhadap perilaku tidak etis, bahkan ketika perilaku
+            tersebut menguntungkan organisasi. Namun, literatur psikologi moral kontemporer juga memperkenalkan konsep
+            <em>Moral Licensing</em> (Miao et al., 2013), yang berargumen bahwa individu yang merasa telah melakukan
+            banyak hal baik (bermoral) bagi organisasi mungkin merasa memiliki "kredit moral" untuk sesekali melanggar
+            aturan. Ketegangan teoretis antara fungsi regulasi diri (MI sebagai rem) dan lisensi moral (MI sebagai izin)
+            menjadikan variabel ini sangat menarik untuk diuji sebagai moderator dalam konteks birokrasi.
+        </p>
+
+        <!-- Conceptual Framework SVG -->
+        <!-- Conceptual Framework SVG -->
+        <!-- Conceptual Framework SVG -->
+    </div>
+    <!-- End of First Column Section -->
+
+    <!-- Conceptual Framework SVG (Full Width) -->
+    <div class="full-width-print"
+        style="text-align: center; margin: 30px 0; width: 100%; break-inside: avoid; page-break-inside: avoid;">
+        <svg viewBox="0 0 800 350" xmlns="http://www.w3.org/2000/svg"
+            style="max-width: 100%; height: auto; font-family: 'Book Antiqua', serif;">
+            <!-- Definitions for markers -->
+            <defs>
+                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#000" />
+                </marker>
+            </defs>
+
+            <!-- Nodes (Compressed Gaps) -->
+            <!-- Transformational Leadership (x=0) -->
+            <rect x="0" y="150" width="200" height="80" rx="10" ry="10" fill="#fff" stroke="#000" stroke-width="1.5" />
+            <text x="100" y="185" text-anchor="middle" font-size="14" font-weight="bold">Transformational</text>
+            <text x="100" y="205" text-anchor="middle" font-size="14" font-weight="bold">Leadership</text>
+
+            <!-- Organizational Identification (x=260, Gap=60) -->
+            <rect x="260" y="150" width="200" height="80" rx="10" ry="10" fill="#fff" stroke="#000"
+                stroke-width="1.5" />
+            <text x="360" y="185" text-anchor="middle" font-size="14" font-weight="bold">Organizational</text>
+            <text x="360" y="205" text-anchor="middle" font-size="14" font-weight="bold">Identification</text>
+
+            <!-- Unethical Pro-Org Behavior (x=520, Gap=60, Ends at 720) -->
+            <rect x="520" y="150" width="200" height="80" rx="10" ry="10" fill="#fff" stroke="#000"
+                stroke-width="1.5" />
+            <text x="620" y="185" text-anchor="middle" font-size="14" font-weight="bold">Unethical Pro-</text>
+            <text x="620" y="205" text-anchor="middle" font-size="14" font-weight="bold">Organizational
+                Behavior</text>
+
+            <!-- Moral Identity (x=260) -->
+            <rect x="260" y="20" width="200" height="60" rx="10" ry="10" fill="#fff" stroke="#000" stroke-width="1.5" />
+            <text x="360" y="55" text-anchor="middle" font-size="14" font-style="italic">Moral Identity</text>
+
+            <!-- Paths (Arrows) -->
+            <!-- H2: TL -> OI (200 to 250) -->
+            <line x1="200" y1="190" x2="250" y2="190" stroke="#000" stroke-width="1.5" marker-end="url(#arrowhead)" />
+            <text x="230" y="180" text-anchor="middle" font-size="12">H2</text>
+
+            <!-- H3: OI -> UPB (460 to 510) -->
+            <line x1="460" y1="190" x2="510" y2="190" stroke="#000" stroke-width="1.5" marker-end="url(#arrowhead)" />
+            <text x="490" y="180" text-anchor="middle" font-size="12">H3</text>
+
+            <!-- H1: TL -> UPB (Curved Bottom) -->
+            <path d="M 100 230 V 280 H 620 V 240" fill="none" stroke="#000" stroke-width="1.5"
+                marker-end="url(#arrowhead)" />
+            <text x="360" y="270" text-anchor="middle" font-size="12" fill="#000">H1</text>
+
+            <!-- H5: Moderation (MI -> Path H3, x=360) -->
+            <line x1="360" y1="80" x2="360" y2="150" stroke="#000" stroke-width="1.5" stroke-dasharray="5,5"
+                marker-end="url(#arrowhead)" />
+            <text x="370" y="120" text-anchor="start" font-size="12">H5</text>
+
+            <!-- H4 (Mediation) -->
+            <text x="360" y="320" text-anchor="middle" font-size="12" font-style="italic" fill="#666">(H4: Mediation
+                Effect)</text>
+
+        </svg>
+        <div class="figure-caption">Gambar 1. Kerangka Konseptual Penelitian</div>
+    </div>
+
+    <!-- Start of Second Column Section -->
+    <div class="content-body">
+
+        <h2>METODOLOGI PENELITIAN</h2>
+
+        <p>Penelitian ini menggunakan desain kuantitatif eksplanatif untuk menguji hubungan kausalitas antar variabel.
+        </p>
+
+        <h3>Populasi dan Teknik Sampling</h3>
+        <p>Populasi penelitian adalah 594 pegawai KPP Pratama di wilayah Kanwil DJP Sumatera Barat dan Jambi. Ukuran
+            sampel ditentukan menggunakan rumus Krejcie dan Morgan (1970) dengan tingkat kesalahan 5%, menghasilkan
+            jumlah sampel minimal 234 responden. Teknik pengambilan sampel adalah <em>Proportionate Stratified Random
+                Sampling</em> berdasarkan unit kerja (Pemeriksaan, Pengawasan, Pelayanan, Penagihan, dan Subbag Umum)
+            untuk menjamin representativitas.</p>
+        <p>Instrumen penelitian menggunakan kuesioner tertutup dengan skala Likert. Validitas instrumen diuji
+            menggunakan kriteria <em>Convergent Validity</em> (Loading Factor > 0.70, AVE > 0.50) dan <em>Discriminant
+                Validity</em> (Fornell-Larcker Criterion). Reliabilitas diuji menggunakan <em>Composite Reliability</em>
+            (> 0.70).</p>
+
+        <!-- Formula AVE -->
+        <div
+            style="background:#f9f9f9; padding:10px; border-left:3px solid #000; font-family:monospace; margin:10px 0; font-size:9pt; text-align: center;">
+            AVE = (Σλ²) / (Σλ² + ΣVar(ε))
+        </div>
+
+    </div>
+    <!-- End of Methodology Section -->
+
+    <!-- Force Page Break -->
+    <!-- Section Break -->
+    <div style="margin-top: 20px; margin-bottom: 20px;"></div>
+
+    <!-- Start of Results Section -->
+    <div class="content-body">
+
+        <h2>HASIL PENELITIAN DAN PEMBAHASAN</h2>
+
+        <h3>1. Analisis Profil Responden dan Implikasinya</h3>
+        <p>Analisis deskriptif terhadap 234 responden memberikan gambaran sosiologis yang penting untuk memahami konteks
+            temuan. Mayoritas responden adalah laki-laki (56.4%) dan memiliki tingkat pendidikan Sarjana (58.1%). Yang
+            paling menarik adalah data masa kerja (<em>tenure</em>), di mana 47.9% responden telah bekerja lebih dari 16
+            tahun. Dominasi pegawai senior ini memiliki implikasi ganda. Di satu sisi, mereka memiliki <em>tacit
+                knowledge</em> yang mendalam tentang prosedur perpajakan.</p>
+        <p>Di sisi lain, masa kerja yang panjang dalam satu organisasi cenderung berkorelasi positif dengan tingkat
+            <em>Organizational Identification</em> yang tinggi, sebagaimana diteorikan oleh Mael & Ashforth (1992). Hal
+            ini memberikan konteks awal mengapa variabel OI dalam penelitian ini (Mean = 4.12) tergolong sangat tinggi.
+            Pegawai yang telah menghabiskan separuh hidupnya di DJP tentu memiliki keterikatan emosional yang sangat
+            kuat, yang menjadi tanah subur bagi berkembangnya loyalitas buta.
+        </p>
+
+        <h3>2. Evaluasi Mendalam Measurement Model (Outer Model)</h3>
+        <p>Langkah krusial sebelum pengujian hipotesis adalah memastikan ketepatan alat ukur. Hasil algoritma PLS
+            menunjukkan bahwa model pengukuran awal memerlukan pemurnian. Indikator OI1 (<em>"Ketika seseorang
+                mengkritik organisasi, saya merasa dihina"</em>) dan UPB5 (<em>"Tidak mengembalikan kelebihan bayar
+                pajak secara sengaja"</em>) harus dieliminasi karena memiliki nilai <em>loading factor</em> di bawah
+            ambang batas kritis 0.70 (Hair et al., 2017).</p>
+        <p>Penghapusan indikator UPB5 secara spesifik menarik untuk dibahas. Item ini merupakan bentuk UPB yang paling
+            "kasar" dan berisiko hukum tinggi. Rendahnya loading pada item ini mengindikasikan bahwa responden cenderung
+            menghindari perilaku yang secara eksplisit melanggar hukum (pidana), namun lebih permisif terhadap perilaku
+            UPB yang bersifat "abu-abu" atau manipulasi administratif (seperti menyembunyikan informasi atau memoles
+            laporan). Ini menegaskan bahwa UPB di lingkungan birokrasi seringkali bermanifestasi dalam bentuk yang
+            <em>subtle</em> (halus) namun sistemik.
+        </p>
+        <p>Setelah <em>respesifikasi model</em>, seluruh konstruk menunjukkan kualitas yang sangat baik.
+            <strong>Transformational Leadership (TL)</strong> memiliki AVE = 0.859 dan CR = 0.985. Nilai yang mendekati
+            sempurna ini menunjukkan bahwa responden memiliki persepsi yang sangat seragam mengenai perilaku
+            kepemimpinan atasan mereka. <strong>Organizational Identification (OI)</strong> memiliki AVE = 0.649 dan CR
+            = 0.881, memenuhi syarat validitas konvergen > 0.50. Demikian juga dengan <strong>Moral Identity
+                (MI)</strong> (AVE = 0.676; CR = 0.912) dan <strong>UPB</strong> (AVE = 0.501; CR = 0.833). Meskipun AVE
+            UPB berada tepat di ambang batas (borderline), validitas ini masih dapat diterima untuk penelitian
+            eksploratori perilaku (Hulland, 1999).
+        </p>
+
+        <h3>3. Evaluasi Structural Model (Inner Model)</h3>
+        <p>Kekuatan prediksi model dinilai melalui koefisien determinasi (R-Square). Nilai R-Square untuk variabel UPB
+            adalah <strong>0.290</strong>, yang berarti bahwa 29% variansi dalam perilaku UPB dapat dijelaskan oleh
+            kombinasi <em>Transformational Leadership</em>, <em>Organizational Identification</em>, dan <em>Moral
+                Identity</em>. Dalam ranah ilmu perilaku sosial, angka 29% tergolong kategori moderat (Chin, 1998),
+            mengingat kompleksitas perilaku manusia yang dipengaruhi oleh ribuan variabel eksternal lainnya. Sementara
+            itu, nilai R-Square untuk <em>Organizational Identification</em> adalah 0.214, menunjukkan bahwa gaya
+            kepemimpinan atasan berkontribusi sebesar 21.4% dalam membentuk identitas organisasi pegawai.</p>
+
+        <table>
+            <caption>Tabel 1. Rangkuman Hasil Pengujian Hipotesis</caption>
+            <thead>
+                <tr>
+                    <th>Hipotesis</th>
+                    <th>Jalur</th>
+                    <th>Beta (β)</th>
+                    <th>T-Statistic</th>
+                    <th>P-Value</th>
+                    <th>Simpulan</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>H1</td>
+                    <td>TL -> UPB</td>
+                    <td>0.210</td>
+                    <td>2.915</td>
+                    <td>0.004</td>
+                    <td><strong>Diterima</strong></td>
+                </tr>
+                <tr>
+                    <td>H2</td>
+                    <td>TL -> OI</td>
+                    <td>0.463</td>
+                    <td>7.821</td>
+                    <td>0.000</td>
+                    <td><strong>Diterima</strong></td>
+                </tr>
+                <tr>
+                    <td>H3</td>
+                    <td>OI -> UPB</td>
+                    <td>0.395</td>
+                    <td>5.102</td>
+                    <td>0.000</td>
+                    <td><strong>Diterima</strong></td>
+                </tr>
+                <tr>
+                    <td>H5</td>
+                    <td>MI x OI -> UPB</td>
+                    <td>0.000</td>
+                    <td>0.045</td>
+                    <td>0.964</td>
+                    <td><strong>Ditolak</strong></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>4. Diskusi Hasil Hipotesis dan Analisis Kritis</h3>
+
+        <h4>H1: Pengaruh Transformational Leadership Terhadap UPB (Didukung)</h4>
+        <p>Temuan ini (β=0.210, p<0.05) membuktikan bahwa kepemimpinan transformasional memiliki pengaruh positif yang
+                signifikan terhadap kecenderungan UPB. Hal ini menunjukkan bahwa gaya kepemimpinan yang inspiratif dapat
+                berkorelasi dengan peningkatan perilaku pro-organisasi yang menyimpang dari standar etika formal.
+                Analisis menunjukkan bahwa pemimpin transformasional memiliki peran penting dalam membentuk persepsi
+                (<em>framing</em>) terhadap sasaran organisasi. Pengarahan visi yang sangat kuat dapat memengaruhi
+                objektivitas etika bawahan, di mana pencapaian target strategis dapat diprioritaskan di atas prosedur
+                administratif yang baku.</p>
+
+        <h4>H2: Pemimpin sebagai Arsitek Identitas (Didukung)</h4>
+        <p>Hasil statistik yang sangat kuat (β=0.463, T=7.821) membuktikan bahwa pemimpin transformasional adalah faktor
+            dominan dalam membentuk identifikasi organisasi. Di lingkungan kerja yang penuh tekanan seperti DJP,
+            pemimpin yang memberikan perhatian individual (<em>individualized consideration</em>) dan motivasi
+            inspirasional menjadi sumber dukungan emosional utama. Hal ini membuat pegawai merasa "berutang budi" dan
+            menginternalisasi nilai-nilai organisasi yang dibawa oleh pemimpin ke dalam diri mereka.</p>
+
+        <h4>H3: Identifikasi Organisasi sebagai Prediktor UPB (Didukung)</h4>
+        <p>Temuan ini (β=0.395, p<0.05) mendukung premis <em>Social Identity Theory</em> bahwa identifikasi organisasi
+                yang sangat tinggi dapat memengaruhi objektivitas individu. Pegawai dengan tingkat OI yang ekstrem
+                cenderung memfokuskan perhatian pada kepentingan organisasi secara sempit (<em>tunnel vision</em>),
+                sehingga potensi dampak etika dari tindakan mereka mungkin terabaikan. Dalam konteks organisasi publik,
+                orientasi pada pencapaian target institusi dapat mendominasi pertimbangan etika yang lebih luas.</p>
+
+        <h4>Analisis Mediasi: Peran Sentral Organizational Identification</h4>
+        <p>Hasil uji mediasi menunjukkan bahwa OI memediasi secara parsial (VAF = 46.5%) hubungan antara TL dan UPB. Ini
+            adalah temuan kunci. Artinya, pemimpin transformasional mempengaruhi UPB melalui dua jalur: pertama, jalur
+            langsung melalui instruksi implisit atau tekanan target yang dibungkus visi; dan kedua, jalur tidak langsung
+            (psikologis) dengan mengubah konsep diri bawahan terlebih dahulu menjadi "insan organisasi", yang kemudian
+            secara sukarela melakukan apa saja demi organisasi.</p>
+
+        <h4>Analisis Anomali: Peran Moderat Moral Identity (H5 Ditolak)</h4>
+        <p>Penolakan H5 (β=0.000, p=0.964) memberikan wawasan penting mengenai interaksi antara identitas personal dan
+            konteks organisasi. Secara teoretis, <em>Moral Identity</em> diharapkan berperan sebagai faktor kontrol
+            internal. Namun, kegagalannya dalam memoderasi hubungan OI-UPB dapat dijelaskan melalui <em>Situational
+                Strength Theory</em> (Cooper & Withey, 2009). Teori ini menjelaskan bahwa dalam kriteria "situasi kuat"
+            (strong situation)—yang memiliki aturan, hierarki, dan insentif pencapaian yang jelas—pengaruh variabel
+            kepribadian cenderung berkurang.</p>
+        <p>Lingkungan organisasi publik dengan target kinerja yang ketat merupakan contoh dari <em>strong
+                situation</em>. Tekanan untuk mencapai sasaran organisasi yang bersifat wajib menciptakan lingkungan di
+            mana ruang diskresi individu menjadi terbatas. Dalam kondisi ini, tuntutan dari lingkungan eksternal (atasan
+            dan target kinerja) lebih dominan dalam mengarahkan perilaku dibandingkan dengan nilai moral internal. Hal
+            ini dapat menyebabkan fenomena di mana tindakan tertentu tidak lagi dipandang sebagai isu etika, melainkan
+            semata-mata sebagai strategi teknis untuk pencapaian target organisasi.</p>
+
+        <h4>Implikasi Teoretis</h4>
+        <p>Penelitian ini memberikan kontribusi signifikan dalam memajukan literatur kepemimpinan dan etika birokrasi.
+            Pertama, studi ini memperluas validitas konsep <em>Unethical Pro-organizational Behavior</em> (UPB) ke dalam
+            konteks sektor publik di negara berkembang (non-Barat). Sebagian besar studi UPB dilakukan di sektor swasta
+            (mis: Umphress et al., 2010), di mana motif profit menjadi driver utama. Temuan ini menegaskan bahwa motif
+            "pengabdian negara" di sektor publik pun dapat didistorsi menjadi pemicu perilaku tidak etis yang serupa.
+        </p>
+        <p>Kedua, penelitian ini memperkaya diskursus mengenai dampak disfungsional dari identitas sosial
+            (<em>dysfunctional identification</em>). Selama ini,
+            identifikasi organisasi seringkali diasosiasikan dengan hasil positif bagi kinerja. Studi ini memberikan
+            bukti
+            empiris tandingan bahwa identifikasi yang sangat kuat (over-identification), tanpa diimbangi dengan sikap
+            kritis,
+            dapat membawa risiko bagi organisasi. Ini mengonfirmasi postulat bahwa variabel positif dapat
+            memiliki dampak negatif jika terjadi secara berlebihan.</p>
+        <p>Ketiga, kegagalan <em>Moral Identity</em> sebagai moderator memberikan wawasan baru tentang dominasi konteks
+            situasional atas disposisi personal. Hal ini menantang asumsi dasar teori interaksionis (person-situation
+            interaction) dan menyarankan agar peneliti masa depan lebih memperhatikan faktor <em>situational
+                strength</em>
+            sebagai variabel kontrol atau moderator kunci.</p>
+
+        <h4>Keterbatasan dan Saran Penelitian Mendatang</h4>
+        <p>Terlepas dari kontribusi yang diberikan, penelitian ini memiliki beberapa keterbatasan. Pertama, desain
+            cross-sectional
+            membatasi kemampuan untuk menarik kesimpulan kausal yang tegas. Ada kemungkinan hubungan timbal balik, di
+            mana
+            pegawai yang melakukan UPB kemudian meningkatkan justifikasi loyalitas mereka untuk mengurangi disonansi
+            kognitif.
+            Penelitian longitudinal di masa depan sangat disarankan.</p>
+        <p>Kedua, penggunaan self-report rentan terhadap bias sosial (social desirability bias), terutama ketika
+            menanyakan
+            perilaku tidak etis. Meskipun anonimitas dijamin, pegawai mungkin masih enggan mengakui pelanggaran
+            tertentu.
+            Metode eksperimental atau penggunaan skenario (vignette) bisa menjadi alternatif untuk mengukur
+            kecenderungan UPB
+            secara lebih objektif. Ketiga, penelitian ini hanya dilakukan pada satu instansi (DJP). Generalisasi ke
+            instansi
+            publik lain dengan karakteristik budaya berbeda perlu dilakukan dengan hati-hati.</p>
+
+        <h2>KESIMPULAN DAN REKOMENDASI</h2>
+
+        <h3>Kesimpulan</h3>
+        <p>Penelitian ini menyimpulkan bahwa gaya kepemimpinan transformasional memiliki peran penting dalam membentuk
+            orientasi perilaku pegawai melalui mekanisme identifikasi organisasi. Identifikasi organisasi yang kuat,
+            jika tidak diimbangi dengan penekanan pada aspek etika, dapat meningkatkan kecenderungan perilaku
+            pro-organisasi yang tidak etis (UPB). Selain itu, temuan penelitian menunjukkan bahwa faktor situasional
+            dalam organisasi publik memiliki pengaruh yang lebih signifikan dibandingkan dengan identitas moral individu
+            dalam menentukan kecenderungan perilaku tersebut.
+        </p>
+
+        <h3>Rekomendasi Manajerial: Menuju Budaya Kerja Berintegritas</h3>
+        <p>Berdasarkan temuan ini, direkomendasikan reformasi manajerial yang komprehensif di lingkungan DJP melalui
+            tiga pilar strategi utama:</p>
+
+        <h4>1. Cultural Re-engineering: Penguatan Integritas Organisasi</h4>
+        <p>Budaya organisasi perlu terus diperkuat dengan menyelaraskan nilai loyalitas dan integritas etika. Pesan
+            kepemimpinan harus secara eksplisit menekankan pentingnya kepatuhan terhadap standar etika formal dalam
+            setiap pencapaian target. Pegawai perlu didorong untuk memiliki pemahaman bahwa loyalitas terbaik kepada
+            organisasi adalah dengan menjaga reputasi dan integritas institusi. Pengembangan forum diskusi mengenai
+            dilema etika dapat menjadi sarana untuk melatih kepekaan moral pegawai dalam menghadapi situasi kerja yang
+            kompleks.</p>
+
+        <h4>2. Performance Management Redesign: Menyeimbangkan Hasil dan Proses</h4>
+        <p>Sistem penilaian kinerja (IKU) saat ini yang sangat berorientasi pada hasil akhir (target penerimaan) tanpa
+            sengaja memberikan insentif bagi perilaku UPB. DJP perlu mengintegrasikan indikator <em>ethical process</em>
+            ke dalam penilaian kinerja individu dengan bobot yang signifikan. Artinya, <em>bagaimana</em> target dicapai
+            harus sama pentingnya dengan <em>apakah</em> target tercapai. Penghargaan (reward) harus diberikan tidak
+            hanya kepada "top achiever", tetapi juga kepada "ethical champion" yang berani menolak jalan pintas demi
+            kepatuhan prosedur.</p>
+
+        <h4>3. Ethical Leadership Development</h4>
+        <p>Para pimpinan KPP Pratama, sebagai pemegang peran kepemimpinan transformasional, perlu dibekali dengan
+            kompetensi kepemimpinan etis. Mereka harus dilatih untuk tidak hanya menginspirasi bawahan mencapai target
+            (visi), tetapi juga secara teratur mengingatkan tentang batasan-batasan etika (nilai). Pemimpin harus
+            menjadi role model yang menunjukkan bahwa integritas tidak boleh dikorbankan demi target jangka pendek.
+            Komunikasi pemimpin harus seimbang, menekankan bahwa pencapaian target organisasi harus tetap berada dalam
+            koridor etika dan integritas yang berlaku.</p>
+
+        <h2>DAFTAR PUSTAKA</h2>
+        <div style="font-size: 10pt; text-indent: -20px; padding-left: 20px;">
+            <p>Abubakar, Rifa‟i. 2021. Pengantar Metodologi Penelitian. Yogyakarta: SUKAPress UIN Sunan Kalijaga</p>
+            <p>Ahmad, R., Nejati, M., Farr-Wharton, B., & Bentley, T. (2024). Impact of leadership on unethical
+                pro-organizational behavior: A systematic literature review and future research directions. Journal of
+                Leadership & Organizational Studies, 31(3), 338–367. https://doi.org/10.1177/15480518241265399</p>
+            <p>Bekmirzaeva, M., Baek, Y., & Kim, E.-S. (2025). How transformational leadership influences follower
+                willingness to engage in pro-group unethical behavior. Journal of Managerial Psychology.
+                https://doi.org/10.1108/JMP-11-2023-0705</p>
+            <p>Burris, E. R., Umphress, E. E., Duffy, M. M., & Gessner, T. M. (2025). A double-edged sword of ethical
+                behavior: When and why employees' moral identity predicts others' unethical behavior. Journal of Applied
+                Psychology, 110(3), 386–402. https://doi.org/10.1037/apl0001099</p>
+            <p>Boros, S. (2008). Organizational identification: Theoretical and empirical analyses of competing
+                conceptualizations. Cognition, Brain, Behavior, XII(1), 1-28</p>
+            <p>Bose, S., Patnaik, B., & Mohanty, S. (2021). The mediating role of psychological empowerment in the
+                relationship between transformational leadership and organizational identification of employees. The
+                Journal of Applied Behavioral Science, 57(4), 490–510. https://doi.org/10.1177/0021886320920951</p>
+            <p>Chen, Mo, and Chao C. Chen. “The Moral Dark Side of Performance Pressure: How and When It Affects
+                Unethical pro-Organizational Behavior.” The International Journal of Human Resource Management 34, no. 7
+                (2023): 1359– 89. https://doi.org/10.1080/09585192.2021.1991434</p>
+            <p>Changya Hu, Mai Pham, Yen-Yu Chen, Patrick F. Bruning. “A Meta-Analysis of Incremental, Comparative, and
+                Conditional Motivations of Unethical pro- Organizational Behavior.” Journal of Business Research 203
+                (January 2026): 115794. https://doi.org/10.1016/j.jbusres.2025.115794</p>
+            <p>Dadaboyev, S. M. U., Paek, S., & Choi, S. (2023). Do gender, age and tenure matter when behaving
+                unethically for organizations: Meta-analytic review on organizational identity and unethical
+                pro-organizational behavior. British Journal of Management. https://doi.org/10.1108/BJM-12-2022-0480</p>
+            <p>Direktorat Jenderal Pajak. (2024). Laporan Kinerja Direktorat Jenderal Pajak Tahun 2024.
+                https://www.pajak.go.id/id/laporan-kinerja-djp-tahun-2024</p>
+            <p>Direktorat Jenderal Pajak. (2024). Laporan Kinerja Unit Kerja Tahun.
+                https://pajak.go.id/laporan-kinerja-unit-kerja</p>
+            <p>Effelsberg, D., Solga, M., & Gurt, J. (2014). Transformational leadership and follower’s unethical
+                behavior for the benefit of the company: A two-study investigation. Journal of Business Ethics, 120(1),
+                81–93. https://doi.org/10.1007/s10551-013-1644-z</p>
+            <p>Ghozali, I., & Latan, H. (2015). Partial least squares: Konsep, teknik dan aplikasi menggunakan SmartPLS
+                3.0. Badan Penerbit Universitas Diponegoro.</p>
+            <p>Gigol, T. (2021). Leadership, religiousness, state ownership of an enterprise and unethical
+                pro-organizational behavior: The mediating role of organizational identification. PLOS ONE, 16(5),
+                e0251465. https://doi.org/10.1371/journal.pone.0251465</p>
+            <p>Hidayah, N., & Helmy, I. (2019). Pengaruh Organizational Identification Dan Organizational Trust Terhadap
+                Job Satisfaction Melalui Work Engagement Sebagai Variabel Intervening (Studi Pada Guru di SMK Tamtama
+                Karanganyar Kabupaten Kebumen). Sekolah Tinggi Ilmu Ekonomi Putra Bangsa Kebumen.</p>
+            <p>Irshad, M., & Bashir, S. (2020). The dark side of organizational identification: A multi- study
+                investigation of negative outcomes. Frontiers in Psychology, 11, 572478.
+                https://doi.org/10.3389/fpsyg.2020.572478</p>
+            <p>Kim, J., Kang, H., & Lee, K. (2021). Transformational-transactional leadership and unethical
+                pro-organizational behavior in the public sector: does public service motivation make a difference?
+                Public Management Review, 25(2), 429–458. https://doi.org/10.1080/14719037.2021.1974714</p>
+            <p>Kuenzi, M., Mayer, D. M., & Greenbaum, R. L. (2020). Creating anethical organizational environment: The
+                relationship between ethical leadership, ethical organizational climate, and unethical behavior.
+                Personnel Psychology, 73(1), 43–71. https://doi.org/10.1111/peps.12356</p>
+            <p>Lavelle, J.J., Herda, D.N. & Bates, K.M. The Dark Side: Linking Organizational Justice to Unethical
+                Employee Behaviors. Soc Just Res 38, 75–97 (2025). https://doi.org/10.1007/s11211-025-00450-8</p>
+            <p>Liu H, Bracht E, Zhang X, Bradley B, van Dick R. Creativity in non-routine jobs: The role of
+                transformational leadership and organizational identification. Creat Innov Manag. 2020; 30: 129–143.
+                https://doi.org/10.1111/caim.12419</p>
+            <p>Mishra V, Sharma V, Uppal N (2024), "The curvilinear relationship between moral identity and unethical
+                pro-organizational behavior: moderating role of organizational identification". International Journal of
+                Manpower, Vol. 45 No. 6 pp. 1245–1261, doi: https://doi.org/10.1108/IJM-06-2023-0343</p>
+            <p>Mo, S., Lupoli, M. J., Newman, A., & Umphress, E. E. (2022). Good intentions, bad behavior: A review and
+                synthesis of the literature on unethical prosocial behavior (UPB) at work. Journal of Organizational
+                Behavior, 44(2), 335–354 . https://doi.org/10.1002/job.2617</p>
+            <p>Mukherjee, Ujjal, and Saritha S.R. “Unethical Pro-Organizational Behavior: A Systematic Literature Review
+                and Research Agenda.” International Journal of Ethics and Systems, ahead of print, July 25, 2024.
+                https://doi.org/10.1108/IJOES-11-2023-0243</p>
+            <p>Nur, L., Disman, Ahman, E., Hendrayati, H., & Budiman, A. (2021). Analisis Kepemimpinan Transformasional.
+                Jurnal Ilmu Manajemen dan Bisnis, 12(2), 188–197. https://doi.org/10.17509/jimb.v12i2.37610</p>
+            <p>Pan, C. (2024). The Dark Side of Transformational Leadership: Power Distance Spurs Unethical
+                Pro-Organizational Behavior of Employees. Human Performance, 38(1), 28–42.
+                https://doi.org/10.1080/08959285.2024.2436172</p>
+            <p>Schuh, S.C., Zhang, Xa. & Tian, P. For the Good or the Bad? Interactive Effects of Transformational
+                Leadership with Moral and Authoritarian Leadership Behaviors. J Bus Ethics 116, 629–640 (2013).
+                https://doi.org/10.1007/s10551012-1486-0</p>
+            <p>Sekaran, U., & Bougie, R. (2016). Research Methods for Business (7th ed). www.wileypluslearningspace.com
+            </p>
+            <p>Tan, Y., Li, H., & Liu, C. (2025). When good people do bad things: creative public services and unethical
+                behaviours. Public Management Review, 1–27. https://doi.org/10.1080/14719037.2025.2564745</p>
+            <p>Elizabeth E. Umphress, John B. Bingham, (2010) When Employees Do Bad Things for Good Reasons: Examining
+                Unethical Pro-Organizational Behaviors. Organization Science, 22(3):621-640.
+                https://doi.org/10.1287/orsc.1100.0559</p>
+            <p>Umphress, E. E., Bingham, J. B., & Mitchell, M. S. (2010). Unethical behavior in the name of the company:
+                The moderating effect of organizational identification and positive reciprocity beliefs on unethical
+                pro-organizational behavior. Journal of Applied Psychology, 95(4), 769–780.
+                https://doi.org/10.1037/a0019214</p>
+            <p>Zhao, M., & Qu, S. (2022). Research on the consequences of employees' unethical pro- organizational
+                behavior: The moderating role of moral identity. Frontiers in Psychology, 13, Article 1068606.
+                https://doi.org/10.3389/fpsyg.2022.1068606</p>
+        </div>
+
+    </div>
+
+    <!-- Export Controls -->
+    <div class="export-controls">
+        <button onclick="downloadAsDoc()" class="btn-export">📄 Download as Word</button>
+        <button onclick="window.print()" class="btn-export">🖨️ Print to PDF</button>
+        <button onclick="copyToClipboard()" class="btn-export">📋 Copy to Clipboard</button>
+    </div>
+
+    <script>
+        function downloadAsDoc() {
+            var header = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML to Word</title><style>body{font-family:'Book Antiqua',serif;}</style></head><body>";
+            var bodyClone = document.body.cloneNode(true);
+            var controls = bodyClone.querySelector('.export-controls');
+            if (controls) controls.remove();
+
+            var sourceHTML = header + bodyClone.innerHTML + "</body></html>";
+            var source = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(sourceHTML);
+            var fileDownload = document.createElement("a");
+            document.body.appendChild(fileDownload);
+            fileDownload.href = source;
+            fileDownload.download = 'Jurnal_Puti_Lenggogeni_Final.doc';
+            fileDownload.click();
+            document.body.removeChild(fileDownload);
+        }
+
+        function copyToClipboard() {
+            var bodyClone = document.body.cloneNode(true);
+            var controls = bodyClone.querySelector('.export-controls');
+            if (controls) controls.remove();
+            const type = "text/html";
+            const blob = new Blob([bodyClone.innerHTML], { type });
+            const data = [new ClipboardItem({ [type]: blob })];
+            navigator.clipboard.write(data);
+            alert("Copied!");
+        }
+    </script>
+</body>
+
+</html>

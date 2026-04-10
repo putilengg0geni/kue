@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loyalty Paradox: Why Inspirational Leaders Trigger Ethical Deviation?</title>
+    <style>
+        body {
+            font-family: "Book Antiqua", "Palatino Linotype", Palatino, serif;
+            font-size: 12pt;
+            line-height: 1.6;
+            color: #000;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px;
+            background-color: #fff;
+            text-align: justify;
+        }
+
+        /* Header */
+        .journal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+            color: #666;
+            font-size: 11pt;
+            border-bottom: none;
+        }
+
+        /* Title */
+        h1 {
+            font-family: "Book Antiqua", serif;
+            font-size: 14pt;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .author-section {
+            text-align: left;
+            margin-bottom: 3rem;
+            font-size: 12pt;
+        }
+
+        .corresponding-author {
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        /* Abstract */
+        .abstract-container {
+            display: grid;
+            grid-template-columns: 3fr 7fr;
+            gap: 30px;
+            border-top: 1px solid #000;
+            border-bottom: 1px solid #000;
+            padding: 20px 0;
+            margin-bottom: 3rem;
+        }
+
+        .article-info-title,
+        .abstract-title {
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .article-info-col {
+            font-style: italic;
+            font-size: 10pt;
+        }
+
+        .abstract-col {
+            text-align: justify;
+        }
+
+        /* Body */
+        .content-body {
+            column-count: 2;
+            column-gap: 40px;
+        }
+
+        h2 {
+            font-size: 13pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 22px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #000;
+            padding-bottom: 6px;
+        }
+
+        h3 {
+            font-size: 12pt;
+            font-weight: bold;
+            font-style: italic;
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+            break-after: avoid;
+        }
+
+        p {
+            margin-bottom: 12px;
+            text-align: justify;
+            text-indent: 12mm;
+            line-height: 1.4;
+            /* Adjusted to standard academic spacing */
+            font-size: 11.5pt;
+            /* Adjusted for better content fit */
+            orphans: 3;
+            widows: 3;
+        }
+
+        /* Images & Tables */
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .figure-caption {
+            text-align: center;
+            font-size: 10pt;
+            font-weight: bold;
+            margin-top: 8px;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 10pt;
+            margin: 20px 0;
+            break-inside: avoid;
+        }
+
+        th,
+        td {
+            border-top: 1px solid #000;
+            border-bottom: 1px solid #000;
+            padding: 6px;
+            text-align: left;
+        }
+
+        th {
+            font-weight: bold;
+            text-align: center;
+            border-bottom: 2px solid #000;
+        }
+
+        caption {
+            font-weight: bold;
+            text-align: left;
+            margin-bottom: 8px;
+            font-size: 11pt;
+        }
+
+        /* Export Controls */
+        .export-controls {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1000;
+            font-family: sans-serif;
+            border: 1px solid #ddd;
+        }
+
+        .btn-export {
+            background: #2c3e50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            text-align: left;
+        }
+
+        .btn-export:hover {
+            background: #34495e;
+        }
+
+        @page {
+            size: A4;
+            margin: 20mm;
+        }
+
+        @media print {
+
+            html,
+            body {
+                width: 100% !important;
+                height: auto !important;
+                overflow: visible !important;
+                max-width: none !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            .print-container {
+                width: 100% !important;
+                max-width: none !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            /* Re-apply columns to the content wrapper */
+            .content-body {
+                column-count: 2 !important;
+                -webkit-column-count: 2 !important;
+                column-gap: 1cm !important;
+                display: block !important;
+                width: 100% !important;
+            }
+
+            /* Spanning Elements (Full Width) */
+            .journal-header,
+            h1,
+            .author-section,
+            .abstract-container,
+            .figure-caption,
+            .full-width-print {
+                column-span: all !important;
+                -webkit-column-span: all !important;
+            }
+
+
+
+            .export-controls {
+                display: none !important;
+            }
+
+            h2,
+            h3 {
+                break-after: avoid;
+                page-break-after: avoid;
+                -webkit-column-break-after: avoid;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="journal-header">
+        <div>Journal of Finance and Business Digital (JFBD)<br>Vol. 1, No. 1, 2026: 1-20</div>
+        <div><img src="Picture1.png" alt="JFBD Logo" style="max-height: 80px; width: auto;"></div>
+    </div>
+
+    <h1>Loyalty Paradox: Why Inspirational Leaders Trigger Ethical Deviation?</h1>
+
+    <div class="author-section">
+        Puti Lenggogeni<sup>1*</sup>, Syahrizal<sup>2</sup><br>
+        Universitas Negeri Padang<br>
+        <span class="corresponding-author">Corresponding Author:</span> <a
+            href="mailto:putilenggogeni@student.unp.ac.id">putilenggogeni@student.unp.ac.id</a>
+    </div>
+
+    <div class="abstract-container">
+        <div class="article-info-col">
+            <span class="article-info-title">A R T I C L E I N F O</span>
+            <div style="margin-bottom:20px;">
+                <strong>Keywords:</strong><br>
+                Transformational Leadership, Unethical Pro-organizational Behavior, Organizational Identification, Moral
+                Identity, SEM-PLS
+            </div>
+            <div>
+                <em>Received</em> : January 21, 2026<br>
+                <em>Revised</em> : -<br>
+                <em>Accepted</em> : -
+            </div>
+            <div style="margin-top:20px; font-size:8pt;">&copy;2026 The Author(s). CC BY License.</div>
+        </div>
+        <div class="abstract-col">
+            <span class="abstract-title">A B S T R A C T</span>
+            <p>This study aims to examine the effect of <em>Transformational Leadership</em> on
+                <em>Unethical Pro-organizational Behavior</em> (UPB) with <em>Organizational Identification</em>
+                as a mediating variable and <em>Moral Identity</em> as a moderating variable among employees of the Direktorat Jenderal Pajak (DJP).
+                Using a quantitative approach with 234 respondents selected through <em>Proportionate Stratified Random Sampling</em>,
+                data were analyzed using SEM-PLS. The results showed that <em>Transformational Leadership</em>
+                has a significant positive effect on UPB and <em>Organizational Identification</em>.
+                <em>Organizational Identification</em> was found to mediate the relationship between leadership and UPB. However, <em>Moral
+                Identity</em> does not have a significant moderating role in the relationship between organizational identification and unethical behavior. These findings
+                indicate that in organizational environments with high performance demands, situational factors and leadership styles
+                have a more dominant influence in explaining the tendency toward unethical pro-organizational behavior compared to an individual's internal moral values.
+            </p>
+        </div>
+    </div>
+
+    <div class="content-body">
+
+        <h2>INTRODUCTION</h2>
+        <p>Integrity and ethical dilemmas in public bureaucracy are phenomena that continue to evolve along with
+            high demands for accountability and performance. Employees in government agencies, particularly the Direktorat Jenderal Pajak (DJP), face challenges in aligning dynamic organizational achievement targets with
+            stringent integrity standards. The phenomenon of <em>Unethical Pro-organizational Behavior</em> (UPB), which
+            is defined as unethical behavior performed intentionally to benefit the
+            organization, emerges as a form of response to these dynamics. This study analyzes
+            how transformational leadership and organizational identification mechanisms play a role in shaping
+            this behavioral tendency.</p>
+        <p>Previous studies on transformational leadership have extensively evaluated its positive influence
+            on variables such as employee performance, job satisfaction, and <em>Organizational Citizenship Behavior</em>
+            (OCB). However, recent studies have begun to review the possibility of dysfunctional impacts from this
+            leadership style under certain conditions. Effelsberg et al. (2014) argued that leader effectiveness
+            in aligning individual values with the organization's vision has the potential to reduce subordinates' objectivity
+            in assessing the ethics of an action. This research seeks to provide a theoretical contribution by
+            analyzing how social identity roles transmit the influence of leadership on
+            unethical behavior academically, as well as evaluating the role of individual moral identity as a
+            control factor in bureaucracy.</p>
+        <p>Conceptually, this study evaluates factors that drive ethical violations in
+            the workplace by considering systemic and situational influences. Structural pressures and leader orientation
+            can become predispositions for behavior that deviates from prevailing ethical standards,
+            even if such actions are subjectively intended for the organization's benefit. This is consistent with
+            the views of Adams & Balfour (2004) regarding the complexity of administrative behavior in the context of
+            hierarchical organizations.</p>
+        <p>This phenomenon has high relevance in the context of bureaucratic reform, where public agencies are required
+            to achieve ambitious performance targets within complex environments. The demand for achieving state revenue targets can create situations where ethical considerations are influenced by organizational goal achievement priorities (Tenbrunsel & Smith-Crowe, 2008). In these conditions, a progressive leadership style
+            can strengthen subordinates' orientation to prioritize organizational interests over other
+            considerations.</p>
+        <p>Therefore, this study aims to evaluate the structure of the relationship between these variables to
+            provide recommendations for human resource development in the public sector. A comprehensive understanding
+            of the psychological mechanisms behind employee loyalty and compliance is expected to provide a basis for
+            policy formulation that supports a workplace environment that is not only high-performing but
+            also remains grounded in consistent ethical principles.</p>
+
+        <h2>LITERATURE REVIEW</h2>
+
+        <h3>Transformational Leadership and Its Implications for UPB</h3>
+        <p><em>Transformational Leadership</em> (TL) is defined as a leadership style that directs the norms and
+            values of followers to transcend personal interests to achieve collective goals (Bass, 1985). From the
+            perspective of <em>Social Exchange Theory</em> (Blau, 1964), strong reciprocal relationships between superiors and
+            subordinates can form obligations. As a response to leader support,
+            subordinates may tend to exert maximum effort to achieve organizational targets, which in
+            certain conditions may include actions that deviate from standard procedures or UPB. This dynamic
+            shows that UPB can emerge not merely as common destructive behavior, but as a form of
+            loyalty that ignores ethical boundaries in an effort to achieve high performance.</p>
+        <p>Social Exchange Theory provides an explanation for the reciprocity mechanism in this relationship. Personal support
+            and attention provided by transformational leaders tend to increase subordinate commitment.
+            This high emotional attachment can influence subordinates' objective assessment, allowing for the rationalization
+            of UPB behavior as a form of contribution to the organization. This phenomenon creates
+            a climate where achieving organizational orientation becomes the top priority, which in
+            leadership literature is often referred to as the dependency dimension in the leader-follower relationship (Kark et al., 2003).</p>
+
+        <h3>Mediation Mechanism: Organizational Identification (OI)</h3>
+        <p>Referring to <em>Social Identity Theory</em> (Tajfel & Turner, 1986), OI is the perception of <em>oneness</em> with the organization. Employees with high OI define themselves through organizational attributes. This study proposes that TL increases UPB indirectly by
+            strengthening OI. Highly identified employees will view criticism of the organization as
+            personal criticism, potentially blurring ethical boundaries for the "sake" of the entity they love.</p>
+        <p>Extreme organizational identification can lead to symptoms of <em>organizational narcissism</em>. Employees
+            no longer separate their self-identity from the organizational identity. Criticism of DJP work procedures,
+            for example, is considered a personal attack on their self-esteem. As a result, they will do
+            whatever it takes to maintain a positive organizational image, including hiding mistakes, manipulating
+            performance reports, or protecting incompetent colleagues. This psychological mechanism explains why
+            employees who are honest in their private lives may perform dishonest actions in the workplace; they
+            are operating in an <em>agentic state</em> where they feel merely as an extension
+            of the organization's will.</p>
+
+        <h3>Moderation Mechanism: Moral Identity (MI)</h3>
+        <p><em>Moral Identity</em> (MI) is a cognitive construct of how important moral traits (honesty,
+            fairness, caring) are to a person's self-concept (Aquino & Reed, 2002). Theoretically, MI should function
+            as a <em>self-regulatory mechanism</em>. Individuals with high MI are expected
+            to have a lower tolerance threshold for unethical behavior, even when such behavior
+            benefits the organization. However, contemporary moral psychology literature also introduces the concept of
+            <em>Moral Licensing</em> (Miao et al., 2013), which argues that individuals who feel they have done
+            many good (moral) deeds for the organization may feel they have "moral credit" to occasionally break
+            the rules. The theoretical tension between the self-regulation function (MI as a brake) and moral licensing (MI as a permit)
+            makes this variable very interesting to test as a moderator in the bureaucratic context.
+        </p>
+
+    </div>
+
+    <div class="full-width-print"
+        style="text-align: center; margin: 30px 0; width: 100%; break-inside: avoid; page-break-inside: avoid;">
+        <svg viewBox="0 0 800 350" xmlns="http://www.w3.org/2000/svg"
+            style="max-width: 100%; height: auto; font-family: 'Book Antiqua', serif;">
+            <!-- Definitions for markers -->
+            <defs>
+                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#000" />
+                </marker>
+            </defs>
+
+            <!-- Nodes (Compressed Gaps) -->
+            <!-- Transformational Leadership (x=0) -->
+            <rect x="0" y="150" width="200" height="80" rx="10" ry="10" fill="#fff" stroke="#000" stroke-width="1.5" />
+            <text x="100" y="185" text-anchor="middle" font-size="14" font-weight="bold">Transformational</text>
+            <text x="100" y="205" text-anchor="middle" font-size="14" font-weight="bold">Leadership</text>
+
+            <!-- Organizational Identification (x=260, Gap=60) -->
+            <rect x="260" y="150" width="200" height="80" rx="10" ry="10" fill="#fff" stroke="#000"
+                stroke-width="1.5" />
+            <text x="360" y="185" text-anchor="middle" font-size="14" font-weight="bold">Organizational</text>
+            <text x="360" y="205" text-anchor="middle" font-size="14" font-weight="bold">Identification</text>
+
+            <!-- Unethical Pro-Org Behavior (x=520, Gap=60, Ends at 720) -->
+            <rect x="520" y="150" width="200" height="80" rx="10" ry="10" fill="#fff" stroke="#000"
+                stroke-width="1.5" />
+            <text x="620" y="185" text-anchor="middle" font-size="14" font-weight="bold">Unethical Pro-</text>
+            <text x="620" y="205" text-anchor="middle" font-size="14" font-weight="bold">Organizational
+                Behavior</text>
+
+            <!-- Moral Identity (x=260) -->
+            <rect x="260" y="20" width="200" height="60" rx="10" ry="10" fill="#fff" stroke="#000" stroke-width="1.5" />
+            <text x="360" y="55" text-anchor="middle" font-size="14" font-style="italic">Moral Identity</text>
+
+            <!-- Paths (Arrows) -->
+            <!-- H2: TL -> OI (200 to 250) -->
+            <line x1="200" y1="190" x2="250" y2="190" stroke="#000" stroke-width="1.5" marker-end="url(#arrowhead)" />
+            <text x="230" y="180" text-anchor="middle" font-size="12">H2</text>
+
+            <!-- H3: OI -> UPB (460 to 510) -->
+            <line x1="460" y1="190" x2="510" y2="190" stroke="#000" stroke-width="1.5" marker-end="url(#arrowhead)" />
+            <text x="490" y="180" text-anchor="middle" font-size="12">H3</text>
+
+            <!-- H1: TL -> UPB (Curved Bottom) -->
+            <path d="M 100 230 V 280 H 620 V 240" fill="none" stroke="#000" stroke-width="1.5"
+                marker-end="url(#arrowhead)" />
+            <text x="360" y="270" text-anchor="middle" font-size="12" fill="#000">H1</text>
+
+            <!-- H5: Moderation (MI -> Path H3, x=360) -->
+            <line x1="360" y1="80" x2="360" y2="150" stroke="#000" stroke-width="1.5" stroke-dasharray="5,5"
+                marker-end="url(#arrowhead)" />
+            <text x="370" y="120" text-anchor="start" font-size="12">H5</text>
+
+            <!-- H4 (Mediation) -->
+            <text x="360" y="320" text-anchor="middle" font-size="12" font-style="italic" fill="#666">(H4: Mediation
+                Effect)</text>
+
+        </svg>
+        <div class="figure-caption">Figure 1. Research Conceptual Framework</div>
+    </div>
+
+    <div class="content-body">
+
+        <h2>RESEARCH METHODOLOGY</h2>
+
+        <p>This study uses an explanatory quantitative design to test causal relationships between variables.
+        </p>
+
+        <h3>Population and Sampling Technique</h3>
+        <p>The research population consists of 594 employees of KPP Pratama in the Kanwil DJP Sumatera Barat dan Jambi region. The sample size was determined using the Krejcie and Morgan (1970) formula with a 5% margin of error, resulting in a minimum sample of 234 respondents. The sampling technique was <em>Proportionate Stratified Random Sampling</em> based on work units (Examination, Supervision, Service, Collection, and General Subsection) to ensure representativeness.</p>
+        <p>The research instrument used closed questionnaires with Likert scales. Instrument validity was tested
+            using <em>Convergent Validity</em> criteria (Loading Factor > 0.70, AVE > 0.50) and <em>Discriminant
+                Validity</em> (Fornell-Larcker Criterion). Reliability was tested using <em>Composite Reliability</em>
+            (> 0.70).</p>
+
+        <!-- Formula AVE -->
+        <div
+            style="background:#f9f9f9; padding:10px; border-left:3px solid #000; font-family:monospace; margin:10px 0; font-size:9pt; text-align: center;">
+            AVE = (Σλ²) / (Σλ² + ΣVar(ε))
+        </div>
+
+    </div>
+
+    <div style="margin-top: 20px; margin-bottom: 20px;"></div>
+
+    <div class="content-body">
+
+        <h2>RESEARCH RESULTS AND DISCUSSION</h2>
+
+        <h3>1. Analysis of Respondent Profile and Its Implications</h3>
+        <p>Descriptive analysis of the 234 respondents provides an important sociological picture for understanding the context of the findings. Most respondents were male (56.4%) and had a Bachelor's degree (58.1%). Most interesting is the tenure data, where 47.9% of respondents had worked for more than 16 years. This dominance of senior employees has double implications. On one hand, they have deep <em>tacit knowledge</em> about tax procedures.</p>
+        <p>On the other hand, a long tenure within one organization tends to correlate positively with high levels of <em>Organizational Identification</em>, as theorized by Mael & Ashforth (1992). This provide initial context as to why the OI variable in this study (Mean = 4.12) is classified as very high. Employees who have spent half their lives at DJP certainly have a very strong emotional attachment, which becomes fertile ground for the development of blind loyalty.
+        </p>
+
+        <h3>2. In-depth Evaluation of Measurement Model (Outer Model)</h3>
+        <p>A crucial step before hypothesis testing is ensuring the accuracy of the measurement tools. PLS algorithm results show that the initial measurement model required refinement. Indicators OI1 (<em>"When someone criticizes the organization, I feel insulted"</em>) and UPB5 (<em>"Intentionally not returning tax overpayments"</em>) had to be eliminated because they had <em>loading factor</em> values below the critical threshold of 0.70 (Hair et al., 2017).</p>
+        <p>The removal of indicator UPB5 is particularly interesting to discuss. This item is the most "blatant" form of UPB with high legal risk. The low loading on this item indicates that respondents tend to avoid behavior that explicitly violates the (criminal) law, but are more permissive toward "gray area" UPB behaviors or administrative manipulations (such as hiding information or polishing reports). This confirms that UPB in bureaucratic environments often manifests in <em>subtle</em> but systemic forms.
+        </p>
+        <p>After <em>model respecification</em>, all constructs showed excellent quality.
+            <strong>Transformational Leadership (TL)</strong> had AVE = 0.859 and CR = 0.985. This near-perfect value indicates that respondents had a very uniform perception of their superiors' leadership behavior. <strong>Organizational Identification (OI)</strong> had AVE = 0.649 and CR = 0.881, meeting the convergent validity requirement of > 0.50. Similarly, <strong>Moral Identity (MI)</strong> (AVE = 0.676; CR = 0.912) and <strong>UPB</strong> (AVE = 0.501; CR = 0.833). Although UPB's AVE was right at the threshold (borderline), this validity is still acceptable for exploratory behavioral research (Hulland, 1999).
+        </p>
+
+        <h3>3. Evaluation of Structural Model (Inner Model)</h3>
+        <p>The model's predictive power was assessed through the coefficient of determination (R-Square). The R-Square value for the UPB variable was <strong>0.290</strong>, meaning that 29% of the variance in UPB behavior can be explained by a combination of <em>Transformational Leadership</em>, <em>Organizational Identification</em>, and <em>Moral Identity</em>. In the realm of social behavioral science, 29% falls into the moderate category (Chin, 1998), considering the complexity of human behavior influenced by thousands of other external variables. Meanwhile, the R-Square value for <em>Organizational Identification</em> was 0.214, indicating that superiors' leadership style contributes 21.4% to forming employee organizational identity.</p>
+
+        <table>
+            <caption>Table 1. Summary of Hypothesis Testing Results</caption>
+            <thead>
+                <tr>
+                    <th>Hypothesis</th>
+                    <th>Path</th>
+                    <th>Beta (β)</th>
+                    <th>T-Statistic</th>
+                    <th>P-Value</th>
+                    <th>Conclusion</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>H1</td>
+                    <td>TL -> UPB</td>
+                    <td>0.210</td>
+                    <td>2.915</td>
+                    <td>0.004</td>
+                    <td><strong>Accepted</strong></td>
+                </tr>
+                <tr>
+                    <td>H2</td>
+                    <td>TL -> OI</td>
+                    <td>0.463</td>
+                    <td>7.821</td>
+                    <td>0.000</td>
+                    <td><strong>Accepted</strong></td>
+                </tr>
+                <tr>
+                    <td>H3</td>
+                    <td>OI -> UPB</td>
+                    <td>0.395</td>
+                    <td>5.102</td>
+                    <td>0.000</td>
+                    <td><strong>Accepted</strong></td>
+                </tr>
+                <tr>
+                    <td>H5</td>
+                    <td>MI x OI -> UPB</td>
+                    <td>0.000</td>
+                    <td>0.045</td>
+                    <td>0.964</td>
+                    <td><strong>Rejected</strong></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>4. Discussion of Hypothesis Results and Critical Analysis</h3>
+
+        <h4>H1: Effect of Transformational Leadership on UPB (Supported)</h4>
+        <p>This finding (β=0.210, p<0.05) proves that transformational leadership has a significant positive influence on UPB tendencies. This indicates that an inspirational leadership style can correlate with an increase in pro-organizational behavior that deviates from formal ethical standards. Analysis shows that transformational leaders play an important role in <em>framing</em> organizational goals. Very strong vision direction can affect subordinates' ethical objectivity, where achievement of strategic targets may be prioritized over standard administrative procedures.</p>
+
+        <h4>H2: Leader as Identity Architect (Supported)</h4>
+        <p>The very strong statistical results (β=0.463, T=7.821) prove that transformational leaders are a dominant factor in forming organizational identification. In high-pressure work environments like DJP, leaders who provide <em>individualized consideration</em> and inspirational motivation become primary sources of emotional support. This makes employees feel "indebted" and internalize the organizational values brought by the leader into themselves.</p>
+
+        <h4>H3: Organizational Identification as a Predictor of UPB (Supported)</h4>
+        <p>This finding (β=0.395, p<0.05) supports the <em>Social Identity Theory</em> premise that very high organizational identification can affect individual objectivity. Employees with extreme OI levels tend to focus attention on organizational interests narrowly (<em>tunnel vision</em>), potentially ignoring the ethical impact of their actions. In the context of public organizations, orientation toward institutional target achievement can dominate broader ethical considerations.</p>
+
+        <h4>Mediation Analysis: The Central Role of Organizational Identification</h4>
+        <p>Mediation test results show that OI partially mediates (VAF = 46.5%) the relationship between TL and UPB. This is a key finding. It means transformational leaders influence UPB through two paths: first, a direct path through implicit instructions or vision-wrapped target pressure; and second, an indirect (psychological) path by first changing subordinates' self-concept into "organization people," who then voluntarily do anything for the organization.</p>
+
+        <h4>Anomaly Analysis: The Moderating Role of Moral Identity (H5 Rejected)</h4>
+        <p>The rejection of H5 (β=0.000, p=0.964) provides important insights into the interaction between personal identity and organizational context. Theoretically, <em>Moral Identity</em> was expected to act as an internal control factor. However, its failure to moderate the OI-UPB relationship can be explained through <em>Situational Strength Theory</em> (Cooper & Withey, 2009). This theory explains that in "strong situation" criteria—which have clear rules, hierarchies, and achievement incentives—the influence of personality variables tends to decrease.</p>
+        <p>Public organizational environments with tight performance targets are an example of a <em>strong situation</em>. Pressure to achieve mandatory organizational goals creates an environment where individual discretion is limited. In these conditions, demands from the external environment (superiors and performance targets) are more dominant in directing behavior compared to internal moral values. This can lead to phenomena where certain actions are no longer viewed as ethical issues, but simply as technical strategies for organizational target achievement.</p>
+
+        <h4>Theoretical Implications</h4>
+        <p>This study makes a significant contribution to advancing leadership and bureaucratic ethics literature. First, this study extends the validity of the <em>Unethical Pro-organizational Behavior</em> (UPB) concept into the public sector context in a developing (non-Western) country. Most UPB studies are conducted in the private sector (e.g., Umphress et al., 2010), where profit motives are the main driver. This finding confirms that "state service" motives in the public sector can also be distorted into triggers for similar unethical behavior.
+        </p>
+        <p>Second, this study enriches the discourse on the dysfunctional impacts of social identity (<em>dysfunctional identification</em>). Thus far, organizational identification has often been associated with positive performance outcomes. This study provides counter-empirical evidence that very strong identification (over-identification), without critical attitudes, can bring risks to the organization. This confirms the postulate that positive variables can have negative impacts if they occur excessively.</p>
+        <p>Third, the failure of <em>Moral Identity</em> as a moderator provides new insight into the dominance of situational context over personal disposition. This challenges basic assumptions of interactionist theory (person-situation interaction) and suggests that future researchers should pay more attention to <em>situational strength</em> factors as key control variables or moderators.</p>
+
+        <h4>Limitations and Suggestions for Future Research</h4>
+        <p>Despite its contributions, this study has several limitations. First, the cross-sectional design limits the ability to draw firm causal conclusions. There is a possibility of reciprocal relationships, where employees who perform UPB then increase their loyalty justification to reduce cognitive dissonance. Future longitudinal research is highly recommended.</p>
+        <p>Second, the use of self-reports is susceptible to social desirability bias, especially when asking about unethical behavior. Although anonymity was guaranteed, employees might still be reluctant to admit to certain violations. Experimental methods or the use of scenarios (vignettes) could be alternatives to measure UPB tendencies more objectively. Third, this research was only conducted at one agency (DJP). Generalization to other public agencies with different cultural characteristics should be done with caution.</p>
+
+        <h2>CONCLUSION AND RECOMMENDATIONS</h2>
+
+        <h3>Conclusion</h3>
+        <p>This study concludes that transformational leadership style plays an important role in shaping employee behavioral orientation through organizational identification mechanisms. Strong organizational identification, if not balanced with an emphasis on ethical aspects, can increase the tendency of unethical pro-organizational behavior (UPB). Furthermore, research findings show that situational factors within public organizations have a more significant influence than individual moral identity in determining such behavioral tendencies.
+        </p>
+
+        <h3>Managerial Recommendations: Toward an Integrity-Based Work Culture</h3>
+        <p>Based on these findings, comprehensive managerial reform is recommended within the DJP environment through three main strategic pillars:</p>
+
+        <h4>1. Cultural Re-engineering: Strengthening Organizational Integrity</h4>
+        <p>Organizational culture needs continuous strengthening by aligning loyalty values and ethical integrity. Leadership messages must explicitly emphasize the importance of compliance with formal ethical standards in every target achievement. Employees should be encouraged to have the understanding that the best loyalty to the organization is by maintaining institutional reputation and integrity. Developing discussion forums on ethical dilemmas can be a means to train employees' moral sensitivity in facing complex work situations.</p>
+
+        <h4>2. Performance Management Redesign: Balancing Results and Process</h4>
+        <p>The current result-oriented (revenue target) performance appraisal system (IKU) unintentionally provides incentives for UPB behavior. DJP needs to integrate <em>ethical process</em> indicators into individual performance appraisals with significant weight. This means <em>how</em> a target is achieved should be as important as <em>whether</em> the target was achieved. Rewards should be given not only to "top achievers" but also to "ethical champions" who dare to reject shortcuts for procedural compliance.</p>
+
+        <h4>3. Ethical Leadership Development</h4>
+        <p>KPP Pratama leaders, as holders of transformational leadership roles, need to be equipped with ethical leadership competencies. They must be trained not only to inspire subordinates to achieve targets (vision) but also to regularly remind them about ethical boundaries (values). Leaders must be role models who show that integrity cannot be sacrificed for short-term targets. Leader communication must be balanced, emphasizing that organizational target achievement must remain within the corridors of prevailing ethics and integrity.</p>
+
+        <h2>REFERENCES</h2>
+        <div style="font-size: 10pt; text-indent: -20px; padding-left: 20px;">
+            <p>Abubakar, Rifa‟i. 2021. Pengantar Metodologi Penelitian. Yogyakarta: SUKAPress UIN Sunan Kalijaga</p>
+            <p>Ahmad, R., Nejati, M., Farr-Wharton, B., & Bentley, T. (2024). Impact of leadership on unethical
+                pro-organizational behavior: A systematic literature review and future research directions. Journal of
+                Leadership & Organizational Studies, 31(3), 338–367. https://doi.org/10.1177/15480518241265399</p>
+            <p>Bekmirzaeva, M., Baek, Y., & Kim, E.-S. (2025). How transformational leadership influences follower
+                willingness to engage in pro-group unethical behavior. Journal of Managerial Psychology.
+                https://doi.org/10.1108/JMP-11-2023-0705</p>
+            <p>Burris, E. R., Umphress, E. E., Duffy, M. M., & Gessner, T. M. (2025). A double-edged sword of ethical
+                behavior: When and why employees' moral identity predicts others' unethical behavior. Journal of Applied
+                Psychology, 110(3), 386–402. https://doi.org/10.1037/apl0001099</p>
+            <p>Boros, S. (2008). Organizational identification: Theoretical and empirical analyses of competing
+                conceptualizations. Cognition, Brain, Behavior, XII(1), 1-28</p>
+            <p>Bose, S., Patnaik, B., & Mohanty, S. (2021). The mediating role of psychological empowerment in the
+                relationship between transformational leadership and organizational identification of employees. The
+                Journal of Applied Behavioral Science, 57(4), 490–510. https://doi.org/10.1177/0021886320920951</p>
+            <p>Chen, Mo, and Chao C. Chen. “The Moral Dark Side of Performance Pressure: How and When It Affects
+                Unethical pro-Organizational Behavior.” The International Journal of Human Resource Management 34, no. 7
+                (2023): 1359– 89. https://doi.org/10.1080/09585192.2021.1991434</p>
+            <p>Changya Hu, Mai Pham, Yen-Yu Chen, Patrick F. Bruning. “A Meta-Analysis of Incremental, Comparative, and
+                Conditional Motivations of Unethical pro- Organizational Behavior.” Journal of Business Research 203
+                (January 2026): 115794. https://doi.org/10.1016/j.jbusres.2025.115794</p>
+            <p>Dadaboyev, S. M. U., Paek, S., & Choi, S. (2023). Do gender, age and tenure matter when behaving
+                unethically for organizations: Meta-analytic review on organizational identity and unethical
+                pro-organizational behavior. British Journal of Management. https://doi.org/10.1108/BJM-12-2022-0480</p>
+            <p>Direktorat Jenderal Pajak. (2024). Laporan Kinerja Direktorat Jenderal Pajak Tahun 2024.
+                https://www.pajak.go.id/id/laporan-kinerja-djp-tahun-2024</p>
+            <p>Direktorat Jenderal Pajak. (2024). Laporan Kinerja Unit Kerja Tahun.
+                https://pajak.go.id/laporan-kinerja-unit-kerja</p>
+            <p>Effelsberg, D., Solga, M., & Gurt, J. (2014). Transformational leadership and follower’s unethical
+                behavior for the benefit of the company: A two-study investigation. Journal of Business Ethics, 120(1),
+                81–93. https://doi.org/10.1007/s10551-013-1644-z</p>
+            <p>Ghozali, I., & Latan, H. (2015). Partial least squares: Konsep, teknik dan aplikasi menggunakan SmartPLS
+                3.0. Badan Penerbit Universitas Diponegoro.</p>
+            <p>Gigol, T. (2021). Leadership, religiousness, state ownership of an enterprise and unethical
+                pro-organizational behavior: The mediating role of organizational identification. PLOS ONE, 16(5),
+                e0251465. https://doi.org/10.1371/journal.pone.0251465</p>
+            <p>Hidayah, N., & Helmy, I. (2019). Pengaruh Organizational Identification Dan Organizational Trust Terhadap
+                Job Satisfaction Melalui Work Engagement Sebagai Variabel Intervening (Studi Pada Guru di SMK Tamtama
+                Karanganyar Kabupaten Kebumen). Sekolah Tinggi Ilmu Ekonomi Putra Bangsa Kebumen.</p>
+            <p>Irshad, M., & Bashir, S. (2020). The dark side of organizational identification: A multi- study
+                investigation of negative outcomes. Frontiers in Psychology, 11, 572478.
+                https://doi.org/10.3389/fpsyg.2020.572478</p>
+            <p>Kim, J., Kang, H., & Lee, K. (2021). Transformational-transactional leadership and unethical
+                pro-organizational behavior in the public sector: does public service motivation make a difference?
+                Public Management Review, 25(2), 429–458. https://doi.org/10.1080/14719037.2021.1974714</p>
+            <p>Kuenzi, M., Mayer, D. M., & Greenbaum, R. L. (2020). Creating anethical organizational environment: The
+                relationship between ethical leadership, ethical organizational climate, and unethical behavior.
+                Personnel Psychology, 73(1), 43–71. https://doi.org/10.1111/peps.12356</p>
+            <p>Lavelle, J.J., Herda, D.N. & Bates, K.M. The Dark Side: Linking Organizational Justice to Unethical
+                Employee Behaviors. Soc Just Res 38, 75–97 (2025). https://doi.org/10.1007/s11211-025-00450-8</p>
+            <p>Liu H, Bracht E, Zhang X, Bradley B, van Dick R. Creativity in non-routine jobs: The role of
+                transformational leadership and organizational identification. Creat Innov Manag. 2020; 30: 129–143.
+                https://doi.org/10.1111/caim.12419</p>
+            <p>Mishra V, Sharma V, Uppal N (2024), "The curvilinear relationship between moral identity and unethical
+                pro-organizational behavior: moderating role of organizational identification". International Journal of
+                Manpower, Vol. 45 No. 6 pp. 1245–1261, doi: https://doi.org/10.1108/IJM-06-2023-0343</p>
+            <p>Mo, S., Lupoli, M. J., Newman, A., & Umphress, E. E. (2022). Good intentions, bad behavior: A review and
+                synthesis of the literature on unethical prosocial behavior (UPB) at work. Journal of Organizational
+                Behavior, 44(2), 335–354 . https://doi.org/10.1002/job.2617</p>
+            <p>Mukherjee, Ujjal, and Saritha S.R. “Unethical Pro-Organizational Behavior: A Systematic Literature Review
+                and Research Agenda.” International Journal of Ethics and Systems, ahead of print, July 25, 2024.
+                https://doi.org/10.1108/IJOES-11-2023-0243</p>
+            <p>Nur, L., Disman, Ahman, E., Hendrayati, H., & Budiman, A. (2021). Analisis Kepemimpinan Transformasional.
+                Jurnal Ilmu Manajemen dan Bisnis, 12(2), 188–197. https://doi.org/10.17509/jimb.v12i2.37610</p>
+            <p>Pan, C. (2024). The Dark Side of Transformational Leadership: Power Distance Spurs Unethical
+                Pro-Organizational Behavior of Employees. Human Performance, 38(1), 28–42.
+                https://doi.org/10.1080/08959285.2024.2436172</p>
+            <p>Schuh, S.C., Zhang, Xa. & Tian, P. For the Good or the Bad? Interactive Effects of Transformational
+                Leadership with Moral and Authoritarian Leadership Behaviors. J Bus Ethics 116, 629–640 (2013).
+                https://doi.org/10.1007/s10551012-1486-0</p>
+            <p>Sekaran, U., & Bougie, R. (2016). Research Methods for Business (7th ed). www.wileypluslearningspace.com
+            </p>
+            <p>Tan, Y., Li, H., & Liu, C. (2025). When good people do bad things: creative public services and unethical
+                behaviours. Public Management Review, 1–27. https://doi.org/10.1080/14719037.2025.2564745</p>
+            <p>Elizabeth E. Umphress, John B. Bingham, (2010) When Employees Do Bad Things for Good Reasons: Examining
+                Unethical Pro-Organizational Behaviors. Organization Science, 22(3):621-640.
+                https://doi.org/10.1187/orsc.1100.0559</p>
+            <p>Umphress, E. E., Bingham, J. B., & Mitchell, M. S. (2010). Unethical behavior in the name of the company:
+                The moderating effect of organizational identification and positive reciprocity beliefs on unethical
+                pro-organizational behavior. Journal of Applied Psychology, 95(4), 769–780.
+                https://doi.org/10.1037/a0019214</p>
+            <p>Zhao, M., & Qu, S. (2022). Research on the consequences of employees' unethical pro- organizational
+                behavior: The moderating role of moral identity. Frontiers in Psychology, 13, Article 1068606.
+                https://doi.org/10.3389/fpsyg.2022.1068606</p>
+        </div>
+    </div>
+</body>
+
+</html>
